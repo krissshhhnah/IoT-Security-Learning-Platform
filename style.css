@@ -1,69 +1,95 @@
 /* ==========================================
-   CSS Variables & Themes Configuration
+   CSS Variables & Themes Configuration (Shady Glow)
    ========================================== */
 
-/* Theme 1: Quantum Blue (Arctic Tech - Default Premium) */
-[data-theme="quantum"], :root {
-    --color-bg: #06090f;
-    --color-navbar: #080b13;
-    --color-panel: rgba(10, 16, 29, 0.65);
-    --color-panel-border: rgba(0, 240, 255, 0.12);
-    --color-primary: #00f0ff; /* Glowing Cyan */
-    --color-primary-glow: rgba(0, 240, 255, 0.35);
-    --color-secondary: #3b82f6; /* Cobalt Blue */
-    --color-secondary-glow: rgba(59, 130, 246, 0.25);
-    --color-success: #22c55e; /* Emerald Green */
-    --color-success-glow: rgba(34, 197, 94, 0.25);
+:root, [data-mode="simulation"] {
+    --color-bg: #000000; /* Pitch Black */
+    --color-navbar: #040207; /* Dark Shady Violet Navbar */
+    --color-panel: rgba(8, 5, 14, 0.65); /* Transparent Obsidian Glass */
+    --color-panel-border: rgba(168, 85, 247, 0.16); /* Shimmering Violet Glow */
+    --color-primary: #a855f7; /* Shady Glowing Purple */
+    --color-primary-glow: rgba(168, 85, 247, 0.35);
+    --color-secondary: #6366f1; /* Deep Electric Indigo */
+    --color-secondary-glow: rgba(99, 102, 241, 0.25);
+    --color-success: #10b981; /* Emerald Green */
+    --color-success-glow: rgba(16, 185, 129, 0.25);
     --color-alert: #f59e0b; /* Warning Amber */
     --color-alert-glow: rgba(245, 158, 11, 0.25);
     --color-danger: #ef4444; /* Threat/Compromised Red */
     --color-danger-glow: rgba(239, 68, 68, 0.35);
-    --color-text-main: #f1f5f9;
-    --color-text-muted: #64748b;
-    --color-console-bg: #04060b;
+    --color-text-main: #f3f4f6;
+    --color-text-muted: #9ca3af;
+    --color-console-bg: #000000;
+
+    /* Background glow variables */
+    --bg-glow-1: rgba(168, 85, 247, 0.06);
+    --bg-glow-2: rgba(99, 102, 241, 0.05);
 }
 
-/* Theme 2: Cyberpunk Neon */
-[data-theme="cyberpunk"] {
-    --color-bg: #0b0711;
-    --color-navbar: #0e0a17;
-    --color-panel: rgba(20, 12, 33, 0.65);
-    --color-panel-border: rgba(255, 0, 127, 0.18);
-    --color-primary: #ff007f; /* Neon Pink */
-    --color-primary-glow: rgba(255, 0, 127, 0.4);
-    --color-secondary: #8a2be2; /* Electric Purple */
-    --color-secondary-glow: rgba(138, 43, 226, 0.3);
-    --color-success: #39ff14; /* Neon Green */
-    --color-success-glow: rgba(57, 255, 20, 0.3);
-    --color-alert: #ffb703; /* Hazard Amber */
-    --color-alert-glow: rgba(255, 183, 3, 0.3);
-    --color-danger: #ff003c;
-    --color-danger-glow: rgba(255, 0, 60, 0.4);
-    --color-text-main: #f5f3f7;
-    --color-text-muted: #8e829d;
-    --color-console-bg: #07030c;
+[data-mode="twin"] {
+    --color-navbar: #010406; /* Dark Shady Cyan/Teal Navbar */
+    --color-panel: rgba(4, 9, 14, 0.65); /* Transparent Teal Glass */
+    --color-panel-border: rgba(0, 240, 255, 0.16); /* Shimmering Cyan Glow */
+    --color-primary: #00f0ff; /* Hardware Cyan/Teal Glow */
+    --color-primary-glow: rgba(0, 240, 255, 0.35);
+    --color-secondary: #0d9488; /* Deep Cyber Teal */
+    --color-secondary-glow: rgba(13, 148, 136, 0.25);
+
+    /* Background glow variables */
+    --bg-glow-1: rgba(0, 240, 255, 0.06);
+    --bg-glow-2: rgba(13, 148, 136, 0.05);
 }
 
-/* Theme 3: Matrix Green */
-[data-theme="matrix"] {
-    --color-bg: #010402;
-    --color-navbar: #020803;
-    --color-panel: rgba(4, 15, 6, 0.75);
-    --color-panel-border: rgba(0, 255, 102, 0.18);
-    --color-primary: #00ff66; /* Matrix Green */
-    --color-primary-glow: rgba(0, 255, 102, 0.45);
-    --color-secondary: #0f5132;
-    --color-secondary-glow: rgba(15, 81, 50, 0.3);
-    --color-success: #00ff66;
-    --color-success-glow: rgba(0, 255, 102, 0.3);
-    --color-alert: #ffb703;
-    --color-alert-glow: rgba(255, 183, 3, 0.3);
-    --color-danger: #ef4444;
-    --color-danger-glow: rgba(239, 68, 68, 0.4);
-    --color-text-main: #d1e7dd;
-    --color-text-muted: #4e7a61;
-    --color-console-bg: #010301;
+/* Shimmering Shady Glow Animations */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 15% 25%, var(--bg-glow-1) 0%, rgba(0, 0, 0, 0) 65%),
+                radial-gradient(circle at 85% 75%, var(--bg-glow-2) 0%, rgba(0, 0, 0, 0) 65%);
+    pointer-events: none;
+    z-index: 0;
+    animation: shadyGlowAnim 14s infinite alternate ease-in-out;
+    transition: background 0.5s ease;
 }
+
+@keyframes shadyGlowAnim {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1.0;
+        transform: scale(1.04) translate(8px, -8px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: scale(0.96) translate(-8px, 8px);
+    }
+}
+
+@keyframes borderShimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Panel top highlight shimmer lines */
+.sidebar::after, .console-panel::after, .details-section::after, .explanations-panel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary-glow), transparent);
+    animation: borderShimmer 6s infinite linear;
+    pointer-events: none;
+    z-index: 5;
+}
+
 
 /* ==========================================
    Base Structure & Reset Configuration

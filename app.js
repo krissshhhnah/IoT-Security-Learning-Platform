@@ -39,6 +39,9 @@ class App {
         this.timerSeconds = 0;
         this.timerIntervalId = null;
 
+        // Set default mode attribute
+        document.documentElement.setAttribute('data-mode', 'simulation');
+
         this.init();
     }
 
@@ -125,13 +128,15 @@ class App {
         // Connect Hardware Port
         btnConnect.addEventListener('click', () => this.handleSerialConnection());
 
-        // Theme dropdown
+        // Theme dropdown (if present)
         const themeSelect = document.getElementById('theme-select');
-        themeSelect.addEventListener('change', (e) => {
-            document.documentElement.setAttribute('data-theme', e.target.value);
-            this.topology.setThemeColors();
-            this.logToConsole(`Theme changed to: ${e.target.value.toUpperCase()}`, 'info');
-        });
+        if (themeSelect) {
+            themeSelect.addEventListener('change', (e) => {
+                document.documentElement.setAttribute('data-theme', e.target.value);
+                this.topology.setThemeColors();
+                this.logToConsole(`Theme changed to: ${e.target.value.toUpperCase()}`, 'info');
+            });
+        }
 
         // Clear Console
         document.getElementById('btn-clear-console').addEventListener('click', () => {
@@ -424,6 +429,7 @@ class App {
     }
 
     setMode(mode) {
+        document.documentElement.setAttribute('data-mode', mode);
         this.simulator.setMode(mode);
         this.stopActiveAttack();
 
@@ -432,6 +438,9 @@ class App {
         this.topology.setupDefaultNodes();
         this.updateNodeDetailsPanel();
         this.updateFlowExplanationBanner();
+
+        // Refresh Three.js grid/theme colors for the new mode
+        this.topology.setThemeColors();
 
         if (mode === 'twin') {
             this.logToConsole("Universal MAC discovery active. Listening for packet broadcasts...", "alert");
