@@ -1649,3 +1649,62 @@ code, pre, .mono-text, select, input, button, textarea {
     margin-top: 0;
 }
 
+/* Inline SVG icon styles */
+.icon-svg {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    vertical-align: middle;
+    stroke: currentColor;
+}
+.icon-svg[fill="currentColor"] {
+    fill: currentColor;
+}
+
+.title-svg {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    stroke: currentColor;
+    color: var(--color-primary);
+}
+
+.legend-svg {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    stroke: currentColor;
+}
+
+.footer-svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--color-primary);
+}
+
+.badge-svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* Spinner rotation animation for vector-status-icon active-spinner */
+.active-spinner svg {
+    animation: svgSpin 1.2s linear infinite;
+    color: var(--color-primary);
+    width: 14px;
+    height: 14px;
+    display: block;
+}
+
+@keyframes svgSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+

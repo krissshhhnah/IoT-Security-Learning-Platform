@@ -30,20 +30,14 @@
                 </div>
                 
                 <div class="header-right">
-                    <!-- Branded Shady Glow Engine Badge -->
-                    <div class="theme-badge">
-                        <span class="badge-dot"></span>
-                        <span class="badge-text">SHADY GLOW ENGINE</span>
-                    </div>
-
                     <button id="btn-trigger-attack" class="header-control-btn btn-play-pause">
-                        <span class="btn-icon">▶</span> <span class="btn-text">Launch</span>
+                        <span class="btn-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span> <span class="btn-text">Launch</span>
                     </button>
                     <button id="btn-stop-attack" class="header-control-btn btn-stop">
-                        <span class="btn-icon">■</span> Stop
+                        <span class="btn-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg></span> Stop
                     </button>
                     <button id="btn-reset-sim" class="header-control-btn btn-reset">
-                        <span class="btn-icon">🔄</span> Reset
+                        <span class="btn-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg></span> Reset
                     </button>
  
                     <!-- Mode Toggle -->
@@ -51,12 +45,6 @@
                         <button id="btn-mode-sim" class="toggle-btn active">SIMULATION</button>
                         <button id="btn-mode-twin" class="toggle-btn">DIGITAL TWIN</button>
                     </div>
- 
-                    <!-- Web Serial Connect Button -->
-                    <button id="btn-connect" class="action-btn connect-btn header-connect" disabled>
-                        <span class="btn-icon">🔌</span>
-                        <span class="btn-text">CONNECT HW</span>
-                    </button>
                 </div>
             </header>
 
@@ -211,19 +199,19 @@
                                 <span>Malicious Activity</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon node-cyan">🌐</span>
+                                <span class="legend-node-icon"><svg class="legend-svg node-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg></span>
                                 <span>IoT Device</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon node-blue">⚙️</span>
+                                <span class="legend-node-icon"><svg class="legend-svg node-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
                                 <span>Network Device</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon node-red-hacker">💻</span>
+                                <span class="legend-node-icon"><svg class="legend-svg node-red-hacker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg></span>
                                 <span>Attacker</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon node-red-beacon">⚠️</span>
+                                <span class="legend-node-icon"><svg class="legend-svg node-red-beacon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
                                 <span>Compromised</span>
                             </div>
                         </div>
@@ -290,9 +278,12 @@
                             <button id="btn-zoom-out" class="zoom-btn">-</button>
                             <span id="zoom-val" class="zoom-val">100%</span>
                             <button id="btn-zoom-in" class="zoom-btn">+</button>
-                            
-                            <button id="btn-tool-rotate" class="tool-btn active">🔄 Rotate</button>
-                            <button id="btn-tool-pan" class="tool-btn">✋ Pan</button>
+                            <button id="btn-tool-rotate" class="tool-btn active">
+                                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>Rotate
+                            </button>
+                            <button id="btn-tool-pan" class="tool-btn">
+                                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5m0 0V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v7m0 0V5a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6m0 0V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v10a7 7 0 0 0 7 7h1a8 8 0 0 0 8-8v-5"/></svg>Pan
+                            </button>
                             <button id="btn-tool-reset" class="tool-btn">Reset View</button>
                         </div>
 
@@ -319,7 +310,10 @@
                         <!-- Live Command Center / Dynamic Control Panel -->
                         <div class="control-dock">
                             <div class="dock-header">
-                                <span class="dock-title">🕹️ ATTACK VECTOR CONTROLS</span>
+                                <span class="dock-title">
+                                    <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="2" y1="14" x2="6" y2="14"/><line x1="10" y1="8" x2="14" y2="8"/><line x1="18" y1="16" x2="22" y2="16"/></svg>
+                                    ATTACK VECTOR CONTROLS
+                                </span>
                             </div>
                             <div class="dock-body" id="dynamic-controls">
                                 <!-- Dynamic content injected here based on active attack selection -->
@@ -329,7 +323,10 @@
                         <!-- Telemetry Engine Panel -->
                         <div class="telemetry-dock">
                             <div class="dock-header">
-                                <span class="dock-title">📊 TELEMETRY ENGINE & GRAPH</span>
+                                <span class="dock-title">
+                                    <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m18.7 8-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+                                    TELEMETRY ENGINE & GRAPH
+                                </span>
                             </div>
                             <div class="telemetry-grid-body">
                                 <div class="telemetry-metrics">
@@ -390,7 +387,10 @@
                 <section class="details-section">
                     <!-- Explanations & Theory (Concept-Oriented Explanations) -->
                     <div class="panel info-panel" id="explanations-collapsible">
-                        <div class="panel-header">📚 EXPLOIT DEFINITION & THEORY</div>
+                        <div class="panel-header">
+                            <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                            EXPLOIT DEFINITION & THEORY
+                        </div>
                         <div class="panel-body" id="attack-info-body">
                             <!-- Injected explanation text -->
                         </div>
@@ -398,7 +398,10 @@
 
                     <!-- ESP32 Board Schematic (Physical Access Target - integrated on demand) -->
                     <div class="panel board-panel hidden" id="panel-esp-board">
-                        <div class="panel-header">🛠️ TARGET DEVICE SCHEMATIC (ESP32-WROOM-32E)</div>
+                        <div class="panel-header">
+                            <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
+                            TARGET DEVICE SCHEMATIC (ESP32-WROOM-32E)
+                        </div>
                         <div class="panel-body board-body" id="esp-board-body">
                             <!-- Dynamic SVG layout inside -->
                         </div>
@@ -407,7 +410,10 @@
                     <!-- Live Event Log Timeline (Mockup aligned console) -->
                     <div class="panel console-panel">
                         <div class="panel-header">
-                            <span>🛡️ LIVE EVENT LOG</span>
+                            <span>
+                                <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                LIVE EVENT LOG
+                            </span>
                             <div style="display: flex; gap: 8px;">
                                 <button id="btn-export-logs" class="clear-btn" style="border-color: var(--color-success); color: var(--color-success)">EXPORT LOGS</button>
                                 <button id="btn-clear-console" class="clear-btn">CLEAR</button>
@@ -424,14 +430,19 @@
         <!-- 3. FOOTER SECTION -->
         <footer class="app-footer">
             <div class="footer-left">
-                <div class="footer-logo">🏫</div>
+                <div class="footer-logo">
+                    <svg class="footer-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+                </div>
                 <div class="footer-text">
                     <span class="footer-title">Department of Computer Science & Engineering</span>
                     <span class="footer-subtitle">Dronacharya College of Engineering, Gurugram, Haryana, India</span>
                 </div>
             </div>
             <div class="footer-mid">
-                <span class="footer-badge">🛡️ Built for research. Securing the connected future.</span>
+                <span class="footer-badge">
+                    <svg class="badge-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg>
+                    Built for research. Securing the connected future.
+                </span>
             </div>
             <div class="footer-right">
                 <span class="footer-copy">&copy; 2026 IoT AttackSim. All rights reserved.</span>
