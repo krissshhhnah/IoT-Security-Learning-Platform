@@ -1,23 +1,710 @@
 <!DOCTYPE html>
 <html lang="en" data-mode="simulation">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IoT AttackSim - Cyber Attack Simulation Platform</title>
+    <title>ISLP - IoT Security Learning Platform</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <!-- Three.js and OrbitControls loaded locally -->
     <script src="libs/three.min.js"></script>
     <script src="libs/OrbitControls.js"></script>
 </head>
+
 <body>
     <div class="app-wrapper">
+        <!-- HERO PAGE VIEW -->
+        <div id="hero-view" class="islp-hero-view">
+            <!-- Aceternity UI Background Beams -->
+            <div class="islp-bg-beams-container">
+                <svg class="islp-bg-beams-svg" viewBox="0 0 1440 900" preserveAspectRatio="none">
+                    <defs>
+                        <!-- Glow filters for the background beams -->
+                        <filter id="beam-glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="6" result="blur" />
+                            <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Overlapping, curved digital pathways -->
+                    <path d="M -100,150 Q 500,450 1600,200" stroke="var(--color-primary)" stroke-width="1.5" class="bg-beam beam-1" filter="url(#beam-glow)" />
+                    <path d="M 300,-100 C 500,300 900,400 1200,1050" stroke="var(--color-secondary)" stroke-width="2" class="bg-beam beam-2" filter="url(#beam-glow)" />
+                    <path d="M 1500,100 Q 800,500 -100,750" stroke="var(--color-primary)" stroke-width="1.5" class="bg-beam beam-3" filter="url(#beam-glow)" />
+                    <path d="M 100,-100 C 250,550 1150,250 1350,1050" stroke="#00f0ff" stroke-width="2" class="bg-beam beam-4" filter="url(#beam-glow)" />
+                </svg>
+            </div>
+            <!-- Top Navbar -->
+            <nav class="islp-hero-navbar">
+                <div class="islp-hero-nav-brand">
+                    <svg class="islp-hero-nav-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <div class="islp-hero-brand-text">
+                        <span class="islp-hero-brand-title">ISLP</span>
+                        <span class="islp-hero-brand-sub">IoT Security Learning Platform</span>
+                    </div>
+                </div>
+                <div class="islp-hero-nav-links">
+                    <a href="#islp-overview" class="islp-hero-nav-link">Overview</a>
+                    <a href="#islp-attacks" class="islp-hero-nav-link">Attack Directory</a>
+                    <a href="#islp-impact" class="islp-hero-nav-link">Impact Matrix</a>
+                    <a href="#islp-credits" class="islp-hero-nav-link">Team & Mentors</a>
+                </div>
+                <div class="islp-hero-nav-actions">
+                    <button class="islp-hero-btn-primary islp-btn-launch-simlab">
+                        <span>SIMLAB</span>
+                        <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Hero Section Header -->
+            <section id="islp-overview" class="islp-hero-section islp-hero-intro islp-scroll-reveal">
+                <div class="islp-hero-glow-blob bg-blob-1"></div>
+                <div class="islp-hero-glow-blob bg-blob-2"></div>
+                
+                <!-- Badge capsule -->
+                <div class="islp-hero-badge">
+                    <span class="badge-tag">New</span>
+                    <span class="badge-text">Introducing ISLP v2.0 Sandbox</span>
+                </div>
+
+                <div class="islp-hero-split-container">
+                    <div class="islp-hero-left-col">
+                        <h1 class="islp-hero-title">Empowering the Future of <span class="islp-text-glow-purple">IoT Cybersecurity</span></h1>
+                        <p class="islp-hero-subtitle">
+                            An interactive, real-time cyber attack simulation and digital twin sandbox designed for next-generation security research, vulnerability analysis, and educational training.
+                        </p>
+                        <div class="islp-hero-actions">
+                            <button class="islp-hero-btn-large islp-btn-launch-simlab">
+                                <span>Enter SIMLAB Sandbox</span>
+                                <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-left:8px;">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                            <a href="#islp-attacks" class="islp-hero-btn-secondary">
+                                <span>Explore 17 OSI Attacks</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="islp-hero-right-col">
+                        <div class="islp-hero-graphic-container">
+                            <svg class="islp-hero-svg" viewBox="0 0 400 400" width="100%" height="100%">
+                                <defs>
+                                    <!-- Gradients -->
+                                    <radialGradient id="chip-glow" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.6" />
+                                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
+                                    </radialGradient>
+                                    <linearGradient id="chip-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#180e29" />
+                                        <stop offset="100%" stop-color="#090514" />
+                                    </linearGradient>
+                                    <linearGradient id="lock-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#a855f7" />
+                                        <stop offset="100%" stop-color="#6366f1" />
+                                    </linearGradient>
+                                    <linearGradient id="line-grad-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00f0ff" />
+                                        <stop offset="100%" stop-color="#6366f1" />
+                                    </linearGradient>
+                                    <filter id="svg-blur">
+                                        <feGaussianBlur stdDeviation="15" />
+                                    </filter>
+                                    <filter id="glow-heavy">
+                                        <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur"/>
+                                            <feMergeNode in="SourceGraphic"/>
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+
+                                <!-- Pulsing Background Chip Glow -->
+                                <rect x="50" y="50" width="300" height="300" rx="40" fill="url(#chip-glow)" class="animated-chip-glow-bg" />
+
+                                <!-- Circuit Connecting Lines (Around the chip) with Light Streams -->
+                                <!-- Left Top Stream -->
+                                <path d="M 30,120 L 120,120 L 120,150" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
+                                <path d="M 30,120 L 120,120 L 120,150" stroke="url(#line-grad-cyan)" stroke-width="2.5" fill="none" class="circuit-line-stream stream-fast" />
+
+                                <!-- Left Bottom Stream -->
+                                <path d="M 30,280 L 120,280 L 120,250" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
+                                <path d="M 30,280 L 120,280 L 120,250" stroke="#a855f7" stroke-width="2.5" fill="none" class="circuit-line-stream stream-slow" />
+
+                                <!-- Right Top Stream -->
+                                <path d="M 370,120 L 280,120 L 280,150" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
+                                <path d="M 370,120 L 280,120 L 280,150" stroke="#a855f7" stroke-width="2.5" fill="none" class="circuit-line-stream stream-normal" />
+
+                                <!-- Right Bottom Stream -->
+                                <path d="M 370,280 L 280,280 L 280,250" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
+                                <path d="M 370,280 L 280,280 L 280,250" stroke="url(#line-grad-cyan)" stroke-width="2.5" fill="none" class="circuit-line-stream stream-fast" />
+
+                                <!-- Outer Nodes -->
+                                <circle cx="30" cy="120" r="4" fill="#00f0ff" filter="url(#glow-heavy)" />
+                                <circle cx="30" cy="280" r="4" fill="#a855f7" filter="url(#glow-heavy)" />
+                                <circle cx="370" cy="120" r="4" fill="#a855f7" filter="url(#glow-heavy)" />
+                                <circle cx="370" cy="280" r="4" fill="#00f0ff" filter="url(#glow-heavy)" />
+
+                                <!-- Central Glowing Security Chip -->
+                                <g class="animated-chip-glow">
+                                    <!-- Outer glowing ring of the chip -->
+                                    <rect x="100" y="100" width="200" height="200" rx="24" fill="none" stroke="rgba(168, 85, 247, 0.4)" stroke-width="6" />
+                                    <rect x="104" y="104" width="192" height="192" rx="20" fill="url(#chip-grad)" stroke="#a855f7" stroke-width="2.5" />
+                                    
+                                    <!-- Grid pattern inside the chip -->
+                                    <path d="M 120,104 L 120,296 M 140,104 L 140,296 M 160,104 L 160,296 M 180,104 L 180,296 M 200,104 L 200,296 M 220,104 L 220,296 M 240,104 L 240,296 M 260,104 L 260,296 M 280,104 L 280,296" stroke="rgba(168, 85, 247, 0.08)" stroke-width="1" />
+                                    <path d="M 104,120 L 296,120 M 104,140 L 296,140 M 104,160 L 296,160 M 104,180 L 296,180 M 104,200 L 296,200 M 104,220 L 296,220 M 104,240 L 296,240 M 104,260 L 296,260 M 104,280 L 296,280" stroke="rgba(168, 85, 247, 0.08)" stroke-width="1" />
+                                    
+                                    <!-- Neon center core -->
+                                    <rect x="135" y="135" width="130" height="130" rx="16" fill="rgba(8, 5, 14, 0.8)" stroke="rgba(0, 240, 255, 0.25)" stroke-width="1.5" />
+                                </g>
+
+                                <!-- The Lock (Lock Body stays relative, Shackle floats) -->
+                                <g transform="translate(170, 160)">
+                                    <!-- Lock Head/Shackle (Floating animation applied to this group) -->
+                                    <g class="animated-lock-shackle">
+                                        <path d="M 16,15 L 16,0 A 14,14 0 0 1 44,0 L 44,15" fill="none" stroke="url(#lock-grad)" stroke-width="5" stroke-linecap="round" filter="url(#glow-heavy)" />
+                                    </g>
+                                    <!-- Lock Body -->
+                                    <rect x="0" y="10" width="60" height="48" rx="8" fill="url(#lock-grad)" filter="url(#glow-heavy)" />
+                                    <!-- Keyhole details -->
+                                    <circle cx="30" cy="28" r="5" fill="#180e29" />
+                                    <polygon points="28,30 32,30 33,40 27,40" fill="#180e29" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust / Technologies Bar -->
+                <div class="islp-hero-trust-bar">
+                    <span class="trust-title">Supported by Academic Labs & Open Standards</span>
+                    <div class="trust-logos">
+                        <div class="trust-logo-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-svg" style="margin-right: 6px;"><path d="M22 10v6M2 10v6M12 2L2 7l10 5 10-5-10-5z"></path><path d="M6 9.5V20a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9.5"></path></svg>
+                            <span>CSD Lab</span>
+                        </div>
+                        <div class="trust-logo-item"><span>NITK Surathkal</span></div>
+                        <div class="trust-logo-item"><span>ESP-NOW MESH</span></div>
+                        <div class="trust-logo-item"><span>Three.js WebGL</span></div>
+                        <div class="trust-logo-item"><span>IEEE 802.15.4</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bento Capabilities Grid Section -->
+            <section class="islp-hero-section islp-scroll-reveal">
+                <div class="islp-section-header">
+                    <h2 class="islp-section-title">Essential Tools for Security Research</h2>
+                    <p class="islp-section-desc">Streamline analysis, verify device states, and monitor network health inside our integrated twin.</p>
+                </div>
+                
+                <div class="islp-bento-grid">
+                    <!-- Card 1: Telemetry Graph representation (Weekly progress style) -->
+                    <div class="islp-bento-card bento-col-2">
+                        <div class="bento-card-header">
+                            <span class="bento-tag">Metrics</span>
+                            <h3>Real-time Telemetry Monitor</h3>
+                            <p>Track packet delivery times, microcontroller CPU loads, and signal strength variations instantly.</p>
+                        </div>
+                        <div class="bento-graph-container">
+                            <svg class="bento-line-chart-svg" viewBox="0 0 400 150" width="100%" height="100%">
+                                <defs>
+                                    <linearGradient id="chart-grad-purple" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.4" />
+                                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0.0" />
+                                    </linearGradient>
+                                    <linearGradient id="chart-trace-grad" x1="0" y1="0" x2="1" y2="0">
+                                        <stop offset="0%" stop-color="#6366f1" />
+                                        <stop offset="50%" stop-color="#a855f7" />
+                                        <stop offset="100%" stop-color="#00f0ff" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- Grid Lines -->
+                                <line x1="30" y1="20" x2="380" y2="20" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+                                <line x1="30" y1="55" x2="380" y2="55" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+                                <line x1="30" y1="90" x2="380" y2="90" stroke="rgba(255,255,255,0.03)" stroke-width="1" />
+                                <line x1="30" y1="125" x2="380" y2="125" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                                
+                                <!-- Filled Area -->
+                                <path d="M 30,125 L 30,95 Q 80,45 130,85 T 230,35 T 330,75 L 380,55 L 380,125 Z" fill="url(#chart-grad-purple)" />
+                                <!-- Trace Line -->
+                                <path d="M 30,95 Q 80,45 130,85 T 230,35 T 330,75 L 380,55" fill="none" stroke="url(#chart-trace-grad)" stroke-width="3.5" stroke-linecap="round" class="bento-chart-trace" />
+                                
+                                <!-- Glowing pointer -->
+                                <circle cx="380" cy="55" r="4.5" fill="#00f0ff" filter="url(#glow-heavy)" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2: Resource circle gauge (Datary Overall Progress style) -->
+                    <div class="islp-bento-card">
+                        <div class="bento-card-header">
+                            <span class="bento-tag">Twin Status</span>
+                            <h3>Twin Resource Audit</h3>
+                            <p>Verify free heap margins and check for physical pin tampering.</p>
+                        </div>
+                        <div class="bento-gauge-container">
+                            <svg class="bento-gauge-svg" viewBox="0 0 200 200" width="100%" height="100%">
+                                <defs>
+                                    <linearGradient id="gauge-grad" x1="0" y1="1" x2="1" y2="0">
+                                        <stop offset="0%" stop-color="#6366f1" />
+                                        <stop offset="100%" stop-color="#a855f7" />
+                                    </linearGradient>
+                                </defs>
+                                <!-- Outer Track -->
+                                <path d="M 40,150 A 70,70 0 1,1 160,150" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="14" stroke-linecap="round" />
+                                <!-- Progress Track -->
+                                <path d="M 40,150 A 70,70 0 1,1 160,150" fill="none" stroke="url(#gauge-grad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="130" class="bento-gauge-arc" />
+                                <!-- Center Text -->
+                                <text x="100" y="95" font-family="'Outfit', sans-serif" font-size="28" font-weight="800" fill="#f8fafc" text-anchor="middle">95%</text>
+                                <text x="100" y="120" font-family="'Outfit', sans-serif" font-size="10" font-weight="600" fill="var(--color-success)" text-anchor="middle" letter-spacing="1">STABLE CORE</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Checklist / Security Capabilities -->
+                    <div class="islp-bento-card">
+                        <div class="bento-card-header">
+                            <span class="bento-tag">Control</span>
+                            <h3>Digital Twin Control</h3>
+                            <p>Sync mock hardware telemetry stream instantly on the WebGL sandbox canvas.</p>
+                        </div>
+                        <div class="bento-list-details">
+                            <div class="bento-list-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="btn-svg" style="margin-right: 6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>1200ms Telemetry Polls</span>
+                            </div>
+                            <div class="bento-list-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="btn-svg" style="margin-right: 6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Serial Gateway Interceptor</span>
+                            </div>
+                            <div class="bento-list-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="btn-svg" style="margin-right: 6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>3D Raycasted Hover Labels</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Hardware tap pins summary (Bento card 2-col) -->
+                    <div class="islp-bento-card bento-col-2">
+                        <div class="bento-card-header">
+                            <span class="bento-tag">Firmware</span>
+                            <h3>Side-Channel & Pin Probing</h3>
+                            <p>Audit physical JTAG debugging pins and exfiltrate cryptographic key characters using timing histograms.</p>
+                        </div>
+                        <div class="bento-pins-row">
+                            <div class="bento-pin-badge"><span>PIN 12: JTAG TDI</span><span class="pin-status error">TAPPED</span></div>
+                            <div class="bento-pin-badge"><span>PIN 13: JTAG TDO</span><span class="pin-status error">TAPPED</span></div>
+                            <div class="bento-pin-badge"><span>PIN 14: JTAG TCK</span><span class="pin-status ok">SECURE</span></div>
+                            <div class="bento-pin-badge"><span>PIN 15: JTAG TMS</span><span class="pin-status ok">SECURE</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Getting Started Easy Timeline Section -->
+            <section class="islp-hero-section islp-scroll-reveal">
+                <div class="islp-section-header">
+                    <h2 class="islp-section-title">Getting Started is Easy</h2>
+                    <p class="islp-section-desc">Understand how to utilize our research sandbox to run comprehensive vulnerability checks in three simple stages.</p>
+                </div>
+                
+                <div class="islp-timeline-row">
+                    <!-- Step 1 -->
+                    <div class="islp-timeline-step">
+                        <div class="timeline-num-bubble">01</div>
+                        <h3>Choose Threat Vector</h3>
+                        <p>Explore our extensive directory of 17 OSI attacks. Selecting a vector loads theory, code commands, and sets the simulator state.</p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="islp-timeline-step">
+                        <div class="timeline-num-bubble">02</div>
+                        <h3>Launch Simulation</h3>
+                        <p>Enter SimLab. Engage the simulation thread or hook up target ESP32 hardware to route live packet sequences on the 3D grid.</p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="islp-timeline-step">
+                        <div class="timeline-num-bubble">03</div>
+                        <h3>Inspect Telemetry</h3>
+                        <p>Analyze latency graphs, event timeline details, register logs, and inspect compromises to design mitigations.</p>
+                    </div>
+                </div>
+                
+                <div class="islp-timeline-action">
+                    <button class="islp-hero-btn-large islp-btn-launch-simlab" style="margin: 30px auto 0 auto;">
+                        <span>Launch SIMLAB Sandbox Now</span>
+                        <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-left:8px;">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Attack Vectors Grid Section -->
+            <section id="islp-attacks" class="islp-hero-section islp-scroll-reveal">
+                <div class="islp-section-header">
+                    <h2 class="islp-section-title">17 OSI-Aligned IoT Attack Directory</h2>
+                    <p class="islp-section-desc">
+                        Explore specific vulnerabilities and launch simulation nodes straight into the sandbox environment to study telemetry response and event logging.
+                    </p>
+                </div>
+                
+                <div class="islp-attacks-grid">
+                    <!-- Card 1 -->
+                    <div class="islp-attack-card" data-layer="Data Link">
+                        <div class="attack-header">
+                            <span class="attack-num">01</span>
+                            <span class="attack-layer">DATA LINK</span>
+                        </div>
+                        <h3>Man-in-the-Middle</h3>
+                        <p>Intercepts transit frames between gateway and sensors to manipulate payloads or spoof active commands.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="1">
+                            <span>Simulate MITM</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="islp-attack-card" data-layer="Physical">
+                        <div class="attack-header">
+                            <span class="attack-num">02</span>
+                            <span class="attack-layer">PHYSICAL</span>
+                        </div>
+                        <h3>Eavesdropping</h3>
+                        <p>Sniffs raw RF carrier signals over unencrypted wireless links to capture credential hashes and device configurations.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="2">
+                            <span>Simulate Sniff</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="islp-attack-card" data-layer="Network">
+                        <div class="attack-header">
+                            <span class="attack-num">03</span>
+                            <span class="attack-layer">NETWORK</span>
+                        </div>
+                        <h3>Replay Attack</h3>
+                        <p>Captures valid authentication tokens and broadcasts them later to bypass hardware verification schemes.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="3">
+                            <span>Simulate Replay</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="islp-attack-card" data-layer="Data Link">
+                        <div class="attack-header">
+                            <span class="attack-num">04</span>
+                            <span class="attack-layer">DATA LINK</span>
+                        </div>
+                        <h3>Spoofing Attack</h3>
+                        <p>Forges MAC addresses of trusted IoT devices to gain illegal network entry and bypass access control lists.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="4">
+                            <span>Simulate Spoof</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="islp-attack-card" data-layer="Network">
+                        <div class="attack-header">
+                            <span class="attack-num">05</span>
+                            <span class="attack-layer">NETWORK</span>
+                        </div>
+                        <h3>Packet Injection</h3>
+                        <p>Crafts and injects malicious hex payloads directly into active routing queues to trigger remote shell overrides.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="5">
+                            <span>Simulate Injection</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="islp-attack-card" data-layer="Transport">
+                        <div class="attack-header">
+                            <span class="attack-num">06</span>
+                            <span class="attack-layer">TRANSPORT</span>
+                        </div>
+                        <h3>Denial of Service</h3>
+                        <p>Floods the local IoT gateway router with junk request frames, causing CPU overhead and memory exfiltration.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="6">
+                            <span>Simulate DoS</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 7 -->
+                    <div class="islp-attack-card" data-layer="Transport">
+                        <div class="attack-header">
+                            <span class="attack-num">07</span>
+                            <span class="attack-layer">TRANSPORT</span>
+                        </div>
+                        <h3>Distributed DoS</h3>
+                        <p>Inundates target router queues using multiple compromised zombie nodes, causing severe network outages.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="7">
+                            <span>Simulate DDoS</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 8 -->
+                    <div class="islp-attack-card" data-layer="Physical">
+                        <div class="attack-header">
+                            <span class="attack-num">08</span>
+                            <span class="attack-layer">PHYSICAL</span>
+                        </div>
+                        <h3>Jamming Attack</h3>
+                        <p>Emits high-intensity RF carrier noise to flood the radio spectrum, causing 100% wireless packet drop rate.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="8">
+                            <span>Simulate Jamming</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 9 -->
+                    <div class="islp-attack-card" data-layer="Application">
+                        <div class="attack-header">
+                            <span class="attack-num">09</span>
+                            <span class="attack-layer">APPLICATION</span>
+                        </div>
+                        <h3>Credential Theft</h3>
+                        <p>Exfiltrates password databases and active device cryptographic handshakes from insecure local storage nodes.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="9">
+                            <span>Simulate Theft</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 10 -->
+                    <div class="islp-attack-card" data-layer="Session">
+                        <div class="attack-header">
+                            <span class="attack-num">10</span>
+                            <span class="attack-layer">SESSION</span>
+                        </div>
+                        <h3>Session Hacking</h3>
+                        <p>Hijacks active BLE connection states or session keys, tricking smart devices into accepting illegal control packets.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="10">
+                            <span>Simulate Hijack</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 11 -->
+                    <div class="islp-attack-card" data-layer="Physical">
+                        <div class="attack-header">
+                            <span class="attack-num">11</span>
+                            <span class="attack-layer">PHYSICAL</span>
+                        </div>
+                        <h3>Rogue Insertion</h3>
+                        <p>Injects unverified rogue hardware modules into active physical connections, bypassing local network firewalls.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="11">
+                            <span>Simulate Rogue</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 12 -->
+                    <div class="islp-attack-card" data-layer="Network">
+                        <div class="attack-header">
+                            <span class="attack-num">12</span>
+                            <span class="attack-layer">NETWORK</span>
+                        </div>
+                        <h3>Routing Attack</h3>
+                        <p>Manipulates mesh routing tables (e.g. RPL) to blackhole payloads or reroute data paths through threat nodes.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="12">
+                            <span>Simulate Routing</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 13 -->
+                    <div class="islp-attack-card" data-layer="Network">
+                        <div class="attack-header">
+                            <span class="attack-num">13</span>
+                            <span class="attack-layer">NETWORK</span>
+                        </div>
+                        <h3>Sybil Attack</h3>
+                        <p>Spawns multiple pseudonymous virtual clone nodes to flood mesh routing algorithms and forge voting consensus.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="13">
+                            <span>Simulate Sybil</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 14 -->
+                    <div class="islp-attack-card" data-layer="Presentation">
+                        <div class="attack-header">
+                            <span class="attack-num">14</span>
+                            <span class="attack-layer">PRESENTATION</span>
+                        </div>
+                        <h3>Sensor Tampering</h3>
+                        <p>Injects forged telemetry data (e.g. manipulating light/temperature values) to trigger false system shutdowns.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="14">
+                            <span>Simulate Tamper</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 15 -->
+                    <div class="islp-attack-card" data-layer="Physical">
+                        <div class="attack-header">
+                            <span class="attack-num">15</span>
+                            <span class="attack-layer">PHYSICAL</span>
+                        </div>
+                        <h3>Timing Attack</h3>
+                        <p>Uses side-channel exfiltration to monitor microcontroller crypto execution cycles and exfiltrate private keys.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="15">
+                            <span>Simulate Timing</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 16 -->
+                    <div class="islp-attack-card" data-layer="Physical">
+                        <div class="attack-header">
+                            <span class="attack-num">16</span>
+                            <span class="attack-layer">PHYSICAL</span>
+                        </div>
+                        <h3>Physical Access</h3>
+                        <p>Taps target board JTAG/UART headers to probe raw memory dumps or flash malicious firmware directly.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="16">
+                            <span>Simulate Physical</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                    <!-- Card 17 -->
+                    <div class="islp-attack-card" data-layer="Transport">
+                        <div class="attack-header">
+                            <span class="attack-num">17</span>
+                            <span class="attack-layer">TRANSPORT</span>
+                        </div>
+                        <h3>Delay Attack</h3>
+                        <p>Holds back and buffers packet delivery times to compromise control-loop synchronization and timing parameters.</p>
+                        <button class="islp-attack-launch-btn" data-attack-id="17">
+                            <span>Simulate Delay</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Impact Section -->
+            <section id="islp-impact" class="islp-hero-section islp-hero-impact islp-scroll-reveal">
+                <div class="islp-section-header">
+                    <h2 class="islp-section-title">Security Impact Matrix</h2>
+                    <p class="islp-section-desc">Learn how vulnerabilities cascading across IoT devices disrupt mission-critical environments.</p>
+                </div>
+                
+                <div class="islp-impact-row">
+                    <div class="islp-impact-column">
+                        <div class="islp-impact-card">
+                            <div class="impact-badge high">HIGH THREAT</div>
+                            <h3>Physical Infrastructure Damage</h3>
+                            <p>Manipulated sensor telemetry and delayed commands can trigger mechanical failure in water treatment facilities, smart generators, and assembly line robots.</p>
+                            <span class="impact-attacks-list">Impacted by: Sensor Tampering, Delay Attack, Rogue Insertion</span>
+                        </div>
+                    </div>
+                    <div class="islp-impact-column">
+                        <div class="islp-impact-card">
+                            <div class="impact-badge medium">MEDIUM THREAT</div>
+                            <h3>Confidential Data Exfiltration</h3>
+                            <p>Unencrypted wireless communication enables RF eavesdropping, allowing malicious actors to sniff authentication keys, usernames, and sensor tracking records.</p>
+                            <span class="impact-attacks-list">Impacted by: Eavesdropping, MITM, Credential Theft</span>
+                        </div>
+                    </div>
+                    <div class="islp-impact-column">
+                        <div class="islp-impact-card">
+                            <div class="impact-badge critical">CRITICAL THREAT</div>
+                            <h3>Network Failure & Spectrum Denial</h3>
+                            <p>Continuous RF spectrum jamming or flood-based Denial of Service renders network nodes unreachable, completely shutting down smart home monitoring queues.</p>
+                            <span class="impact-attacks-list">Impacted by: Jamming Attack, DoS, DDoS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Credits Section -->
+            <section id="islp-credits" class="islp-hero-section islp-hero-credits islp-scroll-reveal">
+                <div class="islp-section-header">
+                    <h2 class="islp-section-title">Mentors & Core Contributors</h2>
+                    <p class="islp-section-desc">Designed, developed, and maintained at the Centre for System Design (CSD), NITK Surathkal.</p>
+                </div>
+                
+                <div class="islp-credits-grid">
+                    <div class="islp-credits-category">
+                        <h3 class="islp-credits-title">Project Mentors</h3>
+                        <div class="islp-credits-list">
+                            <div class="islp-credit-card">
+                                <div class="credit-avatar">
+                                    <span>CSD</span>
+                                </div>
+                                <div class="credit-info">
+                                    <h4>Dr. Pruthviraj U</h4>
+                                    <p class="credit-role">Head of CSD & Associate Professor</p>
+                                    <p class="credit-institute">National Institute of Technology Karnataka</p>
+                                </div>
+                            </div>
+                            <div class="islp-credit-card">
+                                <div class="credit-avatar">
+                                    <span>CSD</span>
+                                </div>
+                                <div class="credit-info">
+                                    <h4>Dr. K. V. Gangadharan</h4>
+                                    <p class="credit-role">Professor & Advisor (CSD)</p>
+                                    <p class="credit-institute">National Institute of Technology Karnataka</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="islp-credits-category">
+                        <h3 class="islp-credits-title">Core Development Team</h3>
+                        <div class="islp-credits-list">
+                            <div class="islp-credit-card">
+                                <div class="credit-avatar developer">
+                                    <span>DEV</span>
+                                </div>
+                                <div class="credit-info">
+                                    <h4>Research Engineers (CSD)</h4>
+                                    <p class="credit-role">Hardware & Digital Twin Architectures</p>
+                                    <p class="credit-institute">Centre for System Design, NITK</p>
+                                </div>
+                            </div>
+                            <div class="islp-credit-card">
+                                <div class="credit-avatar developer">
+                                    <span>DEV</span>
+                                </div>
+                                <div class="credit-info">
+                                    <h4>Software Team (CSD)</h4>
+                                    <p class="credit-role">Interactive WebGL & Web Dev Labs</p>
+                                    <p class="credit-institute">Centre for System Design, NITK</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- MAIN DASHBOARD CONTENT AREA -->
-        <div id="dashboard-view" class="app-container">
-            
+        <div id="dashboard-view" class="app-container hidden">
+
             <!-- Simulation Header Bar (mockup aligned) -->
             <header class="simulation-header">
                 <div class="header-left">
@@ -28,23 +715,44 @@
                         <span class="sim-id">Simulation ID: SIM-2026-0603-001</span>
                     </div>
                 </div>
-                
+
                 <div class="header-right">
+                    <button id="btn-goto-home" class="header-control-btn btn-home-nav">
+                        <span class="btn-icon"><svg class="btn-svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg></span> ISLP Home
+                    </button>
+
+
                     <button id="btn-trigger-attack" class="header-control-btn btn-play-pause">
-                        <span class="btn-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span> <span class="btn-text">Launch</span>
+                        <span class="btn-icon"><svg class="btn-svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg></span> <span class="btn-text">Launch</span>
                     </button>
                     <button id="btn-stop-attack" class="header-control-btn btn-stop">
-                        <span class="btn-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"/></svg></span> Stop
+                        <span class="btn-icon"><svg class="btn-svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            </svg></span> Stop
                     </button>
                     <button id="btn-reset-sim" class="header-control-btn btn-reset">
-                        <span class="btn-icon"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg></span> Reset
+                        <span class="btn-icon"><svg class="btn-svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                            </svg></span> Reset
                     </button>
- 
+
                     <!-- Mode Toggle -->
                     <div class="toggle-group header-toggle">
                         <button id="btn-mode-sim" class="toggle-btn active">SIMULATION</button>
                         <button id="btn-mode-twin" class="toggle-btn">DIGITAL TWIN</button>
                     </div>
+
+
                 </div>
             </header>
 
@@ -53,7 +761,8 @@
                 <!-- Left Sidebar Navigation -->
                 <aside class="sidebar">
                     <div class="sidebar-top">
-                        <button id="btn-back-home" class="back-dashboard-btn" style="display:none;">← Back to Dashboard</button>
+                        <button id="btn-back-home" class="back-dashboard-btn" style="display:none;">← Back to
+                            Dashboard</button>
                     </div>
 
                     <div class="sidebar-header">ATTACKS</div>
@@ -61,119 +770,136 @@
                         <div class="vector-list">
                             <!-- Sequential menu 1-17 styled with subtitles and state icons -->
                             <button class="vector-item" data-vector="1">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">1. Man-in-the-Middle</span>
                                     <span class="vector-sub">Intercept & modify payloads</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="2">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">2. Eavesdropping</span>
                                     <span class="vector-sub">Sniff wifi carrier packets</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="3">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">3. Replay Attack</span>
                                     <span class="vector-sub">Retransmit auth tokens</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="4">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">4. Spoofing Attack</span>
                                     <span class="vector-sub">Forge MAC identities</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="5">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">5. Packet Injection</span>
                                     <span class="vector-sub">Craft custom raw hex frames</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="6">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">6. Denial of Service</span>
                                     <span class="vector-sub">Flood target router</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="7">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">7. Distributed DoS</span>
                                     <span class="vector-sub">Inundate target switch</span>
                                 </div>
                             </button>
                             <button class="vector-item active" data-vector="8">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">8. Jamming Attack</span>
                                     <span class="vector-sub">Emit RF carrier noise</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="9">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">9. Credential Theft</span>
                                     <span class="vector-sub">Exfiltrate key handshakes</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="10">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">10. Session Hacking</span>
                                     <span class="vector-sub">Hijack active BLE connection</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="11">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">11. Rogue Insertion</span>
                                     <span class="vector-sub">Insert unverified hardware</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="12">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">12. Routing Attack</span>
                                     <span class="vector-sub">Reroute mesh traffic paths</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="13">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">13. Sybil Attack</span>
                                     <span class="vector-sub">Spawn pseudonymous clones</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="14">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">14. Sensor Tamper</span>
                                     <span class="vector-sub">Manipulate sensor telemetry</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="15">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">15. Timing Attack</span>
                                     <span class="vector-sub">Side-channel cryptanalysis</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="16">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">16. Physical Access</span>
                                     <span class="vector-sub">Tap board JTAG/UART pins</span>
                                 </div>
                             </button>
                             <button class="vector-item" data-vector="17">
-                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span>
+                                </div>
                                 <div class="vector-info">
                                     <span class="vector-name">17. Delay Attack</span>
                                     <span class="vector-sub">Hold back packet delivery</span>
@@ -199,19 +925,51 @@
                                 <span>Malicious Activity</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon"><svg class="legend-svg node-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg></span>
+                                <span class="legend-node-icon node-cyan"><svg class="details-svg"
+                                        style="color:var(--color-primary)" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path
+                                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                        </path>
+                                    </svg></span>
                                 <span>IoT Device</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon"><svg class="legend-svg node-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+                                <span class="legend-node-icon node-blue"><svg class="details-svg"
+                                        style="color:var(--color-secondary)" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                        <path
+                                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                        </path>
+                                    </svg></span>
                                 <span>Network Device</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon"><svg class="legend-svg node-red-hacker" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg></span>
+                                <span class="legend-node-icon node-red-hacker"><svg class="details-svg"
+                                        style="color:var(--color-danger)" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="2" y1="20" x2="22" y2="20"></line>
+                                        <line x1="12" y1="17" x2="12" y2="20"></line>
+                                    </svg></span>
                                 <span>Attacker</span>
                             </div>
                             <div class="legend-item">
-                                <span class="legend-node-icon"><svg class="legend-svg node-red-beacon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                                <span class="legend-node-icon node-red-beacon"><svg class="details-svg"
+                                        style="color:#ef4444" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z">
+                                        </path>
+                                        <line x1="12" y1="9" x2="12" y2="13"></line>
+                                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                    </svg></span>
                                 <span>Compromised</span>
                             </div>
                         </div>
@@ -230,12 +988,13 @@
                         <!-- Floating Glassmorphic Flow Explanation Banner -->
                         <div id="flow-explanation-banner" class="flow-banner-overlay">
                             <span class="flow-banner-badge" id="flow-banner-badge">SECURE MESH</span>
-                            <span class="flow-banner-text" id="flow-banner-text">Node A is communicating securely with Node B.</span>
+                            <span class="flow-banner-text" id="flow-banner-text">Node A is communicating securely with
+                                Node B.</span>
                         </div>
 
                         <!-- Dynamic HTML Node Labels Container -->
                         <div id="node-labels-container"></div>
-                        
+
                         <!-- Floating Node Details Hover Tooltip -->
                         <div id="node-hover-tooltip" class="hover-tooltip hidden"></div>
 
@@ -272,17 +1031,26 @@
                             <button id="btn-view-topo" class="toolbar-btn">Topology View</button>
                             <button id="btn-view-list" class="toolbar-btn">List View</button>
                         </div>
-                        
+
                         <div class="toolbar-mid">
                             <span class="toolbar-label">Zoom</span>
                             <button id="btn-zoom-out" class="zoom-btn">-</button>
                             <span id="zoom-val" class="zoom-val">100%</span>
                             <button id="btn-zoom-in" class="zoom-btn">+</button>
+
                             <button id="btn-tool-rotate" class="tool-btn active">
-                                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>Rotate
+                                <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                                </svg> Rotate
                             </button>
                             <button id="btn-tool-pan" class="tool-btn">
-                                <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5m0 0V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v7m0 0V5a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6m0 0V9a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v10a7 7 0 0 0 7 7h1a8 8 0 0 0 8-8v-5"/></svg>Pan
+                                <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v9a7 7 0 0 0 14 0v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2">
+                                    </path>
+                                </svg> Pan
                             </button>
                             <button id="btn-tool-reset" class="tool-btn">Reset View</button>
                         </div>
@@ -310,10 +1078,7 @@
                         <!-- Live Command Center / Dynamic Control Panel -->
                         <div class="control-dock">
                             <div class="dock-header">
-                                <span class="dock-title">
-                                    <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="2" y1="14" x2="6" y2="14"/><line x1="10" y1="8" x2="14" y2="8"/><line x1="18" y1="16" x2="22" y2="16"/></svg>
-                                    ATTACK VECTOR CONTROLS
-                                </span>
+                                <span class="dock-title">ATTACK VECTOR CONTROLS</span>
                             </div>
                             <div class="dock-body" id="dynamic-controls">
                                 <!-- Dynamic content injected here based on active attack selection -->
@@ -323,10 +1088,7 @@
                         <!-- Telemetry Engine Panel -->
                         <div class="telemetry-dock">
                             <div class="dock-header">
-                                <span class="dock-title">
-                                    <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m18.7 8-5.1 5.2-2.8-2.7L7 14.3"/></svg>
-                                    TELEMETRY ENGINE & GRAPH
-                                </span>
+                                <span class="dock-title">TELEMETRY ENGINE & GRAPH</span>
                             </div>
                             <div class="telemetry-grid-body">
                                 <div class="telemetry-metrics">
@@ -336,7 +1098,8 @@
                                             <span id="metric-cpu-val">8%</span>
                                         </div>
                                         <div class="progress-track">
-                                            <div id="metric-cpu-bar" class="progress-fill fill-primary" style="width: 8%"></div>
+                                            <div id="metric-cpu-bar" class="progress-fill fill-primary"
+                                                style="width: 8%"></div>
                                         </div>
                                     </div>
 
@@ -346,7 +1109,8 @@
                                             <span id="metric-heap-val">295 KB</span>
                                         </div>
                                         <div class="progress-track">
-                                            <div id="metric-heap-bar" class="progress-fill fill-success" style="width: 95%"></div>
+                                            <div id="metric-heap-bar" class="progress-fill fill-success"
+                                                style="width: 95%"></div>
                                         </div>
                                     </div>
 
@@ -356,7 +1120,8 @@
                                             <span id="metric-loss-val">0.0%</span>
                                         </div>
                                         <div class="progress-track">
-                                            <div id="metric-loss-bar" class="progress-fill fill-alert" style="width: 0%"></div>
+                                            <div id="metric-loss-bar" class="progress-fill fill-alert"
+                                                style="width: 0%"></div>
                                         </div>
                                     </div>
 
@@ -366,13 +1131,15 @@
                                             <span id="metric-rssi-val">-50 dBm</span>
                                         </div>
                                         <div class="progress-track">
-                                            <div id="metric-rssi-bar" class="progress-fill fill-success" style="width: 80%"></div>
+                                            <div id="metric-rssi-bar" class="progress-fill fill-success"
+                                                style="width: 80%"></div>
                                         </div>
                                     </div>
 
                                     <div class="metric-item-simple">
                                         <span>ACTIVE HARDWARE NODES</span>
-                                        <span id="metric-nodes-val" class="mono-text" style="color: var(--color-success)">3 Nodes</span>
+                                        <span id="metric-nodes-val" class="mono-text"
+                                            style="color: var(--color-success)">3 Nodes</span>
                                     </div>
                                 </div>
                                 <div class="telemetry-chart">
@@ -387,10 +1154,7 @@
                 <section class="details-section">
                     <!-- Explanations & Theory (Concept-Oriented Explanations) -->
                     <div class="panel info-panel" id="explanations-collapsible">
-                        <div class="panel-header">
-                            <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                            EXPLOIT DEFINITION & THEORY
-                        </div>
+                        <div class="panel-header">EXPLOIT DEFINITION & THEORY</div>
                         <div class="panel-body" id="attack-info-body">
                             <!-- Injected explanation text -->
                         </div>
@@ -398,10 +1162,7 @@
 
                     <!-- ESP32 Board Schematic (Physical Access Target - integrated on demand) -->
                     <div class="panel board-panel hidden" id="panel-esp-board">
-                        <div class="panel-header">
-                            <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>
-                            TARGET DEVICE SCHEMATIC (ESP32-WROOM-32E)
-                        </div>
+                        <div class="panel-header"><svg class="panel-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;margin-right:6px;vertical-align:middle;display:inline-block;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg> TARGET DEVICE SCHEMATIC (ESP32-WROOM-32E)</div>
                         <div class="panel-body board-body" id="esp-board-body">
                             <!-- Dynamic SVG layout inside -->
                         </div>
@@ -410,12 +1171,11 @@
                     <!-- Live Event Log Timeline (Mockup aligned console) -->
                     <div class="panel console-panel">
                         <div class="panel-header">
-                            <span>
-                                <svg class="title-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                                LIVE EVENT LOG
-                            </span>
+                            <span>LIVE EVENT LOG</span>
                             <div style="display: flex; gap: 8px;">
-                                <button id="btn-export-logs" class="clear-btn" style="border-color: var(--color-success); color: var(--color-success)">EXPORT LOGS</button>
+                                <button id="btn-export-logs" class="clear-btn"
+                                    style="border-color: var(--color-success); color: var(--color-success)">EXPORT
+                                    LOGS</button>
                                 <button id="btn-clear-console" class="clear-btn">CLEAR</button>
                             </div>
                         </div>
@@ -430,22 +1190,17 @@
         <!-- 3. FOOTER SECTION -->
         <footer class="app-footer">
             <div class="footer-left">
-                <div class="footer-logo">
-                    <svg class="footer-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
-                </div>
+                <div class="footer-logo"><img src="./components/dcoe.png" alt=""></div>
                 <div class="footer-text">
-                    <span class="footer-title">Department of Computer Science & Engineering</span>
-                    <span class="footer-subtitle">Dronacharya College of Engineering, Gurugram, Haryana, India</span>
+                    <span class="footer-title">Centre for System Design</span>
+                    <span class="footer-subtitle">National Institute of Technology Surathkal, Karnataka </span>
                 </div>
             </div>
             <div class="footer-mid">
-                <span class="footer-badge">
-                    <svg class="badge-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg>
-                    Built for research. Securing the connected future.
-                </span>
+                <span class="footer-badge"> Built for research. Securing the connected future.</span>
             </div>
             <div class="footer-right">
-                <span class="footer-copy">&copy; 2026 IoT AttackSim. All rights reserved.</span>
+                <span class="footer-copy">&copy; 2026 IoT Security Learning Platform (ISLP). All rights reserved.</span>
             </div>
         </footer>
     </div>
@@ -453,4 +1208,5 @@
     <!-- Application Script Modules -->
     <script type="module" src="app.js"></script>
 </body>
+
 </html>

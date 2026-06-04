@@ -94,7 +94,7 @@ export class EspBoard {
             <line x1="180" y1="199" x2="190" y2="199" stroke="#b78a39" stroke-width="1.5"/>
         </svg>
         <div class="pin-explanation-card" id="pin-card" style="margin-top: 10px; background: rgba(0,0,0,0.4); border: 1px solid var(--color-panel-border); padding: 8px 12px; border-radius: 4px; font-size: 11px;">
-            <p style="font-weight: bold; color: var(--color-primary); margin-bottom: 4px;" id="pin-card-title">🖱️ CLICK PINS TO INSPECT</p>
+            <p style="font-weight: bold; color: var(--color-primary); margin-bottom: 4px;" id="pin-card-title">CLICK PINS TO INSPECT</p>
             <p id="pin-card-desc" style="color: var(--color-text-main)">Select any colored pin header on the ESP32 board to analyze its physical interfaces and security exposures.</p>
         </div>
         `;
@@ -105,7 +105,7 @@ export class EspBoard {
             pin.addEventListener('click', (e) => {
                 const name = pin.getAttribute('data-name');
                 const vuln = pin.getAttribute('data-vuln');
-                
+
                 document.getElementById('pin-card-title').innerText = name;
                 document.getElementById('pin-card-desc').innerText = vuln;
 

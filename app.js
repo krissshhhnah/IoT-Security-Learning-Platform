@@ -9,6 +9,25 @@ import { MetricsCharts } from './metrics-charts.js';
 import { SerialGateway } from './serial-gateway.js';
 import { EspBoard } from './esp-board.js';
 
+const SVG_ICONS = {
+    play: `<svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>`,
+    pause: `<svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="4" x2="18" y2="20"></line><line x1="6" y1="4" x2="6" y2="20"></line></svg>`,
+    spin: `<svg class="spin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>`,
+    cloud: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>`,
+    antenna: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M2 20h.01M7 20h.01M12 20h.01M17 20h.01M22 20h.01M12 16v-4M8 12v-2M16 12v-2M12 8V4M5 4h14"></path></svg>`,
+    server: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`,
+    plug: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>`,
+    terminal: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>`,
+    camera: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>`,
+    lock: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>`,
+    light: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .6 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg>`,
+    temp: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path></svg>`,
+    warning: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+    unknown: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+    bot: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4M8 8h8"></path></svg>`,
+    ghost: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="details-svg"><path d="M9 10h.01M15 10h.01M12 2a8 8 0 0 0-8 8v12l3-3 2.5 2.5L12 19l2.5 2.5L17 19l3 3V10a8 8 0 0 0-8-8z"></path></svg>`
+};
+
 class App {
     constructor() {
         this.simulator = new AttackSimulator();
@@ -84,10 +103,11 @@ class App {
         setTimeout(() => {
             this.topology.onWindowResize();
             this.charts.resize();
-            this.logToConsole("Simulation dashboard initialized.", "success");
+            this.logToConsole("ISLP Platform initialized.", "success");
         }, 100);
 
         this.triggerSimulationTick();
+        this.initScrollReveal();
     }
 
     bindEvents() {
@@ -104,7 +124,48 @@ class App {
             });
         });
 
+        // Hero Launch SimLab CTA bindings
+        const btnLaunchSimlabs = document.querySelectorAll('.islp-btn-launch-simlab');
+        btnLaunchSimlabs.forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.showDashboard();
+            });
+        });
 
+        // Dashboard back-to-home shortcut button
+        const btnGotoHome = document.getElementById('btn-goto-home');
+        if (btnGotoHome) {
+            btnGotoHome.addEventListener('click', () => {
+                this.showHero();
+            });
+        }
+
+        // Hero Attack Card direct simulator links
+        const attackLaunchBtns = document.querySelectorAll('.islp-attack-launch-btn');
+        attackLaunchBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const attackId = parseInt(e.currentTarget.getAttribute('data-attack-id'));
+                
+                // 1. Show dashboard container first
+                this.showDashboard();
+                
+                // 2. Select corresponding attack item in dashboard sidebar menu
+                const dashboardNavItems = document.querySelectorAll('.vector-item');
+                dashboardNavItems.forEach(item => {
+                    const itemAttackId = parseInt(item.getAttribute('data-vector'));
+                    if (itemAttackId === attackId) {
+                        item.classList.add('active');
+                        // Scroll menu item into view if it is overflowed
+                        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+
+                // 3. Switch active attack vector
+                this.switchAttack(attackId);
+            });
+        });
 
         // Mode Switching
         const btnSim = document.getElementById('btn-mode-sim');
@@ -236,20 +297,13 @@ class App {
             this.updateNodeDetailsPanel();
         };
 
-        // USB connect status update visual flags
+        // USB connect status update callback
         this.serial.onConnectionChange = (connected) => {
-            const btnConnect = document.getElementById('btn-connect');
-            if (btnConnect) {
-                if (connected) {
-                    btnConnect.classList.add('connected');
-                    btnConnect.querySelector('.btn-text').innerText = "PORT ACTIVE";
-                    this.serial.stopMockHardwareStream();
-                } else {
-                    btnConnect.classList.remove('connected');
-                    btnConnect.querySelector('.btn-text').innerText = "CONNECT HW";
-                    if (this.simulator.mode === 'twin') {
-                        this.serial.startMockHardwareStream();
-                    }
+            if (connected) {
+                this.serial.stopMockHardwareStream();
+            } else {
+                if (this.simulator.mode === 'twin') {
+                    this.serial.startMockHardwareStream();
                 }
             }
         };
@@ -402,6 +456,46 @@ class App {
         }
     }
 
+    initScrollReveal() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Trigger animation once
+                }
+            });
+        }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+        
+        document.querySelectorAll('.islp-scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    showDashboard() {
+        document.body.classList.add('dashboard-active');
+        document.getElementById('dashboard-view').classList.remove('hidden');
+        document.getElementById('hero-view').classList.add('hidden');
+        
+        // Recalculate dimensions for WebGL canvas and metrics charts now that container is visible
+        setTimeout(() => {
+            if (this.topology) this.topology.onWindowResize();
+            if (this.charts) this.charts.resize();
+        }, 50);
+        
+        this.logToConsole("Navigated to SimLab Sandbox.", "info");
+    }
+
+    showHero() {
+        document.body.classList.remove('dashboard-active');
+        document.getElementById('dashboard-view').classList.add('hidden');
+        document.getElementById('hero-view').classList.remove('hidden');
+        
+        // Terminate any active attack simulation when returning to home screen
+        if (this.isAttackActive) {
+            this.stopActiveAttack();
+        }
+    }
+
     switchAttack(id) {
         this.activeAttackId = id;
         this.stopActiveAttack(); // Terminate previous loops
@@ -460,7 +554,7 @@ class App {
 
         if (this.isAttackActive) {
             // Visually update Launch button to Halt (Pause icon)
-            btnPlay.querySelector('.btn-icon').innerText = "⏸";
+            btnPlay.querySelector('.btn-icon').innerHTML = SVG_ICONS.pause;
             btnPlay.querySelector('.btn-text').innerText = "Halt";
             btnPlay.classList.add('active');
 
@@ -482,7 +576,7 @@ class App {
             }
         } else {
             // Visual Update to Play icon
-            btnPlay.querySelector('.btn-icon').innerText = "▶";
+            btnPlay.querySelector('.btn-icon').innerHTML = SVG_ICONS.play;
             btnPlay.querySelector('.btn-text').innerText = "Launch";
             btnPlay.classList.remove('active');
 
@@ -509,7 +603,7 @@ class App {
         this.isAttackActive = false;
         
         const btnPlay = document.getElementById('btn-trigger-attack');
-        btnPlay.querySelector('.btn-icon').innerText = "▶";
+        btnPlay.querySelector('.btn-icon').innerHTML = SVG_ICONS.play;
         btnPlay.querySelector('.btn-text').innerText = "Launch";
         btnPlay.classList.remove('active');
 
@@ -600,7 +694,7 @@ class App {
 
             if (attackId === this.activeAttackId && this.isAttackActive) {
                 statusIcon.className = "vector-status-icon active-spinner";
-                statusIcon.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" style="width:100%; height:100%;"><circle cx="12" cy="12" r="10" stroke-dasharray="36" stroke-dashoffset="12" stroke-linecap="round"></circle></svg>`;
+                statusIcon.innerHTML = SVG_ICONS.spin;
             } else {
                 statusIcon.className = "vector-status-icon pending";
                 statusIcon.innerHTML = ""; // No lock, wait, or tick symbols
@@ -822,7 +916,7 @@ class App {
 
         if (id === 'internet') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>`,
+                icon: SVG_ICONS.cloud,
                 title: "WAN Internet",
                 ip: "8.8.8.XX (External)",
                 mac: "00:1A:2B:3C:4D:5E",
@@ -839,7 +933,7 @@ class App {
             };
         } else if (id === 'router') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><path d="M2 16.24A10 10 0 0 1 12 2v0a10 10 0 0 1 10 14.24M12 12v10M12 18H8M12 18h4"/></svg>`,
+                icon: SVG_ICONS.antenna,
                 title: "Core Router",
                 ip: "192.168.1.XX",
                 mac: "24:6F:28:1A:3B:AA",
@@ -856,7 +950,7 @@ class App {
             };
         } else if (id === 'node-b') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`,
+                icon: SVG_ICONS.server,
                 title: "Node B (Parking Receiver)",
                 ip: "192.168.1.XX",
                 mac: this.parkingReceiverMac,
@@ -873,7 +967,7 @@ class App {
             };
         } else if (id === 'attacker') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: #f43f5e;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+                icon: SVG_ICONS.terminal,
                 title: "Malicious Attacker",
                 ip: "203.0.113.XX",
                 mac: "3C:61:05:44:A2:D8",
@@ -890,7 +984,7 @@ class App {
             };
         } else if (id === 'ip-camera') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+                icon: SVG_ICONS.camera,
                 title: "Smart IP Camera",
                 ip: "192.168.1.XX",
                 mac: "24:6F:28:1A:3B:10",
@@ -907,7 +1001,7 @@ class App {
             };
         } else if (id === 'smart-lock') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+                icon: SVG_ICONS.lock,
                 title: "Smart Lock",
                 ip: "192.168.1.XX",
                 mac: "24:6F:28:1A:3B:11",
@@ -921,9 +1015,10 @@ class App {
                 vulnColor,
                 ports: "80 (HTTP), 8125 (ESP-NOW)",
                 lastSeen: "Active"
-           } else if (id === 'node-a') {
+            };
+        } else if (id === 'node-a') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 15h3M1 9h3M1 15h3"/></svg>`,
+                icon: SVG_ICONS.plug,
                 title: "Node A (Parking Sender)",
                 ip: "192.168.1.XX",
                 mac: this.parkingSenderMac,
@@ -940,7 +1035,7 @@ class App {
             };
         } else if (id === 'smart-light') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .5 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></svg>`,
+                icon: SVG_ICONS.light,
                 title: "Smart Light Bulb",
                 ip: "192.168.1.XX",
                 mac: "24:6F:28:1A:3B:13",
@@ -957,7 +1052,7 @@ class App {
             };
         } else if (id === 'thermostat') {
             return {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>`,
+                icon: SVG_ICONS.temp,
                 title: "Smart Thermostat",
                 ip: "192.168.1.XX",
                 mac: "24:6F:28:1A:3B:14",
@@ -978,7 +1073,7 @@ class App {
             const isRogue = info && (info.role === 'rogue' || info.role === 'attacker');
             
             return {
-                icon: isRogue ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: #f43f5e;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: var(--color-primary);"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .5 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></svg>`,
+                icon: isRogue ? SVG_ICONS.warning : SVG_ICONS.light,
                 title: isRogue ? "Rogue Discovered Node" : "Smart Leaf Node",
                 ip: "192.168.1.XX",
                 mac: macAddress,
@@ -994,9 +1089,9 @@ class App {
                 lastSeen: "Active"
             };
         }
- 
+
         return {
-            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:22px; height:22px; stroke: #64748b;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+            icon: SVG_ICONS.unknown,
             title: "Unknown Device",
             ip: "0.0.0.0",
             mac: "00:00:00:00:00:00",
@@ -1077,7 +1172,7 @@ class App {
                 const botIdx = parseInt(bot.id.split('-')[1]) + 1;
                 rowsHTML += `
                     <tr>
-                        <td style="font-weight: 700; color: var(--color-danger);">🤖 BOT ${botIdx}</td>
+                        <td style="font-weight: 700; color: var(--color-danger);">${SVG_ICONS.bot} BOT ${botIdx}</td>
                         <td><code>192.168.1.XX</code></td>
                         <td><code>Auto-Discovered</code></td>
                         <td>DDoS Botnet Node</td>
@@ -1092,7 +1187,7 @@ class App {
         if (this.topology.rogueNode) {
             rowsHTML += `
                 <tr>
-                    <td style="font-weight: 700; color: var(--color-danger);">⚠️ Rogue Node</td>
+                    <td style="font-weight: 700; color: var(--color-danger);">${SVG_ICONS.warning} Rogue Node</td>
                     <td><code>192.168.1.XX</code></td>
                     <td><code>Auto-Discovered</code></td>
                     <td>Rogue Threat Vector</td>
@@ -1107,7 +1202,7 @@ class App {
             this.topology.sybilGhosts.forEach((ghost, idx) => {
                 rowsHTML += `
                     <tr>
-                        <td style="font-weight: 700; color: var(--color-primary);">👻 SYBIL ID ${idx + 1}</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">${SVG_ICONS.ghost} SYBIL ID ${idx + 1}</td>
                         <td><code>192.168.1.XX</code></td>
                         <td><code>Spoofed Address</code></td>
                         <td>Virtual Sybil Identity</td>
