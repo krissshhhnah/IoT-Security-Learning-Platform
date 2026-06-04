@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="quantum">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT AttackSim - Cyber Attack Simulation Platform</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Three.js and OrbitControls loaded locally -->
+    <script src="libs/three.min.js"></script>
+    <script src="libs/OrbitControls.js"></script>
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- MAIN DASHBOARD CONTENT AREA -->
+        <div id="dashboard-view" class="app-container">
+            
+            <!-- Simulation Header Bar (mockup aligned) -->
+            <header class="simulation-header">
+                <div class="header-left">
+                    <h2 id="simulation-title">Simulation: Smart Home Network Attack</h2>
+                    <div class="simulation-status">
+                        <span class="status-badge" id="sim-status-badge">● Idle</span>
+                        <span class="sim-timer" id="sim-timer-val">00:00:00</span>
+                        <span class="sim-id">Simulation ID: SIM-2026-0603-001</span>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <!-- Theme Selector in Header -->
+                    <div class="theme-dropdown header-dropdown">
+                        <select id="theme-select" class="navbar-select">
+                            <option value="quantum">Quantum Blue</option>
+                            <option value="cyberpunk">Cyberpunk Neon</option>
+                            <option value="matrix">Matrix Green</option>
+                        </select>
+                    </div>
+
+                    <button id="btn-trigger-attack" class="header-control-btn btn-play-pause">
+                        <span class="btn-icon">▶</span> <span class="btn-text">Launch</span>
+                    </button>
+                    <button id="btn-stop-attack" class="header-control-btn btn-stop">
+                        <span class="btn-icon">■</span> Stop
+                    </button>
+                    <button id="btn-reset-sim" class="header-control-btn btn-reset">
+                        <span class="btn-icon">🔄</span> Reset
+                    </button>
+ 
+                    <!-- Mode Toggle -->
+                    <div class="toggle-group header-toggle">
+                        <button id="btn-mode-sim" class="toggle-btn active">SIMULATION</button>
+                        <button id="btn-mode-twin" class="toggle-btn">DIGITAL TWIN</button>
+                    </div>
+ 
+                    <!-- Web Serial Connect Button -->
+                    <button id="btn-connect" class="action-btn connect-btn header-connect" disabled>
+                        <span class="btn-icon">🔌</span>
+                        <span class="btn-text">CONNECT HW</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Body Workspace -->
+            <main class="workspace">
+                <!-- Left Sidebar Navigation -->
+                <aside class="sidebar">
+                    <div class="sidebar-top">
+                        <button id="btn-back-home" class="back-dashboard-btn" style="display:none;">← Back to Dashboard</button>
+                    </div>
+
+                    <div class="sidebar-header">ATTACKS</div>
+                    <div class="sidebar-scrollable">
+                        <div class="vector-list">
+                            <!-- Sequential menu 1-17 styled with subtitles and state icons -->
+                            <button class="vector-item" data-vector="1">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">1. Man-in-the-Middle</span>
+                                    <span class="vector-sub">Intercept & modify payloads</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="2">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">2. Eavesdropping</span>
+                                    <span class="vector-sub">Sniff wifi carrier packets</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="3">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">3. Replay Attack</span>
+                                    <span class="vector-sub">Retransmit auth tokens</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="4">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">4. Spoofing Attack</span>
+                                    <span class="vector-sub">Forge MAC identities</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="5">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">5. Packet Injection</span>
+                                    <span class="vector-sub">Craft custom raw hex frames</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="6">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">6. Denial of Service</span>
+                                    <span class="vector-sub">Flood target router</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="7">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">7. Distributed DoS</span>
+                                    <span class="vector-sub">Inundate target switch</span>
+                                </div>
+                            </button>
+                            <button class="vector-item active" data-vector="8">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">8. Jamming Attack</span>
+                                    <span class="vector-sub">Emit RF carrier noise</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="9">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">9. Credential Theft</span>
+                                    <span class="vector-sub">Exfiltrate key handshakes</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="10">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">10. Session Hacking</span>
+                                    <span class="vector-sub">Hijack active BLE connection</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="11">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">11. Rogue Insertion</span>
+                                    <span class="vector-sub">Insert unverified hardware</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="12">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">12. Routing Attack</span>
+                                    <span class="vector-sub">Reroute mesh traffic paths</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="13">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">13. Sybil Attack</span>
+                                    <span class="vector-sub">Spawn pseudonymous clones</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="14">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">14. Sensor Tamper</span>
+                                    <span class="vector-sub">Manipulate sensor telemetry</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="15">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">15. Timing Attack</span>
+                                    <span class="vector-sub">Side-channel cryptanalysis</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="16">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">16. Physical Access</span>
+                                    <span class="vector-sub">Tap board JTAG/UART pins</span>
+                                </div>
+                            </button>
+                            <button class="vector-item" data-vector="17">
+                                <div class="vector-status-container"><span class="vector-status-icon pending"></span></div>
+                                <div class="vector-info">
+                                    <span class="vector-name">17. Delay Attack</span>
+                                    <span class="vector-sub">Hold back packet delivery</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Legend panel styled with icons matching reference -->
+                    <div class="legend-panel">
+                        <div class="legend-title">LEGEND</div>
+                        <div class="legend-list">
+                            <div class="legend-item">
+                                <span class="legend-line line-green"></span>
+                                <span>Normal Traffic</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-line line-orange"></span>
+                                <span>Suspicious Activity</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-line line-red"></span>
+                                <span>Malicious Activity</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-node-icon node-cyan">🌐</span>
+                                <span>IoT Device</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-node-icon node-blue">⚙️</span>
+                                <span>Network Device</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-node-icon node-red-hacker">💻</span>
+                                <span>Attacker</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-node-icon node-red-beacon">⚠️</span>
+                                <span>Compromised</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Mid Section: 3D Visualization Map & Telemetry Dashboard Sidebar -->
+                <section class="viewport-section">
+                    <!-- 3D Canvas Container -->
+                    <div id="three-container">
+                        <div class="map-overlay-coordinates">
+                            <span>BOUNDS: 25 ACRES</span>
+                            <span>GRID: ESP-NOW MESH</span>
+                        </div>
+
+                        <!-- Floating Glassmorphic Flow Explanation Banner -->
+                        <div id="flow-explanation-banner" class="flow-banner-overlay">
+                            <span class="flow-banner-badge" id="flow-banner-badge">SECURE MESH</span>
+                            <span class="flow-banner-text" id="flow-banner-text">Node A is communicating securely with Node B.</span>
+                        </div>
+
+                        <!-- Dynamic HTML Node Labels Container -->
+                        <div id="node-labels-container"></div>
+                        
+                        <!-- Floating Node Details Hover Tooltip -->
+                        <div id="node-hover-tooltip" class="hover-tooltip hidden"></div>
+
+                        <!-- List View Overlay -->
+                        <div id="topology-list-overlay" class="list-view-overlay hidden">
+                            <div class="list-view-header">
+                                <h3>Active Devices Registry</h3>
+                                <p>Real-time physical and virtual node parameters in the mesh network.</p>
+                            </div>
+                            <div class="list-view-body">
+                                <table class="list-view-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Device Name</th>
+                                            <th>IP Address</th>
+                                            <th>MAC Address</th>
+                                            <th>Type / Role</th>
+                                            <th>Status</th>
+                                            <th>Vulnerabilities</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="list-view-table-body">
+                                        <!-- Injected by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Viewport Controls Toolbar (Mockup Aligned) -->
+                    <div class="viewport-toolbar">
+                        <div class="toolbar-left">
+                            <button id="btn-view-3d" class="toolbar-btn active">3D View</button>
+                            <button id="btn-view-topo" class="toolbar-btn">Topology View</button>
+                            <button id="btn-view-list" class="toolbar-btn">List View</button>
+                        </div>
+                        
+                        <div class="toolbar-mid">
+                            <span class="toolbar-label">Zoom</span>
+                            <button id="btn-zoom-out" class="zoom-btn">-</button>
+                            <span id="zoom-val" class="zoom-val">100%</span>
+                            <button id="btn-zoom-in" class="zoom-btn">+</button>
+                            
+                            <button id="btn-tool-rotate" class="tool-btn active">🔄 Rotate</button>
+                            <button id="btn-tool-pan" class="tool-btn">✋ Pan</button>
+                            <button id="btn-tool-reset" class="tool-btn">Reset View</button>
+                        </div>
+
+                        <div class="toolbar-right">
+                            <div class="switch-container">
+                                <span class="switch-label">Labels</span>
+                                <label class="switch-ui">
+                                    <input type="checkbox" id="switch-labels" checked>
+                                    <span class="slider-round"></span>
+                                </label>
+                            </div>
+                            <div class="switch-container">
+                                <span class="switch-label">Traffic</span>
+                                <label class="switch-ui">
+                                    <input type="checkbox" id="switch-traffic" checked>
+                                    <span class="slider-round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Panels Grid -->
+                    <div class="bottom-panels-grid">
+                        <!-- Live Command Center / Dynamic Control Panel -->
+                        <div class="control-dock">
+                            <div class="dock-header">
+                                <span class="dock-title">🕹️ ATTACK VECTOR CONTROLS</span>
+                            </div>
+                            <div class="dock-body" id="dynamic-controls">
+                                <!-- Dynamic content injected here based on active attack selection -->
+                            </div>
+                        </div>
+
+                        <!-- Telemetry Engine Panel -->
+                        <div class="telemetry-dock">
+                            <div class="dock-header">
+                                <span class="dock-title">📊 TELEMETRY ENGINE & GRAPH</span>
+                            </div>
+                            <div class="telemetry-grid-body">
+                                <div class="telemetry-metrics">
+                                    <div class="metric-progress-item">
+                                        <div class="metric-label-row">
+                                            <span>CPU LOAD</span>
+                                            <span id="metric-cpu-val">8%</span>
+                                        </div>
+                                        <div class="progress-track">
+                                            <div id="metric-cpu-bar" class="progress-fill fill-primary" style="width: 8%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="metric-progress-item">
+                                        <div class="metric-label-row">
+                                            <span>FREE HEAP</span>
+                                            <span id="metric-heap-val">295 KB</span>
+                                        </div>
+                                        <div class="progress-track">
+                                            <div id="metric-heap-bar" class="progress-fill fill-success" style="width: 95%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="metric-progress-item">
+                                        <div class="metric-label-row">
+                                            <span>PACKET LOSS RATE</span>
+                                            <span id="metric-loss-val">0.0%</span>
+                                        </div>
+                                        <div class="progress-track">
+                                            <div id="metric-loss-bar" class="progress-fill fill-alert" style="width: 0%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="metric-progress-item">
+                                        <div class="metric-label-row">
+                                            <span>RSSI STRENGTH</span>
+                                            <span id="metric-rssi-val">-50 dBm</span>
+                                        </div>
+                                        <div class="progress-track">
+                                            <div id="metric-rssi-bar" class="progress-fill fill-success" style="width: 80%"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="metric-item-simple">
+                                        <span>ACTIVE HARDWARE NODES</span>
+                                        <span id="metric-nodes-val" class="mono-text" style="color: var(--color-success)">3 Nodes</span>
+                                    </div>
+                                </div>
+                                <div class="telemetry-chart">
+                                    <canvas id="chart-metrics"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Section: Mockup Aligned details & logs -->
+                <section class="details-section">
+                    <!-- Explanations & Theory (Concept-Oriented Explanations) -->
+                    <div class="panel info-panel" id="explanations-collapsible">
+                        <div class="panel-header">📚 EXPLOIT DEFINITION & THEORY</div>
+                        <div class="panel-body" id="attack-info-body">
+                            <!-- Injected explanation text -->
+                        </div>
+                    </div>
+
+                    <!-- ESP32 Board Schematic (Physical Access Target - integrated on demand) -->
+                    <div class="panel board-panel hidden" id="panel-esp-board">
+                        <div class="panel-header">🛠️ TARGET DEVICE SCHEMATIC (ESP32-WROOM-32E)</div>
+                        <div class="panel-body board-body" id="esp-board-body">
+                            <!-- Dynamic SVG layout inside -->
+                        </div>
+                    </div>
+
+                    <!-- Live Event Log Timeline (Mockup aligned console) -->
+                    <div class="panel console-panel">
+                        <div class="panel-header">
+                            <span>🛡️ LIVE EVENT LOG</span>
+                            <div style="display: flex; gap: 8px;">
+                                <button id="btn-export-logs" class="clear-btn" style="border-color: var(--color-success); color: var(--color-success)">EXPORT LOGS</button>
+                                <button id="btn-clear-console" class="clear-btn">CLEAR</button>
+                            </div>
+                        </div>
+                        <div class="panel-body console-body event-timeline-body" id="console-log-body">
+                            <!-- Simulated/Physical serial streams printed here as event items -->
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- 3. FOOTER SECTION -->
+        <footer class="app-footer">
+            <div class="footer-left">
+                <div class="footer-logo">🏫</div>
+                <div class="footer-text">
+                    <span class="footer-title">Department of Computer Science & Engineering</span>
+                    <span class="footer-subtitle">Dronacharya College of Engineering, Gurugram, Haryana, India</span>
+                </div>
+            </div>
+            <div class="footer-mid">
+                <span class="footer-badge">🛡️ Built for research. Securing the connected future.</span>
+            </div>
+            <div class="footer-right">
+                <span class="footer-copy">&copy; 2026 IoT AttackSim. All rights reserved.</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Application Script Modules -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>
