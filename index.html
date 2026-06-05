@@ -38,7 +38,7 @@
                     <path d="M -100,150 Q 500,450 1600,200" stroke="var(--color-primary)" stroke-width="1.5" class="bg-beam beam-1" filter="url(#beam-glow)" />
                     <path d="M 300,-100 C 500,300 900,400 1200,1050" stroke="var(--color-secondary)" stroke-width="2" class="bg-beam beam-2" filter="url(#beam-glow)" />
                     <path d="M 1500,100 Q 800,500 -100,750" stroke="var(--color-primary)" stroke-width="1.5" class="bg-beam beam-3" filter="url(#beam-glow)" />
-                    <path d="M 100,-100 C 250,550 1150,250 1350,1050" stroke="#00f0ff" stroke-width="2" class="bg-beam beam-4" filter="url(#beam-glow)" />
+                    <path d="M 100,-100 C 250,550 1150,250 1350,1050" stroke="var(--color-secondary)" stroke-width="2" class="bg-beam beam-4" filter="url(#beam-glow)" />
                 </svg>
             </div>
             <!-- Top Navbar -->
@@ -96,95 +96,6 @@
                             <a href="#islp-attacks" class="islp-hero-btn-secondary">
                                 <span>Explore 17 OSI Attacks</span>
                             </a>
-                        </div>
-                    </div>
-                    
-                    <div class="islp-hero-right-col">
-                        <div class="islp-hero-graphic-container">
-                            <svg class="islp-hero-svg" viewBox="0 0 400 400" width="100%" height="100%">
-                                <defs>
-                                    <!-- Gradients -->
-                                    <radialGradient id="chip-glow" cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stop-color="#a855f7" stop-opacity="0.6" />
-                                        <stop offset="100%" stop-color="#a855f7" stop-opacity="0" />
-                                    </radialGradient>
-                                    <linearGradient id="chip-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#180e29" />
-                                        <stop offset="100%" stop-color="#090514" />
-                                    </linearGradient>
-                                    <linearGradient id="lock-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#a855f7" />
-                                        <stop offset="100%" stop-color="#6366f1" />
-                                    </linearGradient>
-                                    <linearGradient id="line-grad-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#00f0ff" />
-                                        <stop offset="100%" stop-color="#6366f1" />
-                                    </linearGradient>
-                                    <filter id="svg-blur">
-                                        <feGaussianBlur stdDeviation="15" />
-                                    </filter>
-                                    <filter id="glow-heavy">
-                                        <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-                                        <feMerge>
-                                            <feMergeNode in="coloredBlur"/>
-                                            <feMergeNode in="SourceGraphic"/>
-                                        </feMerge>
-                                    </filter>
-                                </defs>
-
-                                <!-- Pulsing Background Chip Glow -->
-                                <rect x="50" y="50" width="300" height="300" rx="40" fill="url(#chip-glow)" class="animated-chip-glow-bg" />
-
-                                <!-- Circuit Connecting Lines (Around the chip) with Light Streams -->
-                                <!-- Left Top Stream -->
-                                <path d="M 30,120 L 120,120 L 120,150" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
-                                <path d="M 30,120 L 120,120 L 120,150" stroke="url(#line-grad-cyan)" stroke-width="2.5" fill="none" class="circuit-line-stream stream-fast" />
-
-                                <!-- Left Bottom Stream -->
-                                <path d="M 30,280 L 120,280 L 120,250" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
-                                <path d="M 30,280 L 120,280 L 120,250" stroke="#a855f7" stroke-width="2.5" fill="none" class="circuit-line-stream stream-slow" />
-
-                                <!-- Right Top Stream -->
-                                <path d="M 370,120 L 280,120 L 280,150" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
-                                <path d="M 370,120 L 280,120 L 280,150" stroke="#a855f7" stroke-width="2.5" fill="none" class="circuit-line-stream stream-normal" />
-
-                                <!-- Right Bottom Stream -->
-                                <path d="M 370,280 L 280,280 L 280,250" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none" />
-                                <path d="M 370,280 L 280,280 L 280,250" stroke="url(#line-grad-cyan)" stroke-width="2.5" fill="none" class="circuit-line-stream stream-fast" />
-
-                                <!-- Outer Nodes -->
-                                <circle cx="30" cy="120" r="4" fill="#00f0ff" filter="url(#glow-heavy)" />
-                                <circle cx="30" cy="280" r="4" fill="#a855f7" filter="url(#glow-heavy)" />
-                                <circle cx="370" cy="120" r="4" fill="#a855f7" filter="url(#glow-heavy)" />
-                                <circle cx="370" cy="280" r="4" fill="#00f0ff" filter="url(#glow-heavy)" />
-
-                                <!-- Central Glowing Security Chip -->
-                                <g class="animated-chip-glow">
-                                    <!-- Outer glowing ring of the chip -->
-                                    <rect x="100" y="100" width="200" height="200" rx="24" fill="none" stroke="rgba(168, 85, 247, 0.4)" stroke-width="6" />
-                                    <rect x="104" y="104" width="192" height="192" rx="20" fill="url(#chip-grad)" stroke="#a855f7" stroke-width="2.5" />
-                                    
-                                    <!-- Grid pattern inside the chip -->
-                                    <path d="M 120,104 L 120,296 M 140,104 L 140,296 M 160,104 L 160,296 M 180,104 L 180,296 M 200,104 L 200,296 M 220,104 L 220,296 M 240,104 L 240,296 M 260,104 L 260,296 M 280,104 L 280,296" stroke="rgba(168, 85, 247, 0.08)" stroke-width="1" />
-                                    <path d="M 104,120 L 296,120 M 104,140 L 296,140 M 104,160 L 296,160 M 104,180 L 296,180 M 104,200 L 296,200 M 104,220 L 296,220 M 104,240 L 296,240 M 104,260 L 296,260 M 104,280 L 296,280" stroke="rgba(168, 85, 247, 0.08)" stroke-width="1" />
-                                    
-                                    <!-- Neon center core -->
-                                    <rect x="135" y="135" width="130" height="130" rx="16" fill="rgba(8, 5, 14, 0.8)" stroke="rgba(0, 240, 255, 0.25)" stroke-width="1.5" />
-                                </g>
-
-                                <!-- The Lock (Lock Body stays relative, Shackle floats) -->
-                                <g transform="translate(170, 160)">
-                                    <!-- Lock Head/Shackle (Floating animation applied to this group) -->
-                                    <g class="animated-lock-shackle">
-                                        <path d="M 16,15 L 16,0 A 14,14 0 0 1 44,0 L 44,15" fill="none" stroke="url(#lock-grad)" stroke-width="5" stroke-linecap="round" filter="url(#glow-heavy)" />
-                                    </g>
-                                    <!-- Lock Body -->
-                                    <rect x="0" y="10" width="60" height="48" rx="8" fill="url(#lock-grad)" filter="url(#glow-heavy)" />
-                                    <!-- Keyhole details -->
-                                    <circle cx="30" cy="28" r="5" fill="#180e29" />
-                                    <polygon points="28,30 32,30 33,40 27,40" fill="#180e29" />
-                                </g>
-                            </svg>
                         </div>
                     </div>
                 </div>
@@ -702,6 +613,42 @@
             </section>
         </div>
 
+        <!-- TRANSITION SPLASH SCREEN -->
+        <div id="transition-splash" class="transition-splash hidden">
+            <div class="splash-content">
+                <div class="splash-logo">
+                    <svg class="splash-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="splash-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="var(--color-primary)" />
+                                <stop offset="100%" stop-color="var(--color-secondary)" />
+                            </linearGradient>
+                            <filter id="splash-glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <polygon points="50,15 80,32 80,68 50,85 20,68 20,32" stroke="url(#splash-grad)" stroke-width="4" fill="none" filter="url(#splash-glow)" />
+                        <circle cx="50" cy="50" r="10" fill="url(#splash-grad)" filter="url(#splash-glow)" />
+                        <line x1="50" y1="15" x2="50" y2="40" stroke="var(--color-text-muted)" stroke-width="2" stroke-dasharray="2 2" />
+                        <line x1="20" y1="68" x2="40" y2="58" stroke="var(--color-text-muted)" stroke-width="2" stroke-dasharray="2 2" />
+                        <line x1="80" y1="68" x2="60" y2="58" stroke="var(--color-text-muted)" stroke-width="2" stroke-dasharray="2 2" />
+                    </svg>
+                </div>
+                <h2 class="splash-title">INITIALIZING SIMLAB SANDBOX</h2>
+                <p class="splash-subtitle">Centre for System Design, NITK Surathkal</p>
+                <div class="splash-progress-container">
+                    <div class="splash-progress-bar" id="splash-progress-bar"></div>
+                </div>
+                <div class="splash-status-console" id="splash-status-console">
+                    <div class="console-line line-active">> Starting platform engine...</div>
+                </div>
+            </div>
+        </div>
+
         <!-- MAIN DASHBOARD CONTENT AREA -->
         <div id="dashboard-view" class="app-container hidden">
 
@@ -760,9 +707,14 @@
             <main class="workspace">
                 <!-- Left Sidebar Navigation -->
                 <aside class="sidebar">
-                    <div class="sidebar-top">
+                    <div class="sidebar-top" style="display: flex; justify-content: flex-end; padding: 10px 15px 5px 15px;">
                         <button id="btn-back-home" class="back-dashboard-btn" style="display:none;">← Back to
                             Dashboard</button>
+                        <button id="btn-toggle-sidebar" class="sidebar-toggle-btn" title="Collapse Sidebar to Bottom">
+                            <svg class="btn-svg toggle-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
                     </div>
 
                     <div class="sidebar-header">ATTACKS</div>
@@ -985,6 +937,22 @@
                             <span>GRID: ESP-NOW MESH</span>
                         </div>
 
+                        <!-- Collapsed Sidebar floating tab -->
+                        <div id="sidebar-collapsed-tab" class="sidebar-collapsed-tab hidden" title="Expand Sidebar to Left">
+                            <span id="collapsed-attack-name">8. Jamming Attack</span>
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 12px; height: 12px; margin-left: 8px; vertical-align: middle;">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+
+                        <!-- Collapsed Details floating tab -->
+                        <div id="details-collapsed-tab" class="details-collapsed-tab hidden" title="Expand Details to Left">
+                            <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 12px; height: 12px; margin-right: 8px; vertical-align: middle;">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                            <span>EXPLOIT INFO</span>
+                        </div>
+
                         <!-- Floating Glassmorphic Flow Explanation Banner -->
                         <div id="flow-explanation-banner" class="flow-banner-overlay">
                             <span class="flow-banner-badge" id="flow-banner-badge">SECURE MESH</span>
@@ -1022,53 +990,99 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- 3D Viewport Controls Toolbar (Mockup Aligned) -->
-                    <div class="viewport-toolbar">
-                        <div class="toolbar-left">
-                            <button id="btn-view-3d" class="toolbar-btn active">3D View</button>
-                            <button id="btn-view-topo" class="toolbar-btn">Topology View</button>
-                            <button id="btn-view-list" class="toolbar-btn">List View</button>
-                        </div>
-
-                        <div class="toolbar-mid">
-                            <span class="toolbar-label">Zoom</span>
-                            <button id="btn-zoom-out" class="zoom-btn">-</button>
-                            <span id="zoom-val" class="zoom-val">100%</span>
-                            <button id="btn-zoom-in" class="zoom-btn">+</button>
-
-                            <button id="btn-tool-rotate" class="tool-btn active">
-                                <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
-                                </svg> Rotate
-                            </button>
-                            <button id="btn-tool-pan" class="tool-btn">
-                                <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path
-                                        d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v9a7 7 0 0 0 14 0v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2">
-                                    </path>
-                                </svg> Pan
-                            </button>
-                            <button id="btn-tool-reset" class="tool-btn">Reset View</button>
-                        </div>
-
-                        <div class="toolbar-right">
-                            <div class="switch-container">
-                                <span class="switch-label">Labels</span>
-                                <label class="switch-ui">
-                                    <input type="checkbox" id="switch-labels" checked>
-                                    <span class="slider-round"></span>
-                                </label>
+                        <!-- 3D Viewport Controls Toolbar (Floatable, Draggable, Iconified) -->
+                        <div class="viewport-toolbar" style="user-select: none;">
+                            <!-- Gripper drag handle -->
+                            <div class="drag-handle" id="toolbar-drag-handle" title="Drag to Move Toolbar">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="width: 14px; height: 14px; display: block;">
+                                    <circle cx="9" cy="5" r="2"></circle>
+                                    <circle cx="9" cy="12" r="2"></circle>
+                                    <circle cx="9" cy="19" r="2"></circle>
+                                    <circle cx="15" cy="5" r="2"></circle>
+                                    <circle cx="15" cy="12" r="2"></circle>
+                                    <circle cx="15" cy="19" r="2"></circle>
+                                </svg>
                             </div>
-                            <div class="switch-container">
-                                <span class="switch-label">Traffic</span>
-                                <label class="switch-ui">
-                                    <input type="checkbox" id="switch-traffic" checked>
-                                    <span class="slider-round"></span>
-                                </label>
+
+                            <div class="toolbar-left">
+                                <button id="btn-view-3d" class="toolbar-btn active" title="3D View">
+                                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                    </svg>
+                                </button>
+                                <button id="btn-view-topo" class="toolbar-btn" title="Topology View">
+                                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                        <circle cx="6" cy="6" r="3"></circle>
+                                        <circle cx="6" cy="18" r="3"></circle>
+                                        <circle cx="18" cy="6" r="3"></circle>
+                                        <circle cx="18" cy="18" r="3"></circle>
+                                        <line x1="8.5" y1="8.5" x2="9.5" y2="9.5"></line>
+                                        <line x1="15.5" y1="15.5" x2="14.5" y2="14.5"></line>
+                                        <line x1="8.5" y1="15.5" x2="9.5" y2="14.5"></line>
+                                        <line x1="15.5" y1="8.5" x2="14.5" y2="9.5"></line>
+                                    </svg>
+                                </button>
+                                <button id="btn-view-list" class="toolbar-btn" title="List View">
+                                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="toolbar-mid">
+                                <div title="Zoom Level" style="display: flex; align-items: center; justify-content: center;">
+                                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; color: var(--color-text-muted);">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                </div>
+                                <button id="btn-zoom-out" class="zoom-btn" title="Zoom Out">-</button>
+                                <span id="zoom-val" class="zoom-val" style="min-width: 32px; text-align: center;">100%</span>
+                                <button id="btn-zoom-in" class="zoom-btn" title="Zoom In">+</button>
+
+                                <button id="btn-tool-rotate" class="tool-btn active" title="Rotate View">
+                                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                                    </svg>
+                                </button>
+                                <button id="btn-tool-pan" class="tool-btn" title="Pan View">
+                                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v5M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v6M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v9a7 7 0 0 0 14 0v-4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2"></path>
+                                    </svg>
+                                </button>
+                                <button id="btn-tool-reset" class="tool-btn" title="Reset View">
+                                    <svg class="btn-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M15 3h6v6"></path>
+                                        <path d="M9 21H3v-6"></path>
+                                        <path d="M21 3l-7 7"></path>
+                                        <path d="M3 21l7-7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="toolbar-right">
+                                <div class="switch-container">
+                                    <span class="switch-label">Labels</span>
+                                    <label class="switch-ui">
+                                        <input type="checkbox" id="switch-labels" checked>
+                                        <span class="slider-round"></span>
+                                    </label>
+                                </div>
+                                <div class="switch-container">
+                                    <span class="switch-label">Traffic</span>
+                                    <label class="switch-ui">
+                                        <input type="checkbox" id="switch-traffic" checked>
+                                        <span class="slider-round"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1154,7 +1168,14 @@
                 <section class="details-section">
                     <!-- Explanations & Theory (Concept-Oriented Explanations) -->
                     <div class="panel info-panel" id="explanations-collapsible">
-                        <div class="panel-header">EXPLOIT DEFINITION & THEORY</div>
+                        <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>EXPLOIT DEFINITION & THEORY</span>
+                            <button id="btn-toggle-details" class="sidebar-toggle-btn" title="Collapse Details to Right" style="width: 20px; height: 20px; border: none; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                <svg class="btn-svg details-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 12px; height: 12px; transition: transform 0.3s ease;">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
                         <div class="panel-body" id="attack-info-body">
                             <!-- Injected explanation text -->
                         </div>
@@ -1169,10 +1190,17 @@
                     </div>
 
                     <!-- Live Event Log Timeline (Mockup aligned console) -->
-                    <div class="panel console-panel">
+                    <div class="panel console-panel" id="console-panel">
                         <div class="panel-header">
-                            <span>LIVE EVENT LOG</span>
-                            <div style="display: flex; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <button id="btn-toggle-console" class="sidebar-toggle-btn" title="Collapse Logs" style="width: 20px; height: 20px; border: none; padding: 0; display: flex; align-items: center; justify-content: center;">
+                                    <svg class="btn-svg console-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 12px; height: 12px; transition: transform 0.3s ease;">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <span>LIVE EVENT LOG</span>
+                            </div>
+                            <div class="console-actions-group" style="display: flex; gap: 8px;">
                                 <button id="btn-export-logs" class="clear-btn"
                                     style="border-color: var(--color-success); color: var(--color-success)">EXPORT
                                     LOGS</button>

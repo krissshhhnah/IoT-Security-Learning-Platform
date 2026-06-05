@@ -108,6 +108,14 @@ class App {
 
         this.triggerSimulationTick();
         this.initScrollReveal();
+        this.initDraggableToolbar();
+
+        // Initialize collapsed sidebar tab label
+        const collapsedAttackNameEl = document.getElementById('collapsed-attack-name');
+        if (collapsedAttackNameEl) {
+            const attackInfo = ATTACKS[this.activeAttackId];
+            collapsedAttackNameEl.innerText = `${this.activeAttackId}. ${attackInfo ? attackInfo.name : 'Unknown Attack'}`;
+        }
     }
 
     bindEvents() {
@@ -126,11 +134,103 @@ class App {
 
         // Hero Launch SimLab CTA bindings
         const btnLaunchSimlabs = document.querySelectorAll('.islp-btn-launch-simlab');
+        const workspace = document.querySelector('.workspace');
         btnLaunchSimlabs.forEach(btn => {
             btn.addEventListener('click', () => {
                 this.showDashboard();
             });
         });
+
+        // Toggle Sidebar Collapse/Expand (slides sidebar off-screen and shows a bottom-left tab)
+        const btnToggleSidebar = document.getElementById('btn-toggle-sidebar');
+        const sidebarCollapsedTab = document.getElementById('sidebar-collapsed-tab');
+        if (btnToggleSidebar && workspace) {
+            btnToggleSidebar.addEventListener('click', () => {
+                workspace.classList.add('sidebar-collapsed');
+                if (sidebarCollapsedTab) sidebarCollapsedTab.classList.remove('hidden');
+                
+                // Trigger resizing of WebGL viewport canvas and charts during grid transition
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 100);
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 350); // once transition completes
+            });
+        }
+
+        if (sidebarCollapsedTab && workspace) {
+            sidebarCollapsedTab.addEventListener('click', () => {
+                workspace.classList.remove('sidebar-collapsed');
+                sidebarCollapsedTab.classList.add('hidden');
+                
+                // Trigger resizing of WebGL viewport canvas and charts during grid transition
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 100);
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 350); // once transition completes
+            });
+        }
+
+        // Toggle Console Panel Collapse/Expand (hides body and lets Explanations grow)
+        const btnToggleConsole = document.getElementById('btn-toggle-console');
+        const consolePanel = document.getElementById('console-panel');
+        if (btnToggleConsole && consolePanel) {
+            btnToggleConsole.addEventListener('click', () => {
+                consolePanel.classList.toggle('collapsed');
+                
+                const isCollapsed = consolePanel.classList.contains('collapsed');
+                btnToggleConsole.setAttribute('title', isCollapsed ? 'Expand Logs' : 'Collapse Logs');
+                
+                // Trigger charts resize when height changes
+                setTimeout(() => {
+                    if (this.charts) this.charts.resize();
+                }, 150);
+            });
+        }
+
+        // Toggle Details Panel Collapse/Expand (slides right sidebar off-screen and shows a top-right tab)
+        const btnToggleDetails = document.getElementById('btn-toggle-details');
+        const detailsCollapsedTab = document.getElementById('details-collapsed-tab');
+        if (btnToggleDetails && workspace) {
+            btnToggleDetails.addEventListener('click', () => {
+                workspace.classList.add('details-collapsed');
+                if (detailsCollapsedTab) detailsCollapsedTab.classList.remove('hidden');
+                
+                // Trigger resizing of WebGL viewport canvas and charts during grid transition
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 100);
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 350); // once transition completes
+            });
+        }
+
+        if (detailsCollapsedTab && workspace) {
+            detailsCollapsedTab.addEventListener('click', () => {
+                workspace.classList.remove('details-collapsed');
+                detailsCollapsedTab.classList.add('hidden');
+                
+                // Trigger resizing of WebGL viewport canvas and charts during grid transition
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 100);
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 350); // once transition completes
+            });
+        }
 
         // Dashboard back-to-home shortcut button
         const btnGotoHome = document.getElementById('btn-goto-home');
@@ -155,8 +255,8 @@ class App {
                     const itemAttackId = parseInt(item.getAttribute('data-vector'));
                     if (itemAttackId === attackId) {
                         item.classList.add('active');
-                        // Scroll menu item into view if it is overflowed
-                        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        // Scroll menu item into view if it is overflowed (supports both vertical & horizontal scroll)
+                        item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
                     } else {
                         item.classList.remove('active');
                     }
@@ -207,9 +307,9 @@ class App {
         document.getElementById('btn-reset-sim').addEventListener('click', () => this.resetSimulation());
 
         // Viewport Toolbar Buttons
-        document.getElementById('btn-view-3d').addEventListener('click', (e) => this.toggleViewportMode('3d', e.target));
-        document.getElementById('btn-view-topo').addEventListener('click', (e) => this.toggleViewportMode('topo', e.target));
-        document.getElementById('btn-view-list').addEventListener('click', (e) => this.toggleViewportMode('list', e.target));
+        document.getElementById('btn-view-3d').addEventListener('click', (e) => this.toggleViewportMode('3d', e.currentTarget));
+        document.getElementById('btn-view-topo').addEventListener('click', (e) => this.toggleViewportMode('topo', e.currentTarget));
+        document.getElementById('btn-view-list').addEventListener('click', (e) => this.toggleViewportMode('list', e.currentTarget));
 
         document.getElementById('btn-zoom-in').addEventListener('click', () => {
             this.topology.zoom('in');
@@ -471,18 +571,232 @@ class App {
         });
     }
 
+    initDraggableToolbar() {
+        const toolbar = document.querySelector('.viewport-toolbar');
+        const handle = document.getElementById('toolbar-drag-handle');
+        const container = document.getElementById('three-container');
+        if (!toolbar || !handle || !container) return;
+
+        let isDragging = false;
+        let startX, startY;
+        let initialX, initialY;
+
+        handle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            toolbar.style.transition = 'none'; // Disable transition while dragging
+            
+            // Get current positions relative to the container
+            const rect = toolbar.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
+            initialX = rect.left - containerRect.left;
+            initialY = rect.top - containerRect.top;
+            
+            startX = e.clientX;
+            startY = e.clientY;
+            
+            // Remove transform centering when moving
+            toolbar.style.transform = 'none';
+            toolbar.style.left = `${initialX}px`;
+            toolbar.style.top = `${initialY}px`;
+            toolbar.style.bottom = 'auto'; // Remove bottom constraint
+            
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            
+            let newX = initialX + dx;
+            let newY = initialY + dy;
+            
+            // Bounding constraints inside container
+            const containerRect = container.getBoundingClientRect();
+            const toolbarRect = toolbar.getBoundingClientRect();
+            
+            const maxX = containerRect.width - toolbarRect.width;
+            const maxY = containerRect.height - toolbarRect.height;
+            
+            newX = Math.max(0, Math.min(newX, maxX));
+            newY = Math.max(0, Math.min(newY, maxY));
+            
+            toolbar.style.left = `${newX}px`;
+            toolbar.style.top = `${newY}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                toolbar.style.transition = 'all 0.2s ease, left 0s, top 0s';
+            }
+        });
+        
+        // Touch support for tablets/mobile
+        handle.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            toolbar.style.transition = 'none';
+            
+            const rect = toolbar.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            
+            initialX = rect.left - containerRect.left;
+            initialY = rect.top - containerRect.top;
+            
+            const touch = e.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+            
+            toolbar.style.transform = 'none';
+            toolbar.style.left = `${initialX}px`;
+            toolbar.style.top = `${initialY}px`;
+            toolbar.style.bottom = 'auto';
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            
+            const touch = e.touches[0];
+            const dx = touch.clientX - startX;
+            const dy = touch.clientY - startY;
+            
+            let newX = initialX + dx;
+            let newY = initialY + dy;
+            
+            const containerRect = container.getBoundingClientRect();
+            const toolbarRect = toolbar.getBoundingClientRect();
+            
+            const maxX = containerRect.width - toolbarRect.width;
+            const maxY = containerRect.height - toolbarRect.height;
+            
+            newX = Math.max(0, Math.min(newX, maxX));
+            newY = Math.max(0, Math.min(newY, maxY));
+            
+            toolbar.style.left = `${newX}px`;
+            toolbar.style.top = `${newY}px`;
+        });
+
+        document.addEventListener('touchend', () => {
+            if (isDragging) {
+                isDragging = false;
+                toolbar.style.transition = 'all 0.2s ease, left 0s, top 0s';
+            }
+        });
+
+        // Keep inside bounds on window resize
+        window.addEventListener('resize', () => {
+            if (toolbar.style.position === 'absolute' && toolbar.style.bottom === 'auto') {
+                const containerRect = container.getBoundingClientRect();
+                const toolbarRect = toolbar.getBoundingClientRect();
+                
+                let currentLeft = parseFloat(toolbar.style.left) || 0;
+                let currentTop = parseFloat(toolbar.style.top) || 0;
+                
+                const maxX = containerRect.width - toolbarRect.width;
+                const maxY = containerRect.height - toolbarRect.height;
+                
+                currentLeft = Math.max(0, Math.min(currentLeft, maxX));
+                currentTop = Math.max(0, Math.min(currentTop, maxY));
+                
+                toolbar.style.left = `${currentLeft}px`;
+                toolbar.style.top = `${currentTop}px`;
+            }
+        });
+    }
+
     showDashboard() {
-        document.body.classList.add('dashboard-active');
-        document.getElementById('dashboard-view').classList.remove('hidden');
-        document.getElementById('hero-view').classList.add('hidden');
+        // 1. Ensure all sidebars are expanded ("on") on entry
+        const workspace = document.querySelector('.workspace');
+        const consolePanel = document.getElementById('console-panel');
+        if (workspace) {
+            workspace.classList.remove('sidebar-collapsed');
+            workspace.classList.remove('details-collapsed');
+        }
+        if (consolePanel) {
+            consolePanel.classList.remove('collapsed');
+        }
+        const sidebarTab = document.getElementById('sidebar-collapsed-tab');
+        const detailsTab = document.getElementById('details-collapsed-tab');
+        if (sidebarTab) sidebarTab.classList.add('hidden');
+        if (detailsTab) detailsTab.classList.add('hidden');
+
+        // 2. Trigger the high-tech transition splash screen
+        const splash = document.getElementById('transition-splash');
+        const progressBar = document.getElementById('splash-progress-bar');
+        const consoleBox = document.getElementById('splash-status-console');
         
-        // Recalculate dimensions for WebGL canvas and metrics charts now that container is visible
-        setTimeout(() => {
-            if (this.topology) this.topology.onWindowResize();
-            if (this.charts) this.charts.resize();
-        }, 50);
-        
-        this.logToConsole("Navigated to SimLab Sandbox.", "info");
+        if (splash && progressBar && consoleBox) {
+            splash.classList.remove('hidden');
+            progressBar.style.width = '0%';
+            consoleBox.innerHTML = '<div class="console-line line-active">> Starting platform engine...</div>';
+            
+            const steps = [
+                { time: 350, progress: '25%', msg: '> Initializing 3D WebGL engine modules...', successMsg: '> 3D WebGL engine initialized.' },
+                { time: 700, progress: '50%', msg: '> Syncing simulated ESP32 nodes...', successMsg: '> ESP32 node synchronization completed.' },
+                { time: 1050, progress: '70%', msg: '> Establishing virtual ESP-NOW channels...', successMsg: '> ESP-NOW mesh channels established.' },
+                { time: 1400, progress: '85%', msg: '> Securing digital twin communication pathways...', successMsg: '> Twin serial pipelines secured.' },
+                { time: 1750, progress: '100%', msg: '> Launching SimLab Sandbox workspace...', successMsg: '> Workspace ready.' }
+            ];
+            
+            steps.forEach((step, idx) => {
+                setTimeout(() => {
+                    // Update progress bar width
+                    progressBar.style.width = step.progress;
+                    
+                    // Mark previous line as success
+                    const activeLine = consoleBox.querySelector('.line-active');
+                    if (activeLine) {
+                        activeLine.classList.remove('line-active');
+                        activeLine.classList.add('line-success');
+                        if (steps[idx-1]) {
+                            activeLine.innerText = steps[idx-1].successMsg;
+                        } else {
+                            activeLine.innerText = '> Platform engine started.';
+                        }
+                    }
+                    
+                    // Append new active loading message
+                    const newLine = document.createElement('div');
+                    newLine.className = 'console-line line-active';
+                    newLine.innerText = step.msg;
+                    consoleBox.appendChild(newLine);
+                    consoleBox.scrollTop = consoleBox.scrollHeight;
+                }, step.time);
+            });
+            
+            // Final transition fade-out
+            setTimeout(() => {
+                splash.classList.add('hidden');
+                
+                // Switch visible views
+                document.body.classList.add('dashboard-active');
+                document.getElementById('dashboard-view').classList.remove('hidden');
+                document.getElementById('hero-view').classList.add('hidden');
+                
+                // Recalculate dimensions for WebGL canvas and metrics charts now that container is visible
+                setTimeout(() => {
+                    if (this.topology) this.topology.onWindowResize();
+                    if (this.charts) this.charts.resize();
+                }, 50);
+                
+                this.logToConsole("Navigated to SimLab Sandbox.", "info");
+            }, 2100);
+            
+        } else {
+            // Fallback if elements don't exist
+            document.body.classList.add('dashboard-active');
+            document.getElementById('dashboard-view').classList.remove('hidden');
+            document.getElementById('hero-view').classList.add('hidden');
+            
+            setTimeout(() => {
+                if (this.topology) this.topology.onWindowResize();
+                if (this.charts) this.charts.resize();
+            }, 50);
+            
+            this.logToConsole("Navigated to SimLab Sandbox.", "info");
+        }
     }
 
     showHero() {
@@ -516,6 +830,13 @@ class App {
         }
 
         this.charts.render(id, []);
+
+        // Update collapsed sidebar tab title with the active/latest attack name
+        const collapsedAttackNameEl = document.getElementById('collapsed-attack-name');
+        if (collapsedAttackNameEl) {
+            const attackInfo = ATTACKS[id];
+            collapsedAttackNameEl.innerText = `${id}. ${attackInfo ? attackInfo.name : 'Unknown Attack'}`;
+        }
     }
 
     setMode(mode) {

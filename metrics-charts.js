@@ -9,6 +9,8 @@ export class MetricsCharts {
         this.canvas = document.getElementById(canvasId);
         if (!this.canvas) return;
         this.ctx = this.canvas.getContext('2d');
+        this.lastAttackId = null;
+        this.lastHistory = null;
         this.resize();
         window.addEventListener('resize', () => this.resize());
     }
@@ -17,9 +19,14 @@ export class MetricsCharts {
         const rect = this.canvas.parentElement.getBoundingClientRect();
         this.canvas.width = rect.width;
         this.canvas.height = rect.height;
+        if (this.lastAttackId !== null && this.lastHistory !== null) {
+            this.render(this.lastAttackId, this.lastHistory);
+        }
     }
 
     render(attackId, history) {
+        this.lastAttackId = attackId;
+        this.lastHistory = history;
         if (!this.ctx) return;
         const width = this.canvas.width;
         const height = this.canvas.height;
@@ -116,20 +123,44 @@ export class MetricsCharts {
         this.ctx.setLineDash([]); // Reset dash
 
         // Draw Labels
-        this.ctx.fillStyle = textColor;
         this.ctx.font = '9px Fira Code';
-        this.ctx.textAlign = 'left';
-        
-        // Color indicators
-        this.ctx.fillStyle = color1;
-        this.ctx.fillRect(padding, 8, 8, 8);
-        this.ctx.fillStyle = textColor;
-        this.ctx.fillText(`${label1}: ${history[history.length - 1][key1]}`, padding + 12, 15);
+        const txt1 = `${label1}: ${history[history.length - 1][key1]}`;
+        const txt2 = `${label2}: ${history[history.length - 1][key2]}`;
+        const txt1Width = this.ctx.measureText(txt1).width;
+        const txt2Width = this.ctx.measureText(txt2).width;
 
-        this.ctx.fillStyle = color2;
-        this.ctx.fillRect(padding + 160, 8, 8, 8);
-        this.ctx.fillStyle = textColor;
-        this.ctx.fillText(`${label2}: ${history[history.length - 1][key2]}`, padding + 172, 15);
+        const totalLegendWidth = padding + 12 + txt1Width + 20 + 12 + txt2Width + padding;
+        const shouldStack = totalLegendWidth > w;
+
+        if (shouldStack) {
+            // Stack vertically on narrow viewports
+            this.ctx.textAlign = 'left';
+            
+            // Row 1
+            this.ctx.fillStyle = color1;
+            this.ctx.fillRect(padding, 6, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.fillText(txt1, padding + 12, 13);
+
+            // Row 2
+            this.ctx.fillStyle = color2;
+            this.ctx.fillRect(padding, 16, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.fillText(txt2, padding + 12, 23);
+        } else {
+            // Side-by-side on wider viewports
+            this.ctx.textAlign = 'left';
+            this.ctx.fillStyle = color1;
+            this.ctx.fillRect(padding, 8, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.fillText(txt1, padding + 12, 15);
+
+            this.ctx.fillStyle = color2;
+            this.ctx.fillRect(w - padding - txt2Width - 12, 8, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.textAlign = 'right';
+            this.ctx.fillText(txt2, w - padding, 15);
+        }
     }
 
     drawLatencyBars(history, textColor, primaryColor, alertColor) {
@@ -159,7 +190,7 @@ export class MetricsCharts {
         this.ctx.fillStyle = textColor;
         this.ctx.font = '9px Fira Code';
         this.ctx.textAlign = 'left';
-        this.ctx.fillText(`TRANSMISSION LATENCY: ${history[history.length - 1].latency} ms`, padding, 15);
+        this.ctx.fillText(`LATENCY: ${history[history.length - 1].latency} ms`, padding, 15);
     }
 
     drawTimingHistogram(history, textColor, successColor) {
@@ -178,7 +209,7 @@ export class MetricsCharts {
         
         const currentTiming = history[history.length - 1].timing;
         if (currentTiming) {
-            this.ctx.fillText(`MICROCONTROLLER CRYPTO TIMING: ${currentTiming.toFixed(2)} μs`, padding, 15);
+            this.ctx.fillText(`MCU CRYPTO TIMING: ${currentTiming.toFixed(2)} μs`, padding, 15);
 
             // Draw simple distribution bars
             const bars = 8;
@@ -247,15 +278,44 @@ export class MetricsCharts {
         this.ctx.stroke();
 
         // Draw Legend labels
-        this.ctx.fillStyle = successColor;
-        this.ctx.fillRect(padding, 8, 8, 8);
-        this.ctx.fillStyle = textColor;
-        this.ctx.fillText(`True Temp Sensor Value`, padding + 12, 15);
+        this.ctx.font = '9px Fira Code';
+        const txt1 = `True Temp Value`;
+        const txt2 = `Tampered Value`;
+        const txt1Width = this.ctx.measureText(txt1).width;
+        const txt2Width = this.ctx.measureText(txt2).width;
 
-        this.ctx.fillStyle = alertColor;
-        this.ctx.fillRect(padding + 160, 8, 8, 8);
-        this.ctx.fillStyle = textColor;
-        this.ctx.fillText(`Tampered Value Received`, padding + 172, 15);
+        const totalLegendWidth = padding + 12 + txt1Width + 20 + 12 + txt2Width + padding;
+        const shouldStack = totalLegendWidth > w;
+
+        if (shouldStack) {
+            // Stack vertically
+            this.ctx.textAlign = 'left';
+            
+            // Row 1
+            this.ctx.fillStyle = successColor;
+            this.ctx.fillRect(padding, 6, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.fillText(txt1, padding + 12, 13);
+
+            // Row 2
+            this.ctx.fillStyle = alertColor;
+            this.ctx.fillRect(padding, 16, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.fillText(txt2, padding + 12, 23);
+        } else {
+            // Side-by-side
+            this.ctx.textAlign = 'left';
+            this.ctx.fillStyle = successColor;
+            this.ctx.fillRect(padding, 8, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.fillText(txt1, padding + 12, 15);
+
+            this.ctx.fillStyle = alertColor;
+            this.ctx.fillRect(w - padding - txt2Width - 12, 8, 8, 8);
+            this.ctx.fillStyle = textColor;
+            this.ctx.textAlign = 'right';
+            this.ctx.fillText(txt2, w - padding, 15);
+        }
     }
 
     drawGrid(chartW, chartH, padding, textColor) {
