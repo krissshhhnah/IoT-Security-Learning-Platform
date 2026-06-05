@@ -550,15 +550,19 @@ textarea {
 .workspace.sidebar-collapsed {
     grid-template-columns: 0px 1fr 375px;
 }
+
 .workspace.sidebar-collapsed .sidebar {
     border-right: none !important;
 }
+
 .workspace.details-collapsed {
     grid-template-columns: 290px 1fr 0px;
 }
+
 .workspace.details-collapsed .details-section {
     border-left: none !important;
 }
+
 .workspace.sidebar-collapsed.details-collapsed {
     grid-template-columns: 0px 1fr 0px;
 }
@@ -2038,14 +2042,6 @@ body.dashboard-active .app-wrapper {
 
 /* ISLP Hero Container */
 .islp-hero-view {
-    --color-primary: #950101; /* Crimson Red */
-    --color-primary-glow: rgba(149, 1, 1, 0.35);
-    --color-secondary: #ff0000; /* Neon Red */
-    --color-secondary-glow: rgba(255, 0, 0, 0.25);
-    --color-panel-border: rgba(149, 1, 1, 0.18);
-    --bg-glow-1: rgba(149, 1, 1, 0.08);
-    --bg-glow-2: rgba(255, 0, 0, 0.06);
-
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -2061,10 +2057,10 @@ body.dashboard-active .app-wrapper {
        Layer 4: Domain-specific background image. */
     background-image:
         linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.95) 90%),
-        linear-gradient(to right, rgba(255, 0, 0, 0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(to right, rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(168, 85, 247, 0.03) 1px, transparent 1px),
         radial-gradient(rgba(0, 0, 0, 0.75) 45%, transparent 45%),
-        url('assets/iot_security_dither_bg_red.png');
+        url('assets/iot_security_dither_bg.png');
 
     background-size:
         100% 100%,
@@ -2241,7 +2237,7 @@ body.dashboard-active .app-wrapper {
     transform: translateX(-50%);
     width: 800px;
     height: 500px;
-    background: radial-gradient(circle, rgba(255, 0, 0, 0.12) 0%, rgba(149, 1, 1, 0.03) 50%, rgba(0, 0, 0, 0) 80%);
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.14) 0%, rgba(99, 102, 241, 0.04) 50%, rgba(0, 0, 0, 0) 80%);
 }
 
 .islp-hero-glow-blob.bg-blob-2 {
@@ -2249,7 +2245,7 @@ body.dashboard-active .app-wrapper {
     right: 10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(255, 0, 0, 0.08) 0%, rgba(149, 1, 1, 0.02) 60%, rgba(0, 0, 0, 0) 80%);
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.07) 0%, rgba(168, 85, 247, 0.02) 60%, rgba(0, 0, 0, 0) 80%);
 }
 
 /* Spacious glassmorphic top navbar */
@@ -2350,12 +2346,12 @@ body.dashboard-active .app-wrapper {
     align-items: center;
     gap: 8px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(149, 1, 1, 0.35);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
 }
 
 .islp-hero-btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(149, 1, 1, 0.5), 0 0 10px rgba(255, 0, 0, 0.25);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4), 0 0 10px rgba(99, 102, 241, 0.4);
 }
 
 /* Sections Base */
@@ -2382,8 +2378,8 @@ body.dashboard-active .app-wrapper {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(149, 1, 1, 0.08);
-    border: 1px solid rgba(255, 0, 0, 0.16);
+    background: rgba(168, 85, 247, 0.05);
+    border: 1px solid rgba(168, 85, 247, 0.15);
     padding: 6px 14px;
     border-radius: 100px;
     margin-bottom: 30px;
@@ -2401,7 +2397,7 @@ body.dashboard-active .app-wrapper {
 }
 
 .islp-hero-badge .badge-text {
-    color: #ff6b6b;
+    color: #c084fc;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -2417,11 +2413,11 @@ body.dashboard-active .app-wrapper {
     max-width: 1050px;
     margin-bottom: 50px;
     text-align: center;
-    background: radial-gradient(circle at center, rgba(30, 0, 0, 0.6) 0%, rgba(5, 0, 0, 0.98) 100%);
+    background: radial-gradient(circle at center, rgba(12, 8, 24, 0.75) 0%, rgba(3, 1, 6, 0.96) 100%);
     padding: 65px 50px;
     border-radius: 24px;
-    border: 1px solid rgba(149, 1, 1, 0.22);
-    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.95), 0 0 50px rgba(255, 0, 0, 0.04);
+    border: 1px solid rgba(168, 85, 247, 0.18);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 50px rgba(168, 85, 247, 0.06);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 }
@@ -2448,14 +2444,14 @@ body.dashboard-active .app-wrapper {
     margin-bottom: 28px;
     text-align: center;
     max-width: 950px;
-    text-shadow: 0 0 40px rgba(255, 0, 0, 0.15);
+    text-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
 }
 
 .islp-text-glow-purple {
-    background: linear-gradient(135deg, #ff6b6b, #ff0000 45%, #950101 100%);
+    background: linear-gradient(135deg, #d8b4fe, #a855f7 45%, #6366f1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 25px rgba(255, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 25px rgba(168, 85, 247, 0.5));
 }
 
 .islp-hero-subtitle {
@@ -2487,12 +2483,12 @@ body.dashboard-active .app-wrapper {
     align-items: center;
     gap: 10px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(149, 1, 1, 0.35), 0 0 15px rgba(255, 0, 0, 0.15);
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3), 0 0 15px rgba(99, 102, 241, 0.15);
 }
 
 .islp-hero-btn-large:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(149, 1, 1, 0.55), 0 0 25px rgba(255, 0, 0, 0.3);
+    box-shadow: 0 8px 30px rgba(168, 85, 247, 0.45), 0 0 25px rgba(99, 102, 241, 0.3);
 }
 
 .islp-hero-btn-secondary {
@@ -2522,6 +2518,7 @@ body.dashboard-active .app-wrapper {
         font-size: 60px;
         letter-spacing: -2px;
     }
+
     .islp-hero-subtitle {
         font-size: 17px;
     }
@@ -2532,18 +2529,23 @@ body.dashboard-active .app-wrapper {
         font-size: 44px;
         letter-spacing: -1.5px;
     }
+
     .islp-hero-subtitle {
         font-size: 15px;
     }
+
     .islp-hero-split-container {
         padding: 45px 25px;
     }
+
     .islp-hero-actions {
         flex-direction: column;
         width: 100%;
         align-items: center;
     }
-    .islp-hero-actions a, .islp-hero-actions button {
+
+    .islp-hero-actions a,
+    .islp-hero-actions button {
         width: 100%;
         justify-content: center;
     }
@@ -2700,8 +2702,8 @@ body.dashboard-active .app-wrapper {
 }
 
 .islp-bento-card {
-    background: linear-gradient(135deg, rgba(12, 4, 4, 0.6) 0%, rgba(5, 1, 1, 0.75) 100%);
-    border: 1px solid rgba(149, 1, 1, 0.12);
+    background: linear-gradient(135deg, rgba(8, 5, 14, 0.6) 0%, rgba(4, 2, 7, 0.75) 100%);
+    border: 1px solid rgba(168, 85, 247, 0.08);
     border-radius: 16px;
     padding: 30px;
     display: flex;
@@ -2721,13 +2723,13 @@ body.dashboard-active .app-wrapper {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.2), transparent);
 }
 
 .islp-bento-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 0, 0, 0.25);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 0, 0, 0.06);
+    border-color: rgba(168, 85, 247, 0.25);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.06);
 }
 
 .bento-col-2 {
@@ -2744,8 +2746,8 @@ body.dashboard-active .app-wrapper {
     font-weight: 700;
     text-transform: uppercase;
     color: var(--color-primary);
-    background: rgba(149, 1, 1, 0.08);
-    border: 1px solid rgba(255, 0, 0, 0.2);
+    background: rgba(168, 85, 247, 0.06);
+    border: 1px solid rgba(168, 85, 247, 0.15);
     padding: 2px 8px;
     border-radius: 100px;
     display: inline-block;
@@ -2894,8 +2896,8 @@ body.dashboard-active .app-wrapper {
     height: 1px;
     background: linear-gradient(90deg,
             transparent,
-            rgba(149, 1, 1, 0.35) 30%,
-            rgba(149, 1, 1, 0.35) 70%,
+            rgba(168, 85, 247, 0.2) 30%,
+            rgba(168, 85, 247, 0.2) 70%,
             transparent 100%);
     z-index: 1;
 }
@@ -2916,8 +2918,8 @@ body.dashboard-active .app-wrapper {
 
 .islp-timeline-step:hover {
     transform: translateY(-4px);
-    border-color: rgba(149, 1, 1, 0.35);
-    background: rgba(20, 5, 5, 0.65);
+    border-color: rgba(168, 85, 247, 0.25);
+    background: rgba(12, 8, 20, 0.6);
 }
 
 .timeline-num-bubble {
@@ -2925,7 +2927,7 @@ body.dashboard-active .app-wrapper {
     height: 60px;
     border-radius: 50%;
     background: #000000;
-    border: 2px solid rgba(149, 1, 1, 0.25);
+    border: 2px solid rgba(168, 85, 247, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2935,7 +2937,7 @@ body.dashboard-active .app-wrapper {
     color: var(--color-primary);
     margin-bottom: 25px;
     position: relative;
-    box-shadow: 0 0 20px rgba(149, 1, 1, 0.08);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.05);
     transition: all 0.3s ease;
 }
 
@@ -2997,7 +2999,7 @@ body.dashboard-active .app-wrapper {
 }
 
 .islp-attack-card {
-    background: rgba(12, 4, 4, 0.55);
+    background: rgba(8, 5, 14, 0.55);
     border: 1px solid var(--color-panel-border);
     border-radius: 10px;
     padding: 24px;
@@ -3010,9 +3012,9 @@ body.dashboard-active .app-wrapper {
 
 .islp-attack-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 0, 0, 0.35);
-    background: rgba(25, 5, 5, 0.75);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 0, 0, 0.08);
+    border-color: rgba(168, 85, 247, 0.35);
+    background: rgba(12, 8, 20, 0.75);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(168, 85, 247, 0.08);
 }
 
 .attack-header {
@@ -3058,8 +3060,8 @@ body.dashboard-active .app-wrapper {
 
 .islp-attack-launch-btn {
     font-family: 'Fira Code', monospace;
-    background: rgba(149, 1, 1, 0.05);
-    border: 1px solid rgba(255, 0, 0, 0.18);
+    background: rgba(168, 85, 247, 0.04);
+    border: 1px solid rgba(168, 85, 247, 0.15);
     color: var(--color-primary);
     padding: 8px 14px;
     border-radius: 5px;
@@ -3089,7 +3091,7 @@ body.dashboard-active .app-wrapper {
 }
 
 .islp-impact-card {
-    background: rgba(12, 4, 4, 0.55);
+    background: rgba(8, 5, 14, 0.55);
     border: 1px solid var(--color-panel-border);
     border-radius: 12px;
     padding: 30px;
@@ -3178,7 +3180,7 @@ body.dashboard-active .app-wrapper {
 }
 
 .islp-credit-card {
-    background: rgba(12, 4, 4, 0.55);
+    background: rgba(8, 5, 14, 0.55);
     border: 1px solid var(--color-panel-border);
     border-radius: 10px;
     padding: 20px;
@@ -3190,7 +3192,7 @@ body.dashboard-active .app-wrapper {
 
 .islp-credit-card:hover {
     border-color: var(--color-primary-glow);
-    background: rgba(20, 5, 5, 0.7);
+    background: rgba(12, 8, 20, 0.7);
     transform: translateX(4px);
 }
 
@@ -3439,7 +3441,7 @@ body.dashboard-active .app-wrapper {
     overflow: hidden;
     margin-bottom: 20px;
     position: relative;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .splash-progress-bar {
@@ -3466,7 +3468,7 @@ body.dashboard-active .app-wrapper {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .splash-status-console .console-line {
@@ -3485,10 +3487,13 @@ body.dashboard-active .app-wrapper {
 }
 
 @keyframes splashPulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
         filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.2));
     }
+
     50% {
         transform: scale(1.05);
         filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
