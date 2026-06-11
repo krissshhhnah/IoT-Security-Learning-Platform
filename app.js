@@ -35,6 +35,8 @@ class App {
         this.charts = null;
         this.serial = new SerialGateway();
         
+        this.socket = typeof io !== 'undefined' ? io('http://localhost:3001') : null;
+
         this.activeAttackId = 8; // Start with Jamming
         this.isAttackActive = false;
         this.selectedNodeId = 'node-a'; // Start with Node A selected
@@ -258,6 +260,21 @@ class App {
         // Console logging callback
         this.simulator.logCallback = (msg, type) => this.logToConsole(msg, type);
         
+        // Socket.io callbacks for backend sync
+        if (this.socket) {
+            this.socket.on('node_data', (data) => {
+                if (data && data.message) {
+                    this.serial.onLineReceived(data.message.toString());
+                }
+            });
+            this.socket.on('connect', () => {
+                this.logToConsole(`[SOCKET] Connected to backend server`, 'success');
+            });
+            this.socket.on('disconnect', () => {
+                this.logToConsole(`[SOCKET] Disconnected from backend server`, 'error');
+            });
+        }
+
         // Serial Line printing callback
         this.serial.onLineReceived = (line) => {
             let type = 'info';
@@ -984,6 +1001,10 @@ class App {
                 this.simulator.start();
             } else {
                 this.logToConsole("[TX_SERIAL] Broadcasting attack trigger command: EXPLOIT_START_ID=" + this.activeAttackId, "success");
+                if (this.socket) {
+                    const attackInfo = ATTACKS[this.activeAttackId] || { name: 'Unknown' };
+                    this.socket.emit('trigger_attack', { attackId: this.activeAttackId, attackName: attackInfo.name });
+                }
             }
         } else {
             // Visual Update to Play icon
@@ -1001,6 +1022,9 @@ class App {
                 this.simulator.stop();
             } else {
                 this.logToConsole("[TX_SERIAL] Broadcasting exploit pause command", "info");
+                if (this.socket) {
+                    this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+                }
             }
         }
         
@@ -1026,6 +1050,9 @@ class App {
         this.topology.setCompromisedNode(null);
         
         this.simulator.stop();
+        if (this.socket) {
+            this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+        }
         this.stopTimer();
 
         // Refresh details table

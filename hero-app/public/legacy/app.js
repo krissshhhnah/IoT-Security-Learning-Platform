@@ -35,6 +35,8 @@ class App {
         this.charts = null;
         this.serial = new SerialGateway();
         
+        this.socket = typeof io !== 'undefined' ? io('http://localhost:3001') : null;
+
         this.activeAttackId = 8; // Start with Jamming
         this.isAttackActive = false;
         this.selectedNodeId = 'node-a'; // Start with Node A selected
@@ -146,31 +148,8 @@ class App {
         }
 
         // Hero Attack Card direct simulator links
-        const attackLaunchBtns = document.querySelectorAll('.islp-attack-launch-btn');
-        attackLaunchBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const attackId = parseInt(e.currentTarget.getAttribute('data-attack-id'));
-                
-                // 1. Show dashboard container first
-                this.showDashboard();
-                
-                // 2. Select corresponding attack item in dashboard sidebar menu
-                const dashboardNavItems = document.querySelectorAll('.vector-item');
-                dashboardNavItems.forEach(item => {
-                    const itemAttackId = parseInt(item.getAttribute('data-vector'));
-                    if (itemAttackId === attackId) {
-                        item.classList.add('active');
-                        // Scroll menu item into view if it is overflowed (supports both vertical & horizontal scroll)
-                        item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-
-                // 3. Switch active attack vector
-                this.switchAttack(attackId);
-            });
-        });
+        // Event listeners are now handled by React in LandingSections.tsx and App.tsx
+        // React orchestrates the transition, shows the dashboard, and then calls switchAttack()
 
         // Mode Switching
         const btnSim = document.getElementById('btn-mode-sim');
@@ -258,6 +237,21 @@ class App {
         // Console logging callback
         this.simulator.logCallback = (msg, type) => this.logToConsole(msg, type);
         
+        // Socket.io callbacks for backend sync
+        if (this.socket) {
+            this.socket.on('node_data', (data) => {
+                if (data && data.message) {
+                    this.serial.onLineReceived(data.message.toString());
+                }
+            });
+            this.socket.on('connect', () => {
+                this.logToConsole(`[SOCKET] Connected to backend server`, 'success');
+            });
+            this.socket.on('disconnect', () => {
+                this.logToConsole(`[SOCKET] Disconnected from backend server`, 'error');
+            });
+        }
+
         // Serial Line printing callback
         this.serial.onLineReceived = (line) => {
             let type = 'info';
@@ -984,6 +978,10 @@ class App {
                 this.simulator.start();
             } else {
                 this.logToConsole("[TX_SERIAL] Broadcasting attack trigger command: EXPLOIT_START_ID=" + this.activeAttackId, "success");
+                if (this.socket) {
+                    const attackInfo = ATTACKS[this.activeAttackId] || { name: 'Unknown' };
+                    this.socket.emit('trigger_attack', { attackId: this.activeAttackId, attackName: attackInfo.name });
+                }
             }
         } else {
             // Visual Update to Play icon
@@ -1001,6 +999,9 @@ class App {
                 this.simulator.stop();
             } else {
                 this.logToConsole("[TX_SERIAL] Broadcasting exploit pause command", "info");
+                if (this.socket) {
+                    this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+                }
             }
         }
         
@@ -1026,6 +1027,9 @@ class App {
         this.topology.setCompromisedNode(null);
         
         this.simulator.stop();
+        if (this.socket) {
+            this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+        }
         this.stopTimer();
 
         // Refresh details table
@@ -1649,11 +1653,11 @@ class App {
         if (!info || !body) return;
 
         body.innerHTML = `
-            <p style="font-weight: 800; color: #ff2a4d; margin-bottom: 5px;">${info.name.toUpperCase()}</p>
-            <p style="font-size: 11px; color: #cbd5e1; margin-bottom: 10px; letter-spacing: 0.5px;">LAYER: ${info.layer.toUpperCase()}</p>
-            <p style="margin-bottom: 12px; color: #e2e8f0; font-size: 13.5px;">${info.explanation}</p>
-            <div style="background: rgba(255,255,255,0.02); border-left: 2px solid #ff2a4d; padding: 8px 10px; font-size: 13px;">
-                <span style="font-weight: bold; color: #94a3b8;">INSTRUCTION:</span> ${info.simInstructions}
+            <p style="font-weight: 800; color: var(--color-primary); margin-bottom: 5px;">${info.name.toUpperCase()}</p>
+            <p style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 10px; letter-spacing: 0.5px;">LAYER: ${info.layer.toUpperCase()}</p>
+            <p style="margin-bottom: 12px; color: var(--color-text-main); font-size: 13.5px;">${info.explanation}</p>
+            <div style="background: rgba(255,255,255,0.02); border-left: 2px solid var(--color-primary); padding: 8px 10px; font-size: 13px;">
+                <span style="font-weight: bold; color: var(--color-text-muted);">INSTRUCTION:</span> ${info.simInstructions}
             </div>
         `;
     }
@@ -1836,12 +1840,10 @@ class App {
     }
 }
 
-// Wait for React to render the DOM and for the dashboard to have dimensions
-const initApp = setInterval(() => {
-    const dashboard = document.getElementById('dashboard-view');
-    const threeContainer = document.getElementById('three-container');
-    if (dashboard && threeContainer && threeContainer.clientWidth > 0 && threeContainer.clientHeight > 0) {
-        clearInterval(initApp);
-        window.simApp = new App();
+// Start application
+const checkReady = setInterval(() => {
+    if (document.getElementById('three-container')) {
+        clearInterval(checkReady);
+        window.app = new App();
     }
-}, 50);
+}, 100);

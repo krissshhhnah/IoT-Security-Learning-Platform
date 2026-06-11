@@ -24,7 +24,11 @@ export class ThreeTopology {
         this.init();
         this.animate();
 
-        window.addEventListener('resize', () => this.onWindowResize());
+        // Use ResizeObserver for responsive grid layout resizing when panels collapse
+        const resizeObserver = new ResizeObserver(() => {
+            this.onWindowResize();
+        });
+        resizeObserver.observe(this.container);
     }
 
     init() {
