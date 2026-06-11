@@ -29,50 +29,50 @@ export const DashboardUI: React.FC<{ isVisible: boolean, activeAttackId: number 
 
 
       {/* HEADER */}
-      <header className="h-16 border-b border-neon-red/20 bg-ink/90 backdrop-blur-md flex items-center justify-between px-6 z-10">
-        <div className="flex items-center gap-6">
-          <h2 id="simulation-title" className="font-syne font-bold text-white text-lg tracking-wide">SIMLABS</h2>
-          <div className="flex items-center gap-3 bg-slate-2/30 px-3 py-1.5 rounded border border-neon-red/10">
-            <span id="sim-status-badge" className="text-neon-red text-xs uppercase tracking-widest font-bold flex items-center gap-2">
+      <header className="min-h-16 h-auto py-3 md:py-0 border-b border-neon-red/20 bg-ink/90 backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between px-4 md:px-6 z-30 gap-4 md:gap-0">
+        <div className="flex items-center justify-between w-full md:w-auto gap-4 md:gap-6">
+          <h2 id="simulation-title" className="font-syne font-bold text-white text-lg tracking-wide shrink-0">SIMLABS</h2>
+          <div className="flex items-center gap-2 md:gap-3 bg-slate-2/30 px-2 md:px-3 py-1.5 rounded border border-neon-red/10 whitespace-nowrap">
+            <span id="sim-status-badge" className="text-neon-red text-[10px] md:text-xs uppercase tracking-widest font-bold flex items-center gap-2 shrink-0">
               <span className="w-2 h-2 rounded-full bg-neon-red animate-pulse"></span> Idle
             </span>
             <span className="text-mist/50">|</span>
-            <span id="sim-timer-val" className="text-mist font-mono text-xs">00:00:00</span>
+            <span id="sim-timer-val" className="text-mist font-mono text-[10px] md:text-xs">00:00:00</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <button id="btn-goto-home" onClick={onGoHome} className="px-4 py-2 text-xs font-bold text-mist hover:text-white transition-colors uppercase tracking-widest">
+        <div className="flex items-center gap-2 md:gap-3 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 custom-scrollbar shrink-0">
+          <button id="btn-goto-home" onClick={onGoHome} className="px-4 py-2 text-xs font-bold text-mist hover:text-white transition-colors uppercase tracking-widest shrink-0">
             Close Sandbox
           </button>
           
           <div className="h-4 w-px bg-slate-2/50 mx-2"></div>
 
           {activeAttackId === 5 && (
-            <div className="flex items-center gap-2 mr-2 animate-fade-in">
+            <div className="flex items-center gap-2 mr-2 animate-fade-in shrink-0">
               <span className="text-[10px] uppercase tracking-widest text-mist">Payload:</span>
               <input 
                 type="text" 
                 id="custom-payload-input"
                 placeholder="e.g. { temp: 999 }" 
-                className="bg-ink-2/80 border border-neon-red/30 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-neon-red w-40 transition-colors font-mono placeholder:text-slate-2/50"
+                className="bg-ink-2/80 border border-neon-red/30 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-neon-red w-32 md:w-40 transition-colors font-mono placeholder:text-slate-2/50"
               />
             </div>
           )}
 
-          <button id="btn-trigger-attack" className="px-5 py-2 bg-neon-red text-ink font-bold text-xs uppercase tracking-widest rounded flex items-center justify-center gap-2 hover:bg-white hover:text-neon-red transition-all shadow-[0_0_15px_rgba(255,42,77,0.3)]">
+          <button id="btn-trigger-attack" className="shrink-0 px-5 py-2 bg-neon-red text-ink font-bold text-xs uppercase tracking-widest rounded flex items-center justify-center gap-2 hover:bg-white hover:text-neon-red transition-all shadow-[0_0_15px_rgba(255,42,77,0.3)]">
             <span className="btn-icon"></span> <span className="btn-text">Launch</span>
           </button>
-          <button id="btn-stop-attack" className="px-4 py-2 border border-neon-red/40 text-neon-red font-bold text-xs uppercase tracking-widest rounded hover:bg-neon-red/10 transition-colors">
+          <button id="btn-stop-attack" className="shrink-0 px-4 py-2 border border-neon-red/40 text-neon-red font-bold text-xs uppercase tracking-widest rounded hover:bg-neon-red/10 transition-colors">
             Stop
           </button>
-          <button id="btn-reset-sim" className="px-4 py-2 border border-slate-2 text-mist font-bold text-xs uppercase tracking-widest rounded hover:bg-slate-2/50 transition-colors">
+          <button id="btn-reset-sim" className="shrink-0 px-4 py-2 border border-slate-2 text-mist font-bold text-xs uppercase tracking-widest rounded hover:bg-slate-2/50 transition-colors">
             Reset
           </button>
           
-          <div className="h-4 w-px bg-slate-2/50 mx-2"></div>
+          <div className="h-4 w-px bg-slate-2/50 mx-2 shrink-0"></div>
 
-          <div className="flex bg-slate-2/30 p-1 rounded">
+          <div className="flex bg-slate-2/30 p-1 rounded shrink-0">
             <button id="btn-mode-sim" className="px-3 py-1 text-xs font-bold rounded text-mist hover:text-white active">SIM</button>
             <button id="btn-mode-twin" className="px-3 py-1 text-xs font-bold rounded text-mist hover:text-white">TWIN</button>
           </div>
@@ -106,8 +106,13 @@ export const DashboardUI: React.FC<{ isVisible: boolean, activeAttackId: number 
       {/* WORKSPACE */}
       <div className="flex-1 flex overflow-hidden relative">
         
+        {/* MOBILE SIDEBAR OVERLAY */}
+        {sidebarOpen && (
+          <div className="md:hidden absolute inset-0 bg-black/50 z-30" onClick={() => setSidebarOpen(false)}></div>
+        )}
+
         {/* LEFT SIDEBAR - ATTACKS */}
-        <aside className={`transition-all duration-300 border-r border-neon-red/10 bg-ink/50 backdrop-blur-md flex flex-col z-20 ${sidebarOpen ? 'w-64 shadow-[4px_0_24px_rgba(0,0,0,0.4)]' : 'w-0 border-none shadow-none opacity-0 overflow-hidden'}`}>
+        <aside className={`absolute md:relative h-full transition-all duration-300 border-r border-neon-red/10 bg-ink/95 md:bg-ink/50 backdrop-blur-md flex flex-col z-40 ${sidebarOpen ? 'w-64 shadow-[4px_0_24px_rgba(0,0,0,0.4)]' : 'w-0 border-none shadow-none opacity-0 overflow-hidden'}`}>
           <div className="p-4 border-b border-neon-red/10 flex items-center justify-between">
             <span className="text-xs font-bold text-neon-red uppercase tracking-widest whitespace-nowrap">Attack Vectors</span>
             <button id="btn-toggle-sidebar" onClick={() => setSidebarOpen(false)} className="text-mist hover:text-white shrink-0">
