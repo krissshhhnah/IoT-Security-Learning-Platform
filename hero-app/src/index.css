@@ -15,6 +15,11 @@
     overflow-x: hidden;
     font-family: 'Inter', sans-serif;
   }
+  
+  /* Force hide all cursors so our custom framer-motion cursor is the only one */
+  *, *::before, *::after, button, a, [role="button"] {
+    cursor: none !important;
+  }
 }
 
 /* ==============================================================
@@ -188,11 +193,6 @@ select option {
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
-
-/* God Cursor for the 3D Canvas */
-canvas {
-  cursor: crosshair;
 }
 
 /* Add custom animations to the tooltip itself */

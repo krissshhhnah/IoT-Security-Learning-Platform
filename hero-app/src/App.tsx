@@ -5,6 +5,7 @@ import { DashboardUI } from './components/DashboardUI';
 import { Loader } from './components/Loader';
 import { TransitionOwl } from './components/TransitionOwl';
 import { AttackInfoModal } from './components/AttackInfoModal';
+import { CustomCursor } from './components/CustomCursor';
 
 function App() {
   const [appReady, setAppReady] = useState(false);
@@ -46,6 +47,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-ink text-ghost selection:bg-neon-red/30 relative">
+      <CustomCursor />
       
       {!appReady && <Loader onComplete={() => setAppReady(true)} />}
       {isTransitioning && <TransitionOwl onCoverComplete={prepareLaunchSim} onComplete={completeLaunchSim} />}
@@ -62,7 +64,7 @@ function App() {
           <a href="#" className="text-ghost font-medium hover:text-neon-red transition-colors">Home</a>
           <a href="#attacks" className="hover:text-neon-red transition-colors">Attacks</a>
           <a href="#impact" className="hover:text-neon-red transition-colors">Impact</a>
-          <a href="#" className="hover:text-neon-red transition-colors">Team</a>
+          <a href="#team" className="hover:text-neon-red transition-colors">Team</a>
         </nav>
       </header>
 

@@ -109,48 +109,84 @@ export const LandingSections: React.FC<{ onLaunchSim: (id: number) => void }> = 
         </motion.section>
 
         {/* TEAM & MENTORS */}
-        <motion.section id="team" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="flex flex-col gap-12 pt-16 border-t border-slate-2/20">
-          <motion.div variants={fadeUpVariant} className="flex flex-col gap-4">
-            <span className="text-neon-red font-mono text-sm tracking-widest uppercase">// Team & Mentors</span>
-            <h2 className="text-3xl font-syne font-bold text-white">Built at CSD,<br/>NITK Surathkal</h2>
+        <motion.section id="team" initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.01 }} variants={staggerContainer} className="flex flex-col gap-16 pt-24 mt-8 border-t border-neon-red/20">
+
+          {/* Section header */}
+          <motion.div variants={fadeUpVariant} className="flex flex-col gap-4 items-center text-center">
+            <span className="text-neon-red font-mono text-xs tracking-[0.3em] uppercase border border-neon-red/30 px-4 py-1 rounded-full">// Team & Mentors</span>
+            <h2 className="text-4xl md:text-5xl font-syne font-bold text-white">Built at <span className="text-neon-red">CSD</span>,<br/>NITK Surathkal</h2>
+            <p className="text-mist text-sm max-w-md">Research, hardware, and software — forged together at the Computer Science & Engineering Dept.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <motion.div variants={fadeUpVariant} className="flex flex-col gap-6">
-              <h3 className="text-mist uppercase tracking-widest text-xs font-bold border-b border-slate-2/30 pb-2">Project Mentors</h3>
-              <div className="flex gap-4 items-center">
-                 <div className="w-12 h-12 rounded bg-ink-2 border border-slate-2 flex items-center justify-center font-bold text-mist text-xs">CSD</div>
-                 <div>
-                   <h4 className="text-white font-bold">Dr. Pruthviraj U</h4>
-                   <p className="text-mist text-xs">Head of CSD & Associate Professor</p>
-                 </div>
+          {/* Supervisor + Mentor Row */}
+          <motion.div variants={fadeUpVariant} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            {/* Supervisor Card */}
+            <a href="https://www.linkedin.com/in/kvganga/" target="_blank" rel="noopener noreferrer"
+              className="group relative flex items-center gap-6 p-6 bg-ink-2/60 border border-slate-2/30 rounded-xl hover:border-mist/60 transition-all duration-300 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-2/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="w-16 h-16 rounded-xl bg-ink-2 border border-slate-2/50 flex items-center justify-center font-bold text-mist text-sm font-mono shrink-0">SUP</div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-mist uppercase tracking-widest font-mono">Project Supervisor</span>
+                <h4 className="text-white font-syne font-bold text-lg group-hover:text-neon-red transition-colors">Dr. K. V. Gangadharan</h4>
+                <span className="text-mist text-xs">Professor & Advisor, CSD — NITK</span>
               </div>
-              <div className="flex gap-4 items-center">
-                 <div className="w-12 h-12 rounded bg-ink-2 border border-slate-2 flex items-center justify-center font-bold text-mist text-xs">CSD</div>
-                 <div>
-                   <h4 className="text-white font-bold">Dr. K. V. Gangadharan</h4>
-                   <p className="text-mist text-xs">Professor & Advisor (CSD)</p>
-                 </div>
+              <svg className="ml-auto text-mist group-hover:text-neon-red transition-colors shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+
+            {/* Mentor Card */}
+            <a href="https://www.linkedin.com/in/alisha-joy25a/" target="_blank" rel="noopener noreferrer"
+              className="group relative flex items-center gap-6 p-6 bg-ink-2/60 border border-slate-2/30 rounded-xl hover:border-mist/60 transition-all duration-300 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-2/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="w-16 h-16 rounded-xl bg-ink-2 border border-slate-2/50 flex items-center justify-center font-bold text-mist text-sm font-mono shrink-0">MNT</div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-mist uppercase tracking-widest font-mono">Project Mentor</span>
+                <h4 className="text-white font-syne font-bold text-lg group-hover:text-neon-red transition-colors">Alisha A Joy</h4>
+                <span className="text-mist text-xs">Project Mentor — NITK</span>
               </div>
-            </motion.div>
-            <motion.div variants={fadeUpVariant} className="flex flex-col gap-6">
-              <h3 className="text-mist uppercase tracking-widest text-xs font-bold border-b border-slate-2/30 pb-2">Core Development Team</h3>
-              <div className="flex gap-4 items-center">
-                 <div className="w-12 h-12 rounded bg-ink-2 border border-slate-2 flex items-center justify-center font-bold text-neon-red text-xs">DEV</div>
-                 <div>
-                   <h4 className="text-white font-bold">Research Engineers (CSD)</h4>
-                   <p className="text-mist text-xs">Hardware & Digital Twin Architectures</p>
-                 </div>
-              </div>
-              <div className="flex gap-4 items-center">
-                 <div className="w-12 h-12 rounded bg-ink-2 border border-slate-2 flex items-center justify-center font-bold text-neon-red text-xs">DEV</div>
-                 <div>
-                   <h4 className="text-white font-bold">Software Team (CSD)</h4>
-                   <p className="text-mist text-xs">Interactive WebGL & Web Dev Labs</p>
-                 </div>
-              </div>
-            </motion.div>
+              <svg className="ml-auto text-mist group-hover:text-neon-red transition-colors shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+
+          </motion.div>
+
+          {/* Divider */}
+          <div className="flex items-center gap-4">
+            <div className="flex-1 h-px bg-neon-red/10"></div>
+            <span className="text-mist font-mono text-xs tracking-widest uppercase">Core Development</span>
+            <div className="flex-1 h-px bg-neon-red/10"></div>
           </div>
+
+          {/* Dev Cards Row */}
+          <motion.div variants={fadeUpVariant} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            {/* Dev 1 */}
+            <a href="https://www.linkedin.com/in/rudranarayan18" target="_blank" rel="noopener noreferrer"
+              className="group relative flex items-center gap-6 p-6 bg-ink-2/60 border border-neon-red/20 rounded-xl hover:border-neon-red/60 hover:shadow-[0_0_24px_rgba(255,42,77,0.12)] transition-all duration-300 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="w-16 h-16 rounded-xl bg-neon-red/10 border border-neon-red/30 flex items-center justify-center font-bold text-neon-red text-sm font-mono shrink-0">DEV</div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-neon-red/70 uppercase tracking-widest font-mono">Lead Developer</span>
+                <h4 className="text-white font-syne font-bold text-lg group-hover:text-neon-red transition-colors">Rudranarayan</h4>
+                <span className="text-mist text-xs">Hardware & Digital Twin Engineering</span>
+              </div>
+              <svg className="ml-auto text-neon-red/40 group-hover:text-neon-red transition-colors shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+
+            {/* Dev 2 */}
+            <a href="https://www.linkedin.com/in/krishnendu-prasanth" target="_blank" rel="noopener noreferrer"
+              className="group relative flex items-center gap-6 p-6 bg-ink-2/60 border border-neon-red/20 rounded-xl hover:border-neon-red/60 hover:shadow-[0_0_24px_rgba(255,42,77,0.12)] transition-all duration-300 backdrop-blur-sm overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-neon-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="w-16 h-16 rounded-xl bg-neon-red/10 border border-neon-red/30 flex items-center justify-center font-bold text-neon-red text-sm font-mono shrink-0">DEV</div>
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-neon-red/70 uppercase tracking-widest font-mono">Lead Developer</span>
+                <h4 className="text-white font-syne font-bold text-lg group-hover:text-neon-red transition-colors">Krishnendu Prasanth</h4>
+                <span className="text-mist text-xs">Interactive WebGL & Web Development</span>
+              </div>
+              <svg className="ml-auto text-neon-red/40 group-hover:text-neon-red transition-colors shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+
+          </motion.div>
+
         </motion.section>
 
       </div>
