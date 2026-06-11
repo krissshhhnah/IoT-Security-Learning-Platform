@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HeroSection } from './components/HeroSection';
 import { LandingSections } from './components/LandingSections';
 import { DashboardUI } from './components/DashboardUI';
@@ -17,7 +17,7 @@ function App() {
   const [inDashboard, setInDashboard] = useState(false);
 
   // Expose a callback so legacy app.js can sync the active attack into React state
-  React.useEffect(() => {
+  useEffect(() => {
     (window as any).__setReactAttackId = (id: number) => setCurrentDashboardAttackId(id);
     return () => { delete (window as any).__setReactAttackId; };
   }, []);
