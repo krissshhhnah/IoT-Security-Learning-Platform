@@ -11,9 +11,16 @@ function App() {
   const [appReady, setAppReady] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [targetAttackId, setTargetAttackId] = useState<number | null>(null);
+  const [currentDashboardAttackId, setCurrentDashboardAttackId] = useState<number | null>(null);
   const [showInfo, setShowInfo] = useState(false);
   // Optional React state for header visibility, though manual DOM toggle is safer for canvases
   const [inDashboard, setInDashboard] = useState(false);
+
+  // Expose a callback so legacy app.js can sync the active attack into React state
+  React.useEffect(() => {
+    (window as any).__setReactAttackId = (id: number) => setCurrentDashboardAttackId(id);
+    return () => { delete (window as any).__setReactAttackId; };
+  }, []);
 
   const handleLaunchSim = (attackId: number) => {
     setTargetAttackId(attackId);
@@ -30,7 +37,9 @@ function App() {
     // Switch attack and trigger resize after a short delay
     setTimeout(() => {
         if ((window as any).app) {
-            (window as any).app.switchAttack(targetAttackId || 8);
+            const id = targetAttackId || 8;
+            (window as any).app.switchAttack(id);
+            setCurrentDashboardAttackId(id);
             if ((window as any).app.topology) (window as any).app.topology.onWindowResize();
             if ((window as any).app.charts) (window as any).app.charts.resize();
         }
@@ -51,7 +60,7 @@ function App() {
       
       {!appReady && <Loader onComplete={() => setAppReady(true)} />}
       {isTransitioning && <TransitionOwl onCoverComplete={prepareLaunchSim} onComplete={completeLaunchSim} />}
-      <AttackInfoModal isOpen={showInfo} attackId={targetAttackId} onClose={() => setShowInfo(false)} />
+
 
       {/* Global Header */}
       <header className={`fixed top-0 left-0 w-full z-[60] flex justify-between items-center px-6 md:px-12 py-6 bg-ink/80 backdrop-blur-md border-b border-neon-red/10 ${!appReady || inDashboard ? 'hidden' : 'block'}`}>
@@ -85,8 +94,8 @@ function App() {
       {/* DASHBOARD (Mounted to preserve IDs, toggles visibility based on state) */}
       <DashboardUI isVisible={inDashboard} onGoHome={handleGoHome} onShowInfo={() => setShowInfo(true)} />
 
-      {/* ATTACK INFO MODAL */}
-      <AttackInfoModal isOpen={showInfo} attackId={targetAttackId} onClose={() => setShowInfo(false)} />
+      {/* ATTACK INFO MODAL - uses currentDashboardAttackId when in dashboard, else targetAttackId */}
+      <AttackInfoModal isOpen={showInfo} attackId={inDashboard ? (currentDashboardAttackId ?? targetAttackId) : targetAttackId} onClose={() => setShowInfo(false)} />
     </div>
   );
 }

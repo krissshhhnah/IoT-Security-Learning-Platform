@@ -901,7 +901,12 @@ class App {
     switchAttack(id) {
         this.activeAttackId = id;
         this.stopActiveAttack(); // Terminate previous loops
-        
+
+        // Sync active attack ID into React state so the Info modal stays up to date
+        if (typeof window.__setReactAttackId === 'function') {
+            window.__setReactAttackId(id);
+        }
+
         this.simulator.setActiveAttack(id);
         this.topology.setAttackVector(id);
         this.updateExplanationPanel();
