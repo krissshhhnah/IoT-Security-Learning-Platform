@@ -16,8 +16,8 @@ const staggerContainer: Variants = {
 };
 
 export const attacks = [
-  { id: 1, layer: "Physical", name: "Eavesdropping", tldr: "Listening in on invisible radio waves to steal passwords.", desc: "Sniffs raw RF carrier signals over unencrypted wireless links to capture credential hashes." },
-  { id: 2, layer: "Data Link", name: "Man-in-the-Middle", tldr: "Secretly standing between two devices to change their messages.", desc: "Intercepts transit frames between gateway and sensors to manipulate payloads or spoof active commands." },
+  { id: 1, layer: "Data Link", name: "Man-in-the-Middle", tldr: "Secretly standing between two devices to change their messages.", desc: "Intercepts transit frames between gateway and sensors to manipulate payloads or spoof active commands." },
+  { id: 2, layer: "Physical", name: "Eavesdropping", tldr: "Listening in on invisible radio waves to steal passwords.", desc: "Sniffs raw RF carrier signals over unencrypted wireless links to capture credential hashes." },
   { id: 3, layer: "Network", name: "Replay Attack", tldr: "Recording a valid login code and using it again later to break in.", desc: "Captures valid authentication tokens and broadcasts them later to bypass hardware verification." },
   { id: 4, layer: "Data Link", name: "Spoofing Attack", tldr: "Pretending to be a trusted device by stealing its ID.", desc: "Forges MAC addresses of trusted IoT devices to gain illegal network entry." },
   { id: 5, layer: "Network", name: "Packet Injection", tldr: "Sneaking fake data packets into the network to cause chaos.", desc: "Crafts and injects malicious hex payloads into active routing queues." },

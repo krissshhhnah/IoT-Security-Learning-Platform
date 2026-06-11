@@ -121,8 +121,8 @@ export const DashboardUI: React.FC<{ isVisible: boolean, activeAttackId: number 
           </div>
           <div className="flex-1 overflow-y-auto overflow-x-hidden p-2 space-y-1 custom-scrollbar">
             {[
-              { id: 1, name: "Eavesdropping" },
-              { id: 2, name: "Man-in-the-Middle" },
+              { id: 1, name: "Man-in-the-Middle" },
+              { id: 2, name: "Eavesdropping" },
               { id: 3, name: "Replay Attack" },
               { id: 4, name: "Spoofing Attack" },
               { id: 5, name: "Packet Injection" },
