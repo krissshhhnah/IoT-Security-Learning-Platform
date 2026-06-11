@@ -23,7 +23,7 @@
 
 <br/>
 
-**Built at the Department of Computer Science & Engineering, NITK Surathkal**
+**Built at the Centre for System Design, NITK Surathkal**
 
 </div>
 
@@ -212,7 +212,7 @@ Three ESP32 nodes form the cyber-physical digital twin:
 
 <div align="center">
 
-**Department of Computer Science & Engineering**<br/>
+**Centre for System Design**<br/>
 National Institute of Technology Karnataka (NITK), Surathkal — 575025
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=ff2a4d&height=100&section=footer" width="100%"/>
