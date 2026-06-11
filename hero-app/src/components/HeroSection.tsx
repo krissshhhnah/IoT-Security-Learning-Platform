@@ -30,22 +30,7 @@ export const HeroSection: React.FC<{ onLaunchSim?: () => void }> = ({ onLaunchSi
         <div className="absolute bottom-[-40%] left-1/2 w-[90%] aspect-square -translate-x-1/2 rounded-full border-[1px] border-neon-red/40 pointer-events-none" />
       </motion.div>
 
-      {/* 3. Header/Nav Area (Placeholder mimicking Figma) */}
-      <header className="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-12 py-8">
-        <div className="text-xl font-bold font-syne text-ghost tracking-wide">SimLab<span className="text-neon-red">.</span></div>
-        <nav className="hidden md:flex gap-8 text-sm font-inter text-mist">
-          <a href="#" className="text-ghost font-medium">Home</a>
-          <a href="#" className="hover:text-ghost transition-colors">About</a>
-          <a href="#" className="hover:text-ghost transition-colors">Solutions</a>
-          <a href="#" className="hover:text-ghost transition-colors">Support</a>
-        </nav>
-        <div className="flex items-center gap-6">
-          <a href="#" className="text-sm font-inter text-ghost hover:text-neon-red transition-colors">Log In</a>
-          <button className="px-6 py-2 bg-slate-2 hover:bg-neon-red hover:text-ink text-ghost transition-colors rounded-full font-inter text-sm">
-            Sign Up
-          </button>
-        </div>
-      </header>
+
 
       {/* Foreground Content Wrapper */}
       <div className="relative z-20 max-w-[1400px] w-full mx-auto px-6 lg:px-12 flex flex-col pt-10">
@@ -117,10 +102,10 @@ export const HeroSection: React.FC<{ onLaunchSim?: () => void }> = ({ onLaunchSi
               className="mt-12"
             >
               <button 
-                onClick={() => window.location.href = 'http://localhost:8000/'}
+                onClick={onLaunchSim}
                 className="px-8 py-4 bg-neon-red/10 border border-neon-red/50 hover:bg-neon-red text-ghost hover:text-ink font-mono text-sm font-bold tracking-widest uppercase transition-all duration-300 rounded-full"
               >
-                Launch SimLab
+                Launch SimLabs
               </button>
             </motion.div>
           </div>

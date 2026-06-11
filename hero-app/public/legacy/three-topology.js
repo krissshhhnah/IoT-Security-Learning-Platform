@@ -24,13 +24,16 @@ export class ThreeTopology {
         this.init();
         this.animate();
 
-        window.addEventListener('resize', () => this.onWindowResize());
+        // Use ResizeObserver for responsive grid layout resizing when panels collapse
+        const resizeObserver = new ResizeObserver(() => {
+            this.onWindowResize();
+        });
+        resizeObserver.observe(this.container);
     }
 
     init() {
-        const w = this.container.clientWidth;
-        const h = this.container.clientHeight;
-        const aspect = (h > 0) ? (w / h) : 1;
+        const w = this.container.clientWidth || 800;
+        const h = this.container.clientHeight || 600;
 
         // Scene
         this.scene = new THREE.Scene();
@@ -38,7 +41,7 @@ export class ThreeTopology {
         this.scene.fog = new THREE.FogExp2(0x07080b, 0.003);
 
         // Camera
-        this.camera = new THREE.PerspectiveCamera(50, aspect, 1, 1000);
+        this.camera = new THREE.PerspectiveCamera(50, w / h, 1, 1000);
         this.camera.position.set(0, 100, 150);
 
         // Renderer
@@ -1544,11 +1547,10 @@ export class ThreeTopology {
     }
 
     onWindowResize() {
-        if (!this.container) return;
         const w = this.container.clientWidth;
         const h = this.container.clientHeight;
-        if (w === 0 && h === 0) return; // Ignore invisible container
-        this.camera.aspect = (h > 0) ? (w / h) : 1;
+        if (w === 0 || h === 0) return;
+        this.camera.aspect = w / h;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(w, h);
     }

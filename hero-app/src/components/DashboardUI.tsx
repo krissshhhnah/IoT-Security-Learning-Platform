@@ -32,7 +32,7 @@ export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void }>
     >
       {/* TRANSITION SPLASH SCREEN */}
       <div id="transition-splash" className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center hidden opacity-0 transition-opacity duration-1000">
-        <h2 className="text-2xl text-neon-red font-bold font-syne animate-pulse tracking-widest">INITIALIZING SIMLAB SANDBOX...</h2>
+        <h2 className="text-2xl text-neon-red font-bold font-syne animate-pulse tracking-widest">INITIALIZING SIMLABS...</h2>
         <div className="w-64 h-1 bg-slate-2/30 mt-6 rounded overflow-hidden">
           <div id="splash-progress-bar" className="h-full bg-neon-red w-0 transition-all duration-300"></div>
         </div>
@@ -44,7 +44,7 @@ export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void }>
       {/* HEADER */}
       <header className="h-16 border-b border-neon-red/20 bg-ink/90 backdrop-blur-md flex items-center justify-between px-6 z-10">
         <div className="flex items-center gap-6">
-          <h2 id="simulation-title" className="font-syne font-bold text-white text-lg tracking-wide">SIMULATION SANDBOX</h2>
+          <h2 id="simulation-title" className="font-syne font-bold text-white text-lg tracking-wide">SIMLABS</h2>
           <div className="flex items-center gap-3 bg-slate-2/30 px-3 py-1.5 rounded border border-neon-red/10">
             <span id="sim-status-badge" className="text-neon-red text-xs uppercase tracking-widest font-bold flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-neon-red animate-pulse"></span> Idle
@@ -74,7 +74,7 @@ export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void }>
           <div className="h-4 w-px bg-slate-2/50 mx-2"></div>
 
           <div className="flex bg-slate-2/30 p-1 rounded">
-            <button id="btn-mode-sim" className="px-3 py-1 text-xs font-bold rounded bg-neon-red/20 text-neon-red">SIM</button>
+            <button id="btn-mode-sim" className="px-3 py-1 text-xs font-bold rounded text-mist hover:text-white active">SIM</button>
             <button id="btn-mode-twin" className="px-3 py-1 text-xs font-bold rounded text-mist hover:text-white">TWIN</button>
           </div>
           
@@ -185,17 +185,33 @@ export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void }>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="5" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="9" cy="19" r="2"></circle><circle cx="15" cy="5" r="2"></circle><circle cx="15" cy="12" r="2"></circle><circle cx="15" cy="19" r="2"></circle></svg>
             </div>
             <div className="h-6 w-px bg-slate-2/30"></div>
-            <button id="btn-view-3d" className="p-2 text-neon-red bg-neon-red/10 rounded hover:bg-neon-red/20">3D</button>
-            <button id="btn-view-topo" className="p-2 text-mist hover:text-white">TOP</button>
-            <button id="btn-view-list" className="p-2 text-mist hover:text-white">LST</button>
+            <button id="btn-view-3d" className="p-2 text-mist hover:text-white active">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </button>
+            <button id="btn-view-topo" className="p-2 text-mist hover:text-white">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            </button>
+            <button id="btn-view-list" className="p-2 text-mist hover:text-white">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            </button>
             <div className="h-6 w-px bg-slate-2/30 mx-1"></div>
-            <button id="btn-zoom-out" className="p-2 text-mist hover:text-white">-</button>
+            <button id="btn-zoom-out" className="p-2 text-mist hover:text-white">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
             <span id="zoom-val" className="text-xs font-mono text-neon-red min-w-[40px] text-center">100%</span>
-            <button id="btn-zoom-in" className="p-2 text-mist hover:text-white">+</button>
+            <button id="btn-zoom-in" className="p-2 text-mist hover:text-white">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
             <div className="h-6 w-px bg-slate-2/30 mx-1"></div>
-            <button id="btn-tool-rotate" className="p-2 text-neon-red bg-neon-red/10 rounded hover:bg-neon-red/20">ROT</button>
-            <button id="btn-tool-pan" className="p-2 text-mist hover:text-white">PAN</button>
-            <button id="btn-tool-reset" className="p-2 text-mist hover:text-white">RST</button>
+            <button id="btn-tool-rotate" className="p-2 text-mist hover:text-white active">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21l-5.46-5.46"></path></svg>
+            </button>
+            <button id="btn-tool-pan" className="p-2 text-mist hover:text-white">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="5 9 2 12 5 15"></polyline><polyline points="9 5 12 2 15 5"></polyline><polyline points="19 9 22 12 19 15"></polyline><polyline points="9 19 12 22 15 19"></polyline><line x1="2" y1="12" x2="22" y2="12"></line><line x1="12" y1="2" x2="12" y2="22"></line></svg>
+            </button>
+            <button id="btn-tool-reset" className="p-2 text-mist hover:text-white">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </button>
           </div>
         </main>
 

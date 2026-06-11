@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
-const fadeUpVariant = {
+const fadeUpVariant: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -52,7 +53,7 @@ export const LandingSections: React.FC<{ onLaunchSim: () => void }> = ({ onLaunc
       <div className="max-w-7xl mx-auto px-6 py-32 w-full z-10 flex flex-col gap-32">
         
         {/* ATTACK VECTORS */}
-        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="flex flex-col gap-12">
+        <motion.section id="attacks" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="flex flex-col gap-12">
           <motion.div variants={fadeUpVariant} className="flex flex-col gap-4 max-w-2xl">
             <span className="text-neon-red font-mono text-sm tracking-widest uppercase">// Attack Surface</span>
             <h2 className="text-4xl md:text-5xl font-syne font-bold text-white leading-tight">17 OSI-Aligned<br/>IoT Attack Vectors</h2>
@@ -60,7 +61,7 @@ export const LandingSections: React.FC<{ onLaunchSim: () => void }> = ({ onLaunc
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {attacks.map((atk, idx) => (
+            {attacks.map((atk) => (
               <motion.div key={atk.id} variants={fadeUpVariant} className="group relative bg-ink-2 border border-slate-2/30 rounded-xl p-6 hover:border-neon-red/50 transition-all duration-300 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-neon-red/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 
@@ -87,28 +88,28 @@ export const LandingSections: React.FC<{ onLaunchSim: () => void }> = ({ onLaunc
         </motion.section>
 
         {/* IMPACT MATRIX */}
-        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="flex flex-col gap-12">
+        <motion.section id="impact" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="flex flex-col gap-12">
           <motion.div variants={fadeUpVariant} className="flex flex-col gap-4 text-center items-center">
             <span className="text-neon-red font-mono text-sm tracking-widest uppercase">// Impact Matrix</span>
             <h2 className="text-4xl md:text-5xl font-syne font-bold text-white leading-tight">Security impact<br/>in the real world</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 items-stretch">
             {impacts.map((impact, i) => (
-              <motion.div key={i} variants={fadeUpVariant} className="bg-ink-2/50 border border-slate-2/20 p-8 rounded-xl backdrop-blur-sm flex flex-col gap-4 relative overflow-hidden">
+              <motion.div key={i} variants={fadeUpVariant} className="bg-ink-2/50 border border-slate-2/20 p-8 rounded-xl backdrop-blur-sm flex flex-col gap-4 relative overflow-hidden h-full">
                 <div className={`absolute top-0 left-0 w-full h-1 ${impact.badgeColor.includes('neon') ? 'bg-neon-red shadow-[0_0_10px_#ff2a4d]' : 'bg-slate-2'}`}></div>
                 <span className={`text-[10px] font-bold tracking-widest uppercase border rounded px-2 py-1 w-fit ${impact.badgeColor}`}>
                   {impact.threat}
                 </span>
-                <h3 className="text-2xl font-bold text-white font-syne mt-2">{impact.title}</h3>
-                <p className="text-mist text-sm leading-relaxed">{impact.desc}</p>
+                <h3 className="text-2xl font-bold text-white font-syne mt-2 flex-grow-0">{impact.title}</h3>
+                <p className="text-mist text-sm leading-relaxed flex-grow">{impact.desc}</p>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
         {/* TEAM & MENTORS */}
-        <motion.section initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="flex flex-col gap-12 pt-16 border-t border-slate-2/20">
+        <motion.section id="team" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="flex flex-col gap-12 pt-16 border-t border-slate-2/20">
           <motion.div variants={fadeUpVariant} className="flex flex-col gap-4">
             <span className="text-neon-red font-mono text-sm tracking-widest uppercase">// Team & Mentors</span>
             <h2 className="text-3xl font-syne font-bold text-white">Built at CSD,<br/>NITK Surathkal</h2>
