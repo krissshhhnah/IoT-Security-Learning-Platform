@@ -1649,11 +1649,11 @@ class App {
         if (!info || !body) return;
 
         body.innerHTML = `
-            <p style="font-weight: 800; color: var(--color-primary); margin-bottom: 5px;">${info.name.toUpperCase()}</p>
-            <p style="font-size: 11px; color: var(--color-text-muted); margin-bottom: 10px; letter-spacing: 0.5px;">LAYER: ${info.layer.toUpperCase()}</p>
-            <p style="margin-bottom: 12px; color: var(--color-text-main); font-size: 13.5px;">${info.explanation}</p>
-            <div style="background: rgba(255,255,255,0.02); border-left: 2px solid var(--color-primary); padding: 8px 10px; font-size: 13px;">
-                <span style="font-weight: bold; color: var(--color-text-muted);">INSTRUCTION:</span> ${info.simInstructions}
+            <p style="font-weight: 800; color: #ff2a4d; margin-bottom: 5px;">${info.name.toUpperCase()}</p>
+            <p style="font-size: 11px; color: #cbd5e1; margin-bottom: 10px; letter-spacing: 0.5px;">LAYER: ${info.layer.toUpperCase()}</p>
+            <p style="margin-bottom: 12px; color: #e2e8f0; font-size: 13.5px;">${info.explanation}</p>
+            <div style="background: rgba(255,255,255,0.02); border-left: 2px solid #ff2a4d; padding: 8px 10px; font-size: 13px;">
+                <span style="font-weight: bold; color: #94a3b8;">INSTRUCTION:</span> ${info.simInstructions}
             </div>
         `;
     }

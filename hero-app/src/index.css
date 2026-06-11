@@ -49,6 +49,13 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 10px rgba(239, 68, 68, 0.25);
 }
 
+.vector-item.active {
+  @apply bg-neon-red/20 text-white border-l-[3px] border-neon-red rounded-none rounded-r;
+}
+.vector-item.active .vector-status-icon {
+  @apply bg-neon-red shadow-[0_0_10px_rgba(255,42,77,1)];
+}
+
 .node-label .label-name {
   font-weight: 700;
   font-size: 11px;
