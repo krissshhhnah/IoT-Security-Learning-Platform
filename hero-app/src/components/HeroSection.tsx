@@ -42,12 +42,12 @@ export const HeroSection: React.FC<{ onLaunchSim?: () => void }> = ({ onLaunchSi
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="font-syne text-[clamp(40px,10vw,96px)] font-bold leading-[1.05] tracking-tight text-ghost mb-8 flex flex-col"
+              className="font-syne text-5xl md:text-[clamp(60px,7vw,96px)] font-bold leading-[1.05] tracking-tight text-ghost mb-6 md:mb-8 flex flex-col"
             >
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 md:gap-6">
                 <span>Threat</span>
                 {/* Shield Icon mimicking the Figma design */}
-                <svg className="w-16 h-16 md:w-20 md:h-20 text-neon-red opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="w-10 h-10 md:w-20 md:h-20 text-neon-red opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                   <path d="M12 8v4"/>
                   <path d="M12 16h.01"/>

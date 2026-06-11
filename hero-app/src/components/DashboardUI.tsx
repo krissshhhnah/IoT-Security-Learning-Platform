@@ -29,20 +29,20 @@ export const DashboardUI: React.FC<{ isVisible: boolean, activeAttackId: number 
 
 
       {/* HEADER */}
-      <header className="min-h-16 h-auto py-3 md:py-0 border-b border-neon-red/20 bg-ink/90 backdrop-blur-md flex flex-col md:flex-row items-start md:items-center justify-between px-4 md:px-6 z-30 gap-4 md:gap-0">
-        <div className="flex items-center justify-between w-full md:w-auto gap-4 md:gap-6">
-          <h2 id="simulation-title" className="font-syne font-bold text-white text-lg tracking-wide shrink-0">SIMLABS</h2>
-          <div className="flex items-center gap-2 md:gap-3 bg-slate-2/30 px-2 md:px-3 py-1.5 rounded border border-neon-red/10 whitespace-nowrap">
-            <span id="sim-status-badge" className="text-neon-red text-[10px] md:text-xs uppercase tracking-widest font-bold flex items-center gap-2 shrink-0">
-              <span className="w-2 h-2 rounded-full bg-neon-red animate-pulse"></span> Idle
+      <header className="h-auto md:h-16 border-b border-neon-red/20 bg-ink/90 backdrop-blur-md flex flex-col md:flex-row w-full z-30">
+        <div className="flex items-center justify-between w-full px-4 md:px-6 py-3 md:py-0 md:w-auto border-b border-slate-2/20 md:border-none shrink-0">
+          <h2 id="simulation-title" className="font-syne font-bold text-white text-base md:text-lg tracking-wide shrink-0">SIMLABS</h2>
+          <div className="flex items-center gap-2 md:gap-3 bg-slate-2/30 px-2 md:px-3 py-1 rounded border border-neon-red/10 whitespace-nowrap">
+            <span id="sim-status-badge" className="text-neon-red text-[10px] md:text-xs uppercase tracking-widest font-bold flex items-center gap-1.5 shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-neon-red animate-pulse"></span> Idle
             </span>
             <span className="text-mist/50">|</span>
             <span id="sim-timer-val" className="text-mist font-mono text-[10px] md:text-xs">00:00:00</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 md:gap-3 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 custom-scrollbar shrink-0">
-          <button id="btn-goto-home" onClick={onGoHome} className="px-4 py-2 text-xs font-bold text-mist hover:text-white transition-colors uppercase tracking-widest shrink-0">
+        <div className="flex items-center gap-2 md:gap-3 px-4 md:px-6 py-3 md:py-0 overflow-x-auto w-full custom-scrollbar shrink-0">
+          <button id="btn-goto-home" onClick={onGoHome} className="px-3 md:px-4 py-1.5 md:py-2 text-[10px] md:text-xs font-bold text-mist hover:text-white transition-colors uppercase tracking-widest shrink-0">
             Close Sandbox
           </button>
           
@@ -321,7 +321,7 @@ export const DashboardUI: React.FC<{ isVisible: boolean, activeAttackId: number 
 
           {/* CONSOLE Overlay */}
           {widgets.console && (
-            <motion.div drag dragMomentum={false} className="absolute bottom-6 left-[300px] z-40 w-[500px] h-48 border border-slate-2/50 rounded bg-ink-2/95 backdrop-blur-md shadow-2xl flex flex-col">
+            <motion.div drag dragMomentum={false} className="absolute bottom-20 md:bottom-6 left-2 right-2 md:left-[300px] md:right-auto z-40 w-auto md:w-[500px] h-48 border border-slate-2/50 rounded bg-ink-2/95 backdrop-blur-md shadow-2xl flex flex-col">
               <div className="px-3 py-2 border-b border-slate-2/50 flex justify-between items-center cursor-move bg-slate-2/10">
                 <span className="text-[10px] font-bold text-neon-red uppercase tracking-widest flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-neon-red rounded-full animate-pulse"></span> Live Event Log
