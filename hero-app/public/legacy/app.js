@@ -148,31 +148,8 @@ class App {
         }
 
         // Hero Attack Card direct simulator links
-        const attackLaunchBtns = document.querySelectorAll('.islp-attack-launch-btn');
-        attackLaunchBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const attackId = parseInt(e.currentTarget.getAttribute('data-attack-id'));
-                
-                // 1. Show dashboard container first
-                this.showDashboard();
-                
-                // 2. Select corresponding attack item in dashboard sidebar menu
-                const dashboardNavItems = document.querySelectorAll('.vector-item');
-                dashboardNavItems.forEach(item => {
-                    const itemAttackId = parseInt(item.getAttribute('data-vector'));
-                    if (itemAttackId === attackId) {
-                        item.classList.add('active');
-                        // Scroll menu item into view if it is overflowed (supports both vertical & horizontal scroll)
-                        item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-
-                // 3. Switch active attack vector
-                this.switchAttack(attackId);
-            });
-        });
+        // Event listeners are now handled by React in LandingSections.tsx and App.tsx
+        // React orchestrates the transition, shows the dashboard, and then calls switchAttack()
 
         // Mode Switching
         const btnSim = document.getElementById('btn-mode-sim');

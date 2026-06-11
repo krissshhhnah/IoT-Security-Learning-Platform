@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-export const TransitionOwl: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+export const TransitionOwl: React.FC<{ onCoverComplete: () => void, onComplete: () => void }> = ({ onCoverComplete, onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -14,30 +14,32 @@ export const TransitionOwl: React.FC<{ onComplete: () => void }> = ({ onComplete
       }
     });
 
-    // Initial state
-    gsap.set(containerRef.current, { opacity: 0 });
-    gsap.set(imgRef.current, { scale: 0.5, opacity: 0, y: 50 });
-    gsap.set(textRef.current, { opacity: 0, y: 20 });
+    // Initial state: instantly cover screen with background
+    gsap.set(containerRef.current, { opacity: 1 });
+    gsap.set(imgRef.current, { scale: 0.5, opacity: 0, y: 20 });
+    gsap.set(textRef.current, { opacity: 0, y: 10 });
     
-    // Animation sequence
-    tl.to(containerRef.current, { opacity: 1, duration: 0.4, ease: "power2.inOut" })
-      .to(imgRef.current, { scale: 1, opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.7)" })
-      .to(textRef.current, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, "-=0.4")
-      // glitch/pulse effect
+    // Let dashboard mount behind the cover immediately
+    setTimeout(onCoverComplete, 10);
+    
+    // Fast, snappy animation sequence
+    tl.to(imgRef.current, { scale: 1, opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)" })
+      .to(textRef.current, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, "-=0.1")
+      // quick glitch pulse
       .to(imgRef.current, { 
-        filter: "drop-shadow(0 0 30px rgba(255, 42, 77, 1))", 
+        filter: "drop-shadow(0 0 40px rgba(255, 42, 77, 1))", 
         scale: 1.1,
-        duration: 0.2, 
+        duration: 0.08, 
         yoyo: true, 
         repeat: 3 
       })
-      // exit
-      .to(containerRef.current, { opacity: 0, duration: 0.6, ease: "power3.inOut", delay: 0.5 });
+      // No fade out for the container - just wait a tiny bit then unmount instantly for a hard cut
+      .to(containerRef.current, { duration: 0.1 });
 
     return () => {
       tl.kill();
     };
-  }, [onComplete]);
+  }, [onCoverComplete, onComplete]);
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[100] bg-ink flex flex-col items-center justify-center pointer-events-auto">

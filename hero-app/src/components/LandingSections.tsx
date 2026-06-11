@@ -15,24 +15,24 @@ const staggerContainer: Variants = {
   }
 };
 
-const attacks = [
-  { id: 1, layer: "Physical", name: "Eavesdropping", desc: "Sniffs raw RF carrier signals over unencrypted wireless links to capture credential hashes." },
-  { id: 2, layer: "Data Link", name: "Man-in-the-Middle", desc: "Intercepts transit frames between gateway and sensors to manipulate payloads or spoof active commands." },
-  { id: 3, layer: "Network", name: "Replay Attack", desc: "Captures valid authentication tokens and broadcasts them later to bypass hardware verification." },
-  { id: 4, layer: "Data Link", name: "Spoofing Attack", desc: "Forges MAC addresses of trusted IoT devices to gain illegal network entry." },
-  { id: 5, layer: "Network", name: "Packet Injection", desc: "Crafts and injects malicious hex payloads into active routing queues." },
-  { id: 6, layer: "Transport", name: "Denial of Service", desc: "Floods the local IoT gateway router with junk request frames, causing CPU overhead." },
-  { id: 7, layer: "Transport", name: "Distributed DoS", desc: "Inundates target router queues using multiple compromised zombie nodes." },
-  { id: 8, layer: "Physical", name: "Jamming Attack", desc: "Emits high-intensity RF carrier noise to flood the radio spectrum." },
-  { id: 9, layer: "Application", name: "Credential Theft", desc: "Exfiltrates password databases and device cryptographic handshakes." },
-  { id: 10, layer: "Session", name: "Session Hacking", desc: "Hijacks active BLE connection states or session keys." },
-  { id: 11, layer: "Physical", name: "Rogue Insertion", desc: "Injects unverified rogue hardware modules into active physical connections." },
-  { id: 12, layer: "Network", name: "Routing Attack", desc: "Manipulates mesh routing tables to blackhole payloads or reroute data paths." },
-  { id: 13, layer: "Network", name: "Sybil Attack", desc: "Spawns multiple pseudonymous virtual clone nodes to flood mesh routing algorithms." },
-  { id: 14, layer: "Presentation", name: "Sensor Tampering", desc: "Injects forged telemetry data to trigger false system shutdowns." },
-  { id: 15, layer: "Physical", name: "Timing Attack", desc: "Uses side-channel exfiltration to monitor microcontroller crypto execution cycles." },
-  { id: 16, layer: "Physical", name: "Physical Access", desc: "Taps target board JTAG/UART headers to probe raw memory dumps." },
-  { id: 17, layer: "Transport", name: "Delay Attack", desc: "Holds back and buffers packet delivery times to compromise control-loop synchronization." }
+export const attacks = [
+  { id: 1, layer: "Physical", name: "Eavesdropping", tldr: "Listening in on invisible radio waves to steal passwords.", desc: "Sniffs raw RF carrier signals over unencrypted wireless links to capture credential hashes." },
+  { id: 2, layer: "Data Link", name: "Man-in-the-Middle", tldr: "Secretly standing between two devices to change their messages.", desc: "Intercepts transit frames between gateway and sensors to manipulate payloads or spoof active commands." },
+  { id: 3, layer: "Network", name: "Replay Attack", tldr: "Recording a valid login code and using it again later to break in.", desc: "Captures valid authentication tokens and broadcasts them later to bypass hardware verification." },
+  { id: 4, layer: "Data Link", name: "Spoofing Attack", tldr: "Pretending to be a trusted device by stealing its ID.", desc: "Forges MAC addresses of trusted IoT devices to gain illegal network entry." },
+  { id: 5, layer: "Network", name: "Packet Injection", tldr: "Sneaking fake data packets into the network to cause chaos.", desc: "Crafts and injects malicious hex payloads into active routing queues." },
+  { id: 6, layer: "Transport", name: "Denial of Service", tldr: "Overwhelming a single device with so much junk data that it crashes.", desc: "Floods the local IoT gateway router with junk request frames, causing CPU overhead." },
+  { id: 7, layer: "Transport", name: "Distributed DoS", tldr: "Using a massive army of hacked devices to take down the entire network.", desc: "Inundates target router queues using multiple compromised zombie nodes." },
+  { id: 8, layer: "Physical", name: "Jamming Attack", tldr: "Blasting loud radio noise so no devices can communicate.", desc: "Emits high-intensity RF carrier noise to flood the radio spectrum." },
+  { id: 9, layer: "Application", name: "Credential Theft", tldr: "Stealing the master password database.", desc: "Exfiltrates password databases and device cryptographic handshakes." },
+  { id: 10, layer: "Session", name: "Session Hacking", tldr: "Taking over someone's active login session while they are still logged in.", desc: "Hijacks active BLE connection states or session keys." },
+  { id: 11, layer: "Physical", name: "Rogue Insertion", tldr: "Plugging an evil, unverified device directly into the network.", desc: "Injects unverified rogue hardware modules into active physical connections." },
+  { id: 12, layer: "Network", name: "Routing Attack", tldr: "Messing with the GPS of the network so data gets lost or sent to the hacker.", desc: "Manipulates mesh routing tables to blackhole payloads or reroute data paths." },
+  { id: 13, layer: "Network", name: "Sybil Attack", tldr: "Creating hundreds of fake clone devices to confuse the network.", desc: "Spawns multiple pseudonymous virtual clone nodes to flood mesh routing algorithms." },
+  { id: 14, layer: "Presentation", name: "Sensor Tampering", tldr: "Sending fake temperature or status readings to trigger an emergency shutdown.", desc: "Injects forged telemetry data to trigger false system shutdowns." },
+  { id: 15, layer: "Physical", name: "Timing Attack", tldr: "Watching how fast a computer thinks to guess its password.", desc: "Uses side-channel exfiltration to monitor microcontroller crypto execution cycles." },
+  { id: 16, layer: "Physical", name: "Physical Access", tldr: "Tearing open the device and plugging wires straight into its brain.", desc: "Taps target board JTAG/UART headers to probe raw memory dumps." },
+  { id: 17, layer: "Transport", name: "Delay Attack", tldr: "Holding back important messages so the system goes completely out of sync.", desc: "Holds back and buffers packet delivery times to compromise control-loop synchronization." }
 ];
 
 const impacts = [
@@ -41,7 +41,7 @@ const impacts = [
   { threat: "CRITICAL THREAT", title: "Network Failure & Spectrum Denial", desc: "Continuous RF spectrum jamming or flood-based Denial of Service renders network nodes unreachable, completely shutting down smart monitoring queues.", badgeColor: "text-neon-red border-neon-red/50 bg-neon-red/20 shadow-[0_0_15px_rgba(255,42,77,0.3)]" }
 ];
 
-export const LandingSections: React.FC<{ onLaunchSim: () => void }> = ({ onLaunchSim }) => {
+export const LandingSections: React.FC<{ onLaunchSim: (id: number) => void }> = ({ onLaunchSim }) => {
   return (
     <div className="w-full flex flex-col bg-ink text-ghost relative">
       
@@ -78,7 +78,7 @@ export const LandingSections: React.FC<{ onLaunchSim: () => void }> = ({ onLaunc
                   <h3 className="text-xl font-bold text-white mb-3 font-syne">{atk.name}</h3>
                   <p className="text-mist text-sm leading-relaxed mb-8 flex-grow">{atk.desc}</p>
                   
-                  <button onClick={onLaunchSim} className="islp-attack-launch-btn flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neon-red hover:text-white transition-colors group/btn w-fit" data-attack-id={atk.id}>
+                  <button onClick={() => onLaunchSim(atk.id)} className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-neon-red hover:text-white transition-colors group/btn w-fit" data-attack-id={atk.id}>
                     Simulate <svg className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                   </button>
                 </div>
