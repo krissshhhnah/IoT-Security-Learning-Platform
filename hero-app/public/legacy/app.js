@@ -1836,7 +1836,12 @@ class App {
     }
 }
 
-// Start application
-window.addEventListener('DOMContentLoaded', () => {
-    new App();
-});
+// Wait for React to render the DOM and for the dashboard to have dimensions
+const initApp = setInterval(() => {
+    const dashboard = document.getElementById('dashboard-view');
+    const threeContainer = document.getElementById('three-container');
+    if (dashboard && threeContainer && threeContainer.clientWidth > 0 && threeContainer.clientHeight > 0) {
+        clearInterval(initApp);
+        window.simApp = new App();
+    }
+}, 50);

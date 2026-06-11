@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-ink text-ghost;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* ==============================================================
+   LEGACY SIMULATOR STYLES 
+   (For dynamically injected HTML from app.js & three-topology.js)
+   ============================================================== */
+
+.node-label {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  background: rgba(6, 9, 15, 0.88);
+  border: 1.5px solid #10b981;
+  color: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 10px rgba(16, 185, 129, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'Space Mono', monospace;
+  white-space: nowrap;
+  z-index: 50;
+}
+
+.node-label.online {
+  border-color: #10b981;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 10px rgba(16, 185, 129, 0.1);
+}
+
+.node-label.compromised, .node-label.malicious {
+  border-color: #ef4444;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 10px rgba(239, 68, 68, 0.25);
+}
+
+.node-label .label-name {
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #f8fafc;
+}
+
+.node-label .label-ip {
+  font-size: 9.5px;
+  color: #94a3b8;
+}
+
+.node-label .label-status {
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 1px;
+  letter-spacing: 0.5px;
+}
+
+.node-label .status-online { color: #10b981; }
+.node-label .status-compromised, .node-label .status-malicious { color: #ef4444; }
+
+.node-status-badge {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+.node-status-badge.healthy {
+  background: rgba(16, 185, 129, 0.08);
+  color: #10b981;
+  border: 1px solid #10b981;
+}
+
+.node-status-badge.compromised {
+  background: rgba(239, 68, 68, 0.08);
+  color: #ef4444;
+  border: 1px solid #ef4444;
+}
+
+.node-status-badge.attacking {
+  background: rgba(245, 158, 11, 0.08);
+  color: #f59e0b;
+  border: 1px solid #f59e0b;
+}
+
+.console-line {
+  padding: 2px 0;
+  border-left: 2px solid transparent;
+  padding-left: 6px;
+}
+
+.console-line.line-info { color: #94a3b8; }
+.console-line.line-success { color: #10b981; border-left-color: #10b981; }
+.console-line.line-warn { color: #f59e0b; border-left-color: #f59e0b; }
+.console-line.line-error { color: #ef4444; border-left-color: #ef4444; background: rgba(239, 68, 68, 0.05); }
+.console-line.line-active { color: #00f0ff; text-shadow: 0 0 5px rgba(0, 240, 255, 0.5); border-left-color: #00f0ff; }
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(10, 5, 8, 0.5); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(244, 63, 94, 0.2); border-radius: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(244, 63, 94, 0.5); }
