@@ -979,15 +979,18 @@ class App {
             this.topology.triggerAttack(true);
             this.startTimer();
             
+            // Start local visual simulation
             if (this.simulator.mode === 'simulation') {
                 this.simulator.start();
-            } else {
-                this.logToConsole("[TX_SERIAL] Broadcasting attack trigger command: EXPLOIT_START_ID=" + this.activeAttackId, "success");
-                if (this.socket) {
-                    const attackInfo = ATTACKS[this.activeAttackId] || { name: 'Unknown' };
-                    this.socket.emit('trigger_attack', { attackId: this.activeAttackId, attackName: attackInfo.name });
-                }
             }
+            
+            // ALWAYS trigger backend if socket is available
+            this.logToConsole("[TX_SERIAL] Broadcasting attack trigger command: EXPLOIT_START_ID=" + this.activeAttackId, "success");
+            if (this.socket) {
+                const attackInfo = ATTACKS[this.activeAttackId] || { name: 'Unknown' };
+                this.socket.emit('trigger_attack', { attackId: this.activeAttackId, attackName: attackInfo.name });
+            }
+            
         } else {
             // Visual Update to Play icon
             btnPlay.querySelector('.btn-icon').innerHTML = SVG_ICONS.play;
@@ -1000,13 +1003,15 @@ class App {
             this.topology.triggerAttack(false);
             this.pauseTimer();
             
+            // Stop local visual simulation
             if (this.simulator.mode === 'simulation') {
                 this.simulator.stop();
-            } else {
-                this.logToConsole("[TX_SERIAL] Broadcasting exploit pause command", "info");
-                if (this.socket) {
-                    this.socket.emit('stop_attack', { attackId: this.activeAttackId });
-                }
+            }
+            
+            // ALWAYS stop backend if socket is available
+            this.logToConsole("[TX_SERIAL] Broadcasting exploit pause command", "info");
+            if (this.socket) {
+                this.socket.emit('stop_attack', { attackId: this.activeAttackId });
             }
         }
         
