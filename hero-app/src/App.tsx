@@ -92,7 +92,7 @@ function App() {
       </div>
 
       {/* DASHBOARD (Mounted to preserve IDs, toggles visibility based on state) */}
-      <DashboardUI isVisible={inDashboard} onGoHome={handleGoHome} onShowInfo={() => setShowInfo(true)} />
+      <DashboardUI isVisible={inDashboard} activeAttackId={currentDashboardAttackId} onGoHome={handleGoHome} onShowInfo={() => setShowInfo(true)} />
 
       {/* ATTACK INFO MODAL - uses currentDashboardAttackId when in dashboard, else targetAttackId */}
       <AttackInfoModal isOpen={showInfo} attackId={inDashboard ? (currentDashboardAttackId ?? targetAttackId) : targetAttackId} onClose={() => setShowInfo(false)} />

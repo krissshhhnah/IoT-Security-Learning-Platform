@@ -73,8 +73,8 @@ io.on('connection', (socket) => {
     // Send the ID to all connected hardware
     if (activePorts.length > 0) {
       let command = `${attackId}`;
-      if (data.payload) {
-        command += `:${data.payload}`;
+      if (data.customPayload) {
+        command += `:${data.customPayload}`;
       }
       command += `\n`;
       

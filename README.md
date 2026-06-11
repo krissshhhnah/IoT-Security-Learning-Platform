@@ -136,30 +136,40 @@ npm run build
 
 ## 🎯 Attack Vectors
 
-<details>
-<summary><b>Click to expand — all 17 simulated attacks</b></summary>
+<div align="center">
 
-| # | Layer | Attack | TL;DR |
-|---|---|---|---|
-| 01 | Physical | **Eavesdropping** | Listening in on invisible radio waves to steal passwords |
-| 02 | Data Link | **Man-in-the-Middle** | Secretly standing between two devices to change their messages |
-| 03 | Network | **Replay Attack** | Recording a valid login code and using it again later |
-| 04 | Data Link | **Spoofing Attack** | Pretending to be a trusted device by stealing its ID |
-| 05 | Network | **Packet Injection** | Sneaking fake data packets into the network to cause chaos |
-| 06 | Transport | **Denial of Service** | Overwhelming a single device with junk data until it crashes |
-| 07 | Transport | **Distributed DoS** | Using an army of hacked devices to take down the network |
-| 08 | Physical | **Jamming Attack** | Blasting radio noise so no devices can communicate |
-| 09 | Application | **Credential Theft** | Stealing the master password database |
-| 10 | Session | **Session Hijacking** | Taking over an active login session |
-| 11 | Physical | **Rogue Insertion** | Plugging an evil, unverified device into the network |
-| 12 | Network | **Routing Attack** | Messing with the network's GPS so data gets lost |
-| 13 | Application | **Firmware Tampering** | Pushing a malicious software update to a device |
-| 14 | Network | **ARP Poisoning** | Corrupting the address book to intercept traffic |
-| 15 | Application | **SQL Injection** | Tricking a database into leaking all its secrets |
-| 16 | Network | **DNS Spoofing** | Sending you to a fake website by lying about its address |
-| 17 | Physical | **Physical Tampering** | Directly accessing and modifying the hardware itself |
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Space+Mono&weight=700&size=24&pause=1000&color=00FF00&center=true&vCenter=true&width=600&lines=FULLY+SUPPORTED+PHYSICAL+ATTACKS;LIVE+ON+ESP32+HARDWARE" alt="Typing SVG" /></a>
 
-</details>
+<br/>
+
+<img src="https://img.shields.io/badge/Eavesdropping-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Man--in--the--Middle-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Replay_Attack-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Spoofing_Attack-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Packet_Injection-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<br/>
+<img src="https://img.shields.io/badge/Denial_of_Service-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Jamming_Attack-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Credential_Theft-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Session_Hacking-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<br/>
+<img src="https://img.shields.io/badge/Rogue_Insertion-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Sensor_Tampering-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+<img src="https://img.shields.io/badge/Delay_Attack-000000?style=for-the-badge&logo=hackthebox&logoColor=00FF00" />
+
+<br/><br/>
+
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Space+Mono&weight=700&size=24&pause=1000&color=FF0000&center=true&vCenter=true&width=600&lines=LOCKED+IN+DIGITAL+TWIN;IMPOSSIBLE+ON+CURRENT+HARDWARE" alt="Typing SVG" /></a>
+
+<br/>
+
+<img src="https://img.shields.io/badge/Distributed_DoS-000000?style=for-the-badge&logo=x&logoColor=FF0000" />
+<img src="https://img.shields.io/badge/Routing_Attack-000000?style=for-the-badge&logo=x&logoColor=FF0000" />
+<img src="https://img.shields.io/badge/Sybil_Attack-000000?style=for-the-badge&logo=x&logoColor=FF0000" />
+<img src="https://img.shields.io/badge/Timing_Attack-000000?style=for-the-badge&logo=x&logoColor=FF0000" />
+<img src="https://img.shields.io/badge/Physical_Access-000000?style=for-the-badge&logo=x&logoColor=FF0000" />
+
+</div>
 
 ---
 

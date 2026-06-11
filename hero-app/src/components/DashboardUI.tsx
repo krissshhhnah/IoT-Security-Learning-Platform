@@ -11,7 +11,7 @@ const LegacyMetrics = React.memo(() => (
   </div>
 ));
 
-export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void, onShowInfo: () => void }> = ({ isVisible, onGoHome, onShowInfo }) => {
+export const DashboardUI: React.FC<{ isVisible: boolean, activeAttackId: number | null, onGoHome: () => void, onShowInfo: () => void }> = ({ isVisible, activeAttackId, onGoHome, onShowInfo }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
   const [widgets, setWidgets] = React.useState({
     controls: true,
@@ -47,6 +47,18 @@ export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void, o
           </button>
           
           <div className="h-4 w-px bg-slate-2/50 mx-2"></div>
+
+          {activeAttackId === 5 && (
+            <div className="flex items-center gap-2 mr-2 animate-fade-in">
+              <span className="text-[10px] uppercase tracking-widest text-mist">Payload:</span>
+              <input 
+                type="text" 
+                id="custom-payload-input"
+                placeholder="e.g. { temp: 999 }" 
+                className="bg-ink-2/80 border border-neon-red/30 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-neon-red w-40 transition-colors font-mono placeholder:text-slate-2/50"
+              />
+            </div>
+          )}
 
           <button id="btn-trigger-attack" className="px-5 py-2 bg-neon-red text-ink font-bold text-xs uppercase tracking-widest rounded flex items-center justify-center gap-2 hover:bg-white hover:text-neon-red transition-all shadow-[0_0_15px_rgba(255,42,77,0.3)]">
             <span className="btn-icon"></span> <span className="btn-text">Launch</span>

@@ -939,6 +939,42 @@ class App {
         this.updateNodeDetailsPanel();
         this.updateFlowExplanationBanner();
 
+        // Lock out unsupported attacks in TWIN mode
+        const unsupportedTwinAttacks = [7, 12, 13, 15, 16];
+        const navItems = document.querySelectorAll('.vector-item');
+        navItems.forEach(item => {
+            const id = parseInt(item.getAttribute('data-vector'));
+            if (unsupportedTwinAttacks.includes(id)) {
+                if (mode === 'twin') {
+                    item.classList.add('opacity-30', 'cursor-not-allowed', 'locked-in-twin');
+                    item.title = "It cannot be performed physically";
+                    item.disabled = true;
+                    if (!item.querySelector('.lock-icon')) {
+                        const lock = document.createElement('span');
+                        lock.className = 'lock-icon ml-auto text-neon-red flex items-center justify-center w-4 h-4';
+                        lock.innerHTML = SVG_ICONS.lock;
+                        item.appendChild(lock);
+                    }
+                } else {
+                    item.classList.remove('opacity-30', 'cursor-not-allowed', 'locked-in-twin');
+                    item.removeAttribute('title');
+                    item.disabled = false;
+                    const lock = item.querySelector('.lock-icon');
+                    if (lock) lock.remove();
+                }
+            }
+        });
+
+        // If the currently selected attack becomes locked, fallback to a safe attack
+        if (mode === 'twin' && unsupportedTwinAttacks.includes(this.activeAttackId)) {
+            const fallbackItem = document.querySelector('.vector-item[data-vector="1"]');
+            if (fallbackItem) {
+                navItems.forEach(i => i.classList.remove('active'));
+                fallbackItem.classList.add('active');
+                this.switchAttack(1);
+            }
+        }
+
         // Refresh Three.js grid/theme colors for the new mode
         this.topology.setThemeColors();
 
@@ -979,18 +1015,25 @@ class App {
             this.topology.triggerAttack(true);
             this.startTimer();
             
-            // Start local visual simulation
             if (this.simulator.mode === 'simulation') {
                 this.simulator.start();
+            } else {
+                this.logToConsole("[TX_SERIAL] Broadcasting attack trigger command: EXPLOIT_START_ID=" + this.activeAttackId, "success");
+                if (this.socket) {
+                    const attackInfo = ATTACKS[this.activeAttackId] || { name: 'Unknown' };
+                    let payloadData = null;
+                    const payloadInput = document.getElementById('custom-payload-input');
+                    if (payloadInput && payloadInput.value.trim() !== '') {
+                        payloadData = payloadInput.value.trim();
+                        this.logToConsole(`[TX_SERIAL] Injecting Custom Payload: ${payloadData}`, "info");
+                    }
+                    this.socket.emit('trigger_attack', { 
+                        attackId: this.activeAttackId, 
+                        attackName: attackInfo.name,
+                        customPayload: payloadData
+                    });
+                }
             }
-            
-            // ALWAYS trigger backend if socket is available
-            this.logToConsole("[TX_SERIAL] Broadcasting attack trigger command: EXPLOIT_START_ID=" + this.activeAttackId, "success");
-            if (this.socket) {
-                const attackInfo = ATTACKS[this.activeAttackId] || { name: 'Unknown' };
-                this.socket.emit('trigger_attack', { attackId: this.activeAttackId, attackName: attackInfo.name });
-            }
-            
         } else {
             // Visual Update to Play icon
             btnPlay.querySelector('.btn-icon').innerHTML = SVG_ICONS.play;
@@ -1003,15 +1046,13 @@ class App {
             this.topology.triggerAttack(false);
             this.pauseTimer();
             
-            // Stop local visual simulation
             if (this.simulator.mode === 'simulation') {
                 this.simulator.stop();
-            }
-            
-            // ALWAYS stop backend if socket is available
-            this.logToConsole("[TX_SERIAL] Broadcasting exploit pause command", "info");
-            if (this.socket) {
-                this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+            } else {
+                this.logToConsole("[TX_SERIAL] Broadcasting exploit pause command", "info");
+                if (this.socket) {
+                    this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+                }
             }
         }
         
@@ -1036,9 +1077,12 @@ class App {
         this.topology.triggerAttack(false);
         this.topology.setCompromisedNode(null);
         
-        this.simulator.stop();
-        if (this.socket) {
-            this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+        if (this.simulator.mode === 'simulation') {
+            this.simulator.stop();
+        } else {
+            if (this.socket) {
+                this.socket.emit('stop_attack', { attackId: this.activeAttackId });
+            }
         }
         this.stopTimer();
 
