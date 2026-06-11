@@ -145,3 +145,61 @@ select {
 select option {
   @apply bg-ink text-mist;
 }
+
+/* ==============================================================
+   SVG ICON FIXES & HOVER ANIMATIONS
+   ============================================================== */
+.details-svg {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.node-hover-icon svg {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto 12px auto;
+  filter: drop-shadow(0 0 12px rgba(255, 42, 77, 0.4));
+  color: #ff2a4d;
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+.btn-svg {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.spin-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-5px) scale(1.05); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* God Cursor for the 3D Canvas */
+canvas {
+  cursor: crosshair;
+}
+
+/* Add custom animations to the tooltip itself */
+#node-hover-tooltip {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+#node-hover-tooltip.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+}

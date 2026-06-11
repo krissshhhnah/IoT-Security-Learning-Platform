@@ -168,8 +168,17 @@ export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void, o
           <div id="node-hover-tooltip" className="absolute bg-ink-2/90 border border-slate-2 px-3 py-2 rounded text-xs text-ghost z-30 hidden pointer-events-none backdrop-blur shadow-lg"></div>
 
           {/* LIST VIEW */}
-          <div id="topology-list-overlay" className="absolute inset-0 bg-ink-2/60 backdrop-blur-md z-40 hidden p-8 overflow-auto">
-             <h3 className="text-neon-red font-syne text-xl mb-6">Device Registry</h3>
+          <div id="topology-list-overlay" className="absolute inset-0 bg-ink-2/95 backdrop-blur-md z-40 hidden p-8 md:p-16 overflow-auto">
+             <div className="flex justify-between items-center mb-6">
+                <h3 className="text-neon-red font-syne text-2xl">Device Registry</h3>
+                <button 
+                  onClick={() => document.getElementById('btn-view-3d')?.click()}
+                  className="px-4 py-2 border border-slate-2/50 text-mist hover:text-white hover:border-neon-red hover:bg-neon-red/10 transition-colors rounded text-sm uppercase tracking-widest flex items-center gap-2"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  Close Registry
+                </button>
+             </div>
              <table className="w-full text-left text-sm text-mist">
                <thead className="border-b border-neon-red/20 text-xs uppercase tracking-wider">
                  <tr><th>Device</th><th>IP Address</th><th>MAC</th><th>Role</th><th>Status</th></tr>
@@ -179,18 +188,18 @@ export const DashboardUI: React.FC<{ isVisible: boolean, onGoHome: () => void, o
           </div>
 
           {/* TOOLBAR */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-ink-2/80 border border-neon-red/20 backdrop-blur-md rounded-lg p-2 flex items-center gap-2 z-20 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" id="viewport-toolbar">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-ink-2/80 border border-neon-red/20 backdrop-blur-md rounded-lg p-2 flex items-center gap-2 z-50 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" id="viewport-toolbar">
             <div id="toolbar-drag-handle" className="cursor-move text-slate-2 px-2 hover:text-neon-red transition-colors">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="5" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="9" cy="19" r="2"></circle><circle cx="15" cy="5" r="2"></circle><circle cx="15" cy="12" r="2"></circle><circle cx="15" cy="19" r="2"></circle></svg>
             </div>
             <div className="h-6 w-px bg-slate-2/30"></div>
-            <button id="btn-view-3d" className="p-2 text-mist hover:text-white active">
+            <button id="btn-view-3d" className="toolbar-btn p-2 text-mist hover:text-white active">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
             </button>
-            <button id="btn-view-topo" className="p-2 text-mist hover:text-white">
+            <button id="btn-view-topo" className="toolbar-btn p-2 text-mist hover:text-white">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
             </button>
-            <button id="btn-view-list" className="p-2 text-mist hover:text-white">
+            <button id="btn-view-list" className="toolbar-btn p-2 text-mist hover:text-white">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
             </button>
             <div className="h-6 w-px bg-slate-2/30 mx-1"></div>
