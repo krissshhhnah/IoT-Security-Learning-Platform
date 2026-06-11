@@ -42,7 +42,7 @@ export const HeroSection: React.FC<{ onLaunchSim?: () => void }> = ({ onLaunchSi
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="font-syne text-[clamp(56px,7vw,96px)] font-bold leading-[1.05] tracking-tight text-ghost mb-8 flex flex-col"
+              className="font-syne text-[clamp(40px,10vw,96px)] font-bold leading-[1.05] tracking-tight text-ghost mb-8 flex flex-col"
             >
               <div className="flex items-center gap-6">
                 <span>Threat</span>

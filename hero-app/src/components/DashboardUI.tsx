@@ -79,12 +79,12 @@ export const DashboardUI: React.FC<{ isVisible: boolean, activeAttackId: number 
           
           <div className="h-4 w-px bg-slate-2/50 mx-2"></div>
           
-          <div className="relative">
-            <button onClick={() => setWidgetMenuOpen(!widgetMenuOpen)} className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded transition-colors ${widgetMenuOpen ? 'bg-white text-ink' : 'text-mist hover:text-white border border-slate-2/30 hover:bg-slate-2/20'}`}>
+          <div className="relative shrink-0">
+            <button onClick={() => setWidgetMenuOpen(!widgetMenuOpen)} className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded transition-colors shrink-0 ${widgetMenuOpen ? 'bg-white text-ink' : 'text-mist hover:text-white border border-slate-2/30 hover:bg-slate-2/20'}`}>
               Widgets
             </button>
             {widgetMenuOpen && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-ink-2/95 backdrop-blur border border-slate-2/50 rounded shadow-2xl p-2 z-50 flex flex-col gap-1">
+              <div className="fixed md:absolute md:right-0 md:top-full top-32 right-4 md:mt-2 w-48 bg-ink-2/95 backdrop-blur border border-slate-2/50 rounded shadow-2xl p-2 z-[60] flex flex-col gap-1">
                 <button onClick={() => setWidgets({...widgets, controls: !widgets.controls})} className="text-left px-3 py-2 text-xs text-mist hover:bg-slate-2/30 rounded flex items-center justify-between">
                   Vector Controls <span className={widgets.controls ? "text-neon-red" : "text-transparent"}>●</span>
                 </button>
